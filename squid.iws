@@ -94,7 +94,7 @@
       <file leaf-file-name="error.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="31" selection-start="303" selection-end="303" vertical-scroll-proportion="0.39235413">
+            <state line="13" column="31" selection-start="303" selection-end="303" vertical-scroll-proportion="0.38922155">
               <folding />
             </state>
           </provider>
@@ -103,7 +103,7 @@
       <file leaf-file-name="SquidController.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="34" selection-start="528" selection-end="528" vertical-scroll-proportion="0.6494845">
+            <state line="13" column="61" selection-start="375" selection-end="375" vertical-scroll-proportion="0.398773">
               <folding />
             </state>
           </provider>
@@ -115,7 +115,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.09803922">
+            <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.09719223">
               <folding />
             </state>
           </provider>
@@ -124,7 +124,7 @@
       <file leaf-file-name="OrderForm.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/groovy/OrderForm.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="14" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0872093">
+            <state line="3" column="14" selection-start="66" selection-end="66" vertical-scroll-proportion="0.086538464">
               <folding />
             </state>
           </provider>
@@ -133,7 +133,7 @@
       <file leaf-file-name="SquidControllerTests.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="75" selection-start="772" selection-end="772" vertical-scroll-proportion="0.58762884">
+            <state line="64" column="33" selection-start="2568" selection-end="2568" vertical-scroll-proportion="0.67484665">
               <folding />
             </state>
           </provider>
@@ -142,7 +142,7 @@
       <file leaf-file-name="TurnTests.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="0.371134">
+            <state line="12" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="0.36809817">
               <folding />
             </state>
           </provider>
@@ -547,7 +547,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="25" width="1024" height="718" extended-state="0" />
+    <frame x="-4" y="25" width="1033" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
@@ -660,7 +660,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="31" selection-start="303" selection-end="303" vertical-scroll-proportion="0.39235413">
+        <state line="13" column="31" selection-start="303" selection-end="303" vertical-scroll-proportion="0.38922155">
           <folding />
         </state>
       </provider>
@@ -674,14 +674,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/groovy/OrderForm.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="14" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0872093">
+        <state line="3" column="14" selection-start="66" selection-end="66" vertical-scroll-proportion="0.086538464">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="0.371134">
+        <state line="12" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="0.36809817">
           <folding />
         </state>
       </provider>
@@ -691,7 +691,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.09803922">
+        <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.09719223">
           <folding />
         </state>
       </provider>
@@ -719,14 +719,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="75" selection-start="772" selection-end="772" vertical-scroll-proportion="0.58762884">
+        <state line="64" column="33" selection-start="2568" selection-end="2568" vertical-scroll-proportion="0.67484665">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="34" selection-start="528" selection-end="528" vertical-scroll-proportion="0.6494845">
+        <state line="13" column="61" selection-start="375" selection-end="375" vertical-scroll-proportion="0.398773">
           <folding />
         </state>
       </provider>
