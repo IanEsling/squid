@@ -1,29 +1,17 @@
 class SquidControllerTests extends GroovyTestCase {
 
-    void testLastTurnForPlayer() {
+    void testStartNewGame()
+    {
         def squid = new SquidController()
-        squid.params.moveTo = "A1"
-        squid.params.turnNumber = 1
-        squid.params.player = "A"
-        squid.order.call()
-        assertEquals("last turn for player A not 1", 1, squid.lastTurnForPlayer("A"))
-        squid.params.moveTo = "A1"
-        squid.params.turnNumber = 2
-        squid.params.player = "A"
-        squid.order.call()
-        assertEquals("last turn for player A not 2", 2, squid.lastTurnForPlayer("A"))
-        squid.params.moveTo = "A1"
-        squid.params.turnNumber = 299
-        squid.params.player = "A"
-        squid.order.call()
-        squid.params.moveTo = "Z1"
-        squid.params.turnNumber = 399
-        squid.params.player = "B"
-        squid.order.call()
-        assertEquals("last turn for player A not 299", 299, squid.lastTurnForPlayer("A"))
+        squid.newGame.call()
+        def model = squid.modelAndView.model.game
+        assertEquals("new game player a not set up correctly", model.playerA, "A")
+        assertEquals("new game player b not set up correctly", model.playerB, "B")
+        assertTrue("no rows for new game", model.rows > 0)
+        assertTrue("no columns for new game", model.columns > 0)
+        assertEquals("new game id not set up correctly", model.id, 1)
     }
-
-
+        
     void testOrdersForPlayersRecorded() {
 
         def squid = new SquidController()
@@ -46,6 +34,7 @@ class SquidControllerTests extends GroovyTestCase {
     }
 
     void testOrderResolution() {
+
         def squid = new SquidController()
         squid.params.moveTo = "A1"
         squid.params.turnNumber = 1

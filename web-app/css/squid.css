@@ -1,0 +1,32 @@
+html * {
+    margin: 0;
+}
+
+body {
+    background: #fff;
+    color: #333;
+    font: 11pt verdana, arial, helvetica, sans-serif;
+}
+
+table.gameboard {
+    border: 1px solid black;
+    width: 400px;
+    height: 400px;
+}
+
+.cellHover {
+    background-color: green;
+    color: white;
+}
+
+.gameboard td {
+    padding: 10pt;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.players {
+    text-align: center;
+}

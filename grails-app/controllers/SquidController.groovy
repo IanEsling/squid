@@ -2,7 +2,11 @@ class SquidController {
 
     def orderStatus
 
-    def index = { }
+    def newGame = {
+        def game =  new Game(playerA:"A", playerB:"B", rows:10, columns:10)
+        game.save(flush:true)
+        render(view:"/squid/squid", model:[game:game])
+    }
 
     def order = {OrderForm form ->
         def turn = new Turn(player: form.player, turnNumber: form.turnNumber, moveTo: form.moveTo)
@@ -11,27 +15,22 @@ class SquidController {
     }
 
     private String orderStatus(OrderForm form) {
-        orderStatus = (lastTurnForPlayer(otherPlayer(form.player)) == form.turnNumber) ? "resolved" : "waiting"
+        def turns = Turn.findAllByPlayer(otherPlayer(form.player))
+        orderStatus = (turns.size() == 0) ? "waiting" :
+            ((turns.max().turnNumber == form.turnNumber) ?
+                "resolved" :
+                "waiting")
     }
 
     String otherPlayer(String player) {
         player.equals("A") ? "B" : "A"
     }
 
-    Integer lastTurnForPlayer(String player) {
-        def i = 0
-        Turn.list().each {Turn turn ->
-            if (turn.player.equals(player) && turn.turnNumber > i)
-                i = turn.turnNumber
-        }
-        return i
-    }
-
     String playerAPosition() {
-        Turn.findByPlayerAndTurnNumber("A", lastTurnForPlayer("A")).moveTo
+        Turn.findAllByPlayer("A").max().moveTo
     }
 
     String playerBPosition() {
-        Turn.findByPlayerAndTurnNumber("B", lastTurnForPlayer("B")).moveTo
+        Turn.findAllByPlayer("B").max().moveTo
     }
 }
