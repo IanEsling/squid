@@ -16,9 +16,6 @@ class SquidController {
         def game = new Game(params)
         if (game.validate())
             game.save(flush: true)
-        else {
-            return render(view:'/squid/errors', bean:game)
-        }
 
         redirect(uri: "/squid")
     }
@@ -43,10 +40,13 @@ class SquidController {
         params['rows'].equals("") ? 10 : request.parameters.rows
     }
 
-    def order = {OrderForm form ->
-        def game = Game.get(form.gameId)
-        game.addToTurns(new Turn(player: form.player, row: form.row, column: form.column, turnNumber: game.lastTurnNumberMadeByPlayer(form.player) + 1))
+    def order = {
+        def game = Game.get(params.gameId)
+        def turn = new Turn(params)
+        turn.turnNumber = game.lastTurnNumberMadeByPlayer(params.player) + 1
+        game.addToTurns(turn)
         game.save(flush: true)
+        redirect(uri: "/squid")
     }
 
     public String orderStatus(Game game) {

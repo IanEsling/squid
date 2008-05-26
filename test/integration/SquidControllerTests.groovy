@@ -34,7 +34,11 @@ class SquidControllerTests extends GroovyTestCase {
 
     private void newMove(Integer row, Integer column, String player, Game game, SquidController squid)
     {
-        squid.order.call(newOrder(row, column, player, game.id))
+        squid.params.row = row
+        squid.params.column = column
+        squid.params.player = player
+        squid.params.gameId = game.id
+        squid.order()
 
         assertEquals("Player "+ player + " row wrong", game.playerRow(player), row)
         assertEquals("Player "+ player + " column wrong", game.playerColumn(player), column)

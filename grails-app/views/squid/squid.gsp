@@ -2,7 +2,6 @@
 <html>
 <head><title>Squid</title>
     <link rel="stylesheet" href="${createLinkTo(dir: 'css', file: 'squid.css')}"/>
-    <link rel="stylesheet" href="${createLinkTo(dir:'css',file:'main.css')}" />
 </head>
 <body>
 <h1 align="center">Welcome To Squid</h1>
@@ -18,6 +17,8 @@
         <g:render template="/squid/newGameTemplate"/>
 
         <h2><g:render template="/squid/playersTemplate" model="[game:game]"/></h2>
+
+        <g:render template="/squid/orderTemplate" model="[game:game]"/>
     </div>
 
     
