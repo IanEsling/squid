@@ -51,3 +51,8 @@ table.gameboard {
     float:right;
     margin: 10px;
 }
+
+.waitingPlayer {
+    font:x-large;
+    color:red;
+}

@@ -1,7 +1,6 @@
 class SquidControllerTests extends GroovyTestCase {
 
-    void testStartNewGame()
-    {
+    void testStartNewGame() {
         def squid = new SquidController()
         squid.params.playerA = "A"
         squid.params.playerB = "B"
@@ -15,57 +14,59 @@ class SquidControllerTests extends GroovyTestCase {
         assertTrue("no columns for new game", game.columns > 0)
         assertTrue("new game id not set up correctly", game.id > 0)
     }
-        
+
     void testOrdersForPlayersRecorded() {
 
         def squid = new SquidController()
         squid.newGame.call()
-        def game = Game.list().max()
-        newMove(2, 1, "A", game, squid)
+        def game = newMove(2, 1, "A")
         assertEquals("Player A row, turn 1 wrong", game.playerRow("A"), 2)
         assertEquals("Player A column, turn 1 wrong", game.playerColumn("A"), 1)
-        newMove(3, 2, "A", game, squid)
+        game = newMove(3, 2, "A")
         assertEquals("Player A row, turn 2 wrong", game.playerRow("A"), 3)
         assertEquals("Player A column, turn 2 wrong", game.playerColumn("A"), 2)
-        newMove(9, 8, "B", game, squid)
+        game = newMove(9, 8, "B")
         assertEquals("Player B row, turn 1 wrong", game.playerRow("B"), 9)
         assertEquals("Player B column, turn 1 wrong", game.playerColumn("B"), 8)
     }
 
-    private void newMove(Integer row, Integer column, String player, Game game, SquidController squid)
-    {
+    void testPlayerStatus() {
+        def squid = new SquidController()
+        squid.newGame.call()
+        def game = newMove(2, 1, "A")
+        assertEquals("Player A row, turn 1 wrong", game.playerRow("A"), 2)
+        assertEquals("Player A column, turn 1 wrong", game.playerColumn("A"), 1)
+        assertEquals("game not waiting for Player A", game.playerAStatus(), "waiting")
+        assertEquals("game not ready for Player B", game.playerBStatus(), "ready")
+        newMove(4, 3, "B")
+        assertEquals("game not ready for Player A", game.playerAStatus(), "ready")
+        assertEquals("game not ready for Player B", game.playerBStatus(), "ready")
+        newMove(8, 7, "B")
+        assertEquals("game not ready for Player A", game.playerAStatus(), "ready")
+        assertEquals("game not waiting for Player B", game.playerBStatus(), "waiting")
+    }
+
+    private Game newMove(Integer row, Integer column, String player) {
+        def squid = new SquidController()
+        def game = Game.list().max()
         squid.params.row = row
         squid.params.column = column
         squid.params.player = player
         squid.params.gameId = game.id
         squid.order()
 
-        assertEquals("Player "+ player + " row wrong", game.playerRow(player), row)
-        assertEquals("Player "+ player + " column wrong", game.playerColumn(player), column)
+        assertEquals("Player " + player + " row wrong", game.playerRow(player), row)
+        assertEquals("Player " + player + " column wrong", game.playerColumn(player), column)
+
+        return game
     }
 
-    private OrderForm newOrder(row, column, player, gameId)
-    {
+    private OrderForm newOrder(row, column, player, gameId) {
         def order = new OrderForm()
         order.row = row
         order.column = column
         order.player = player
         order.gameId = gameId
         return order
-    }
-
-    void testOrderResolution() {
-
-        def squid = new SquidController()
-        squid.newGame.call()
-        def game = Game.list().max()
-        newMove(2, 1, "A", game, squid)
-        assertEquals("orders resolved after only player A moved", "waiting", squid.orderStatus(game))
-        newMove(3, 6, "B", game, squid)
-        assertEquals("orders not resolved after player B moved", "resolved", squid.orderStatus(game))
-        newMove(1, 3, "B", game, squid)
-        assertEquals("orders resolved after player B moved turn 2", "waiting", squid.orderStatus(game))
-        newMove(4, 5, "A", game, squid)
-        assertEquals("orders not resolved after player A moved turn 2", "resolved", squid.orderStatus(game))
     }
 }

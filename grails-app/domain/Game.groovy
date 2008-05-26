@@ -2,11 +2,12 @@ class Game implements Comparable {
 
     static hasMany = [turns: Turn]
 
-    //default values
     String playerA = "A"
     String playerB = "B"
     Integer rows = 10
     Integer columns = 10
+    String playerAStatus
+    String playerBStatus
 
     static constraints = 
     {
@@ -14,6 +15,14 @@ class Game implements Comparable {
         playerB(nullable:false, blank:false)
         rows(nullable:false, minSize:1, maxSize:12)
         columns(nullable:false, minSize:1, maxSize:12)
+        playerAStatus(nullable:true)
+        playerBStatus(nullable:true)
+    }
+
+    public Game status() {
+        playerBStatus = playerBStatus()
+        playerAStatus = playerAStatus()
+        return this
     }
 
     private Integer defaultRow(String player) {
@@ -32,6 +41,16 @@ class Game implements Comparable {
     public Integer playerColumn(String player) {
         def turn = lastTurnByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
+    }
+
+    public String playerAStatus()
+    {
+        return lastTurnNumberMadeByPlayer("A") > lastTurnNumberMadeByPlayer("B") ? "waiting" : "ready"
+    }
+
+    public String playerBStatus()
+    {
+        return lastTurnNumberMadeByPlayer("A") < lastTurnNumberMadeByPlayer("B") ? "waiting" : "ready"
     }
 
     private Turn lastTurnByPlayer(String player) {
