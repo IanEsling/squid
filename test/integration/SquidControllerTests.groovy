@@ -9,7 +9,7 @@ class SquidControllerTests extends GroovyTestCase {
         assertEquals("new game player b not set up correctly", model.playerB, "B")
         assertTrue("no rows for new game", model.rows > 0)
         assertTrue("no columns for new game", model.columns > 0)
-        assertEquals("new game id not set up correctly", model.id, 1)
+        assertTrue("new game id not set up correctly", model.id > 0)
     }
         
     void testOrdersForPlayersRecorded() {

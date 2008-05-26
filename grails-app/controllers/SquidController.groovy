@@ -2,10 +2,19 @@ class SquidController {
 
     def orderStatus
 
+    def index = { currentGame.call() }
+
+    def currentGame = {
+        if (Game.findAll().size() == 0) newGame.call()
+        else
+            render(view: "squid", model: [game: Game.findAll().max()])
+    }
+
     def newGame = {
-        def game =  new Game(playerA:"A", playerB:"B", rows:10, columns:10)
-        game.save(flush:true)
-        render(view:"/squid/squid", model:[game:game])
+        def game = new Game(playerA: "A", playerB: "B", rows: 6, columns: 15)
+        game.save(flush: true)
+        redirect(uri:"/squid")
+
     }
 
     def order = {OrderForm form ->
