@@ -1,6 +1,7 @@
 class OrderForm {
-    def moveTo
-    def turnNumber
-    def player
+    Integer row
+    Integer column
+    String player
+    Integer gameId
 
 }

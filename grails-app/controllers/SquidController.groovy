@@ -1,7 +1,5 @@
 class SquidController {
 
-    def orderStatus
-
     def index = { currentGame.call() }
 
     def currentGame = {
@@ -18,17 +16,15 @@ class SquidController {
     }
 
     def order = {OrderForm form ->
-        def turn = new Turn(player: form.player, turnNumber: form.turnNumber, moveTo: form.moveTo)
-        turn.save(flush: true)
-        orderStatus(form)
+        def game = Game.get(form.gameId)
+        game.addToTurns(new Turn(player:form.player, row:form.row, column:form.column, turnNumber:game.lastTurnNumberMadeByPlayer(form.player)+1))
+        game.save(flush: true)
     }
 
-    private String orderStatus(OrderForm form) {
-        def turns = Turn.findAllByPlayer(otherPlayer(form.player))
-        orderStatus = (turns.size() == 0) ? "waiting" :
-            ((turns.max().turnNumber == form.turnNumber) ?
+    public String orderStatus(Game game) {
+        (game.lastTurnNumberMadeByPlayer("A") == game.lastTurnNumberMadeByPlayer("B")) ?
                 "resolved" :
-                "waiting")
+                "waiting"
     }
 
     String otherPlayer(String player) {

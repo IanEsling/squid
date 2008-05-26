@@ -1,15 +1,13 @@
-class Turn implements Comparable {
+class Turn {
     String player
     Integer turnNumber
-    String moveTo
+    Integer row
+    Integer column
 
-    public int compareTo(Object o) {
-        if (o instanceof Turn)
-        {
-            def turn = (Turn)o
-            if (turn.player.equals(player))
-                return turnNumber - turn.turnNumber
-        }
-        return 0
+    static constraints = {
+        player(nullable:false)
+        turnNumber(nullable:false)
+        row(nullable:false)
+        column(nullable:false)
     }
 }
