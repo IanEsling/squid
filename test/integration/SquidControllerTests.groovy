@@ -3,7 +3,11 @@ class SquidControllerTests extends GroovyTestCase {
     void testStartNewGame()
     {
         def squid = new SquidController()
-        squid.newGame.call()
+        squid.params.playerA = "A"
+        squid.params.playerB = "B"
+        squid.params.rows = 10
+        squid.params.columns = 10
+        squid.newGame()
         def game = Game.list().max()
         assertEquals("new game player a not set up correctly", game.playerA, "A")
         assertEquals("new game player b not set up correctly", game.playerB, "B")
@@ -47,7 +51,6 @@ class SquidControllerTests extends GroovyTestCase {
     }
 
     void testOrderResolution() {
-
 
         def squid = new SquidController()
         squid.newGame.call()

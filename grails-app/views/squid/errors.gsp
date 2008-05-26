@@ -15,12 +15,12 @@
 
 
     <div class="playersContainer">
-        <g:render template="/squid/newGameTemplate"/>
+        <g:render template="/squid/newGameTemplate" model="[game:game]"/>
 
         <h2><g:render template="/squid/playersTemplate" model="[game:game]"/></h2>
     </div>
 
-    
+
 </div>
 </body>
 </html>

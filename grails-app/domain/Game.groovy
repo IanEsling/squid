@@ -1,23 +1,41 @@
 class Game implements Comparable {
+
     static hasMany = [turns: Turn]
 
-    String playerA
-    String playerB
-    Integer rows
-    Integer columns
+    //default values
+    String playerA = "A"
+    String playerB = "B"
+    Integer rows = 10
+    Integer columns = 10
 
-    public Integer playerRow(String player)
+    static constraints = 
     {
-        lastTurnByPlayer(player).row
+        playerA(nullable:false, blank:false)
+        playerB(nullable:false, blank:false)
+        rows(nullable:false, minSize:1, maxSize:12)
+        columns(nullable:false, minSize:1, maxSize:12)
     }
 
-    public Integer playerColumn(String player)
-    {
-        lastTurnByPlayer(player).column
+    private Integer defaultRow(String player) {
+        return player.equals("A") ? 1 : rows
+    }
+
+    private Integer defaultColumn(String player) {
+        return player.equals("A") ? 1 : columns
+    }
+
+    public Integer playerRow(String player) {
+        def turn = lastTurnByPlayer(player)
+        return (turn == null) ? defaultRow(player) : turn.row
+    }
+
+    public Integer playerColumn(String player) {
+        def turn = lastTurnByPlayer(player)
+        return (turn == null) ? defaultColumn(player) : turn.column
     }
 
     private Turn lastTurnByPlayer(String player) {
-        turns.find {it.player.equals(player) && it.turnNumber == lastTurnNumberMadeByPlayer(player)}
+        turns?.find {it?.player?.equals(player) && it?.turnNumber == lastTurnNumberMadeByPlayer(player)}
     }
 
     public Integer lastTurnNumberMadeByPlayer(player) {

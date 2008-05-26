@@ -34,7 +34,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy" line="19" class="Class at SquidController.groovy:19" package="">
+      <breakpoint url="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy" line="9" class="Class at SquidControllerTests.groovy:9" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -47,7 +47,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/grails-app/domain/Game.groovy" line="19" class="Class at Game.groovy:19" package="">
+      <breakpoint url="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy" line="22" class="Class at SquidController.groovy:22" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -110,43 +110,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameTests.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="5" selection-start="1361" selection-end="1361" vertical-scroll-proportion="-90.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Game.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/Game.groovy">
           <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="392" selection-end="392" vertical-scroll-proportion="-2.4333334">
+            <state line="13" column="43" selection-start="311" selection-end="311" vertical-scroll-proportion="-6.5">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Turn.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/Turn.groovy">
-          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-            <state />
-          </provider>
+      <file leaf-file-name="GameTests.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="-6.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TurnTests.groovy" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="65" selection-start="223" selection-end="223" vertical-scroll-proportion="-30.0">
+            <state line="19" column="81" selection-start="1113" selection-end="1113" vertical-scroll-proportion="-71.25">
               <folding />
             </state>
           </provider>
@@ -155,16 +134,52 @@
       <file leaf-file-name="SquidController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="-7.5">
+            <state line="22" column="0" selection-start="495" selection-end="495" vertical-scroll-proportion="-11.25">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reference.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/Reference.class">
+      <file leaf-file-name="_newGameTemplate.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_newGameTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="660" selection-end="660" vertical-scroll-proportion="9.444445">
+            <state line="9" column="108" selection-start="566" selection-end="566" vertical-scroll-proportion="-5.869565">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="91" selection-start="76" selection-end="167" vertical-scroll-proportion="-1.9565217">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="squid.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/squid.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="0" selection-end="658" vertical-scroll-proportion="-2.6086957">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newGame.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/newGame.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="70" selection-start="551" selection-end="551" vertical-scroll-proportion="-11.086957">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="errors.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/errors.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="71" selection-start="552" selection-end="552" vertical-scroll-proportion="-11.086957">
               <folding />
             </state>
           </provider>
@@ -173,16 +188,16 @@
       <file leaf-file-name="SquidControllerTests.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="106" selection-start="2630" selection-end="2630" vertical-scroll-proportion="-88.5">
+            <state line="21" column="21" selection-start="800" selection-end="800" vertical-scroll-proportion="-75.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderForm.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/groovy/OrderForm.groovy">
+      <file leaf-file-name="_gameboardTemplate.gsp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameboardTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="18" selection-start="89" selection-end="89" vertical-scroll-proportion="2.2222223">
+            <state line="4" column="33" selection-start="174" selection-end="174" vertical-scroll-proportion="-2.6086957">
               <folding />
             </state>
           </provider>
@@ -793,79 +808,58 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/runtime/InvokerHelper.class">
+    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/MetaClassImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="0" selection-start="6522" selection-end="6522" vertical-scroll-proportion="23.333334">
+        <state line="274" column="0" selection-start="16672" selection-end="16672" vertical-scroll-proportion="0.100616015">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/GroovyObjectSupport.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="634" selection-end="634" vertical-scroll-proportion="0.44820717">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/runtime/typehandling/DefaultTypeTransformation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="3860" selection-end="3860" vertical-scroll-proportion="0.78439426">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/reflection/ReflectionCache.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="1456" selection-end="1456" vertical-scroll-proportion="33.333332">
+        <state line="24" column="0" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.661191">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/reflection/CachedClass.class">
+    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/reflection/WeakDoubleKeyHashMap.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="2358" selection-end="2358" vertical-scroll-proportion="4.5833335">
+        <state line="16" column="0" selection-start="709" selection-end="709" vertical-scroll-proportion="0.16837782">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/reflection/ComplexKeyHashMap.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1038" selection-end="1038" vertical-scroll-proportion="3.148148">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/reflection/SingleKeyHashMap.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="546" selection-end="546" vertical-scroll-proportion="5.8333335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/MetaClassImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="328" column="0" selection-start="18984" selection-end="18984" vertical-scroll-proportion="0.7029703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/org/codehaus/groovy/runtime/ScriptBytecodeAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="0" selection-start="11361" selection-end="11361" vertical-scroll-proportion="0.1166348">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/Closure.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1606" selection-end="1606" vertical-scroll-proportion="0.1166348">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/groovy/OrderForm.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="18" selection-start="89" selection-end="89" vertical-scroll-proportion="2.2222223">
+        <state line="31" column="0" selection-start="1038" selection-end="1038" vertical-scroll-proportion="0.13346614">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="5" selection-start="1361" selection-end="1361" vertical-scroll-proportion="-90.0">
+        <state line="19" column="81" selection-start="1113" selection-end="1113" vertical-scroll-proportion="-71.25">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/Reference.class">
+    <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="660" selection-end="660" vertical-scroll-proportion="9.444445">
+        <state line="21" column="21" selection-start="800" selection-end="800" vertical-scroll-proportion="-75.0">
           <folding />
         </state>
       </provider>
@@ -875,38 +869,56 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="392" selection-end="392" vertical-scroll-proportion="-2.4333334">
+        <state line="13" column="43" selection-start="311" selection-end="311" vertical-scroll-proportion="-6.5">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameboardTemplate.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="106" selection-start="2630" selection-end="2630" vertical-scroll-proportion="-88.5">
+        <state line="4" column="33" selection-start="174" selection-end="174" vertical-scroll-proportion="-2.6086957">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="91" selection-start="76" selection-end="167" vertical-scroll-proportion="-1.9565217">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/squid.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="0" selection-end="658" vertical-scroll-proportion="-2.6086957">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_newGameTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="108" selection-start="566" selection-end="566" vertical-scroll-proportion="-5.869565">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="25" selection-end="25" vertical-scroll-proportion="-7.5">
+        <state line="22" column="0" selection-start="495" selection-end="495" vertical-scroll-proportion="-11.25">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Turn.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/newGame.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="-6.0">
+        <state line="17" column="70" selection-start="551" selection-end="551" vertical-scroll-proportion="-11.086957">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/errors.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="65" selection-start="223" selection-end="223" vertical-scroll-proportion="-30.0">
+        <state line="17" column="71" selection-start="552" selection-end="552" vertical-scroll-proportion="-11.086957">
           <folding />
         </state>
       </provider>

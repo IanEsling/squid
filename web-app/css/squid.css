@@ -19,6 +19,16 @@ table.gameboard {
     color: white;
 }
 
+.playerAPosition {
+    background-color: crimson;
+    color: white;
+}
+
+.playerBPosition {
+    background-color: blue;
+    color: white;
+}
+
 .gameboard td {
     padding: 4pt;
     /*margin: 10px;*/
@@ -39,4 +49,5 @@ table.gameboard {
 .playersContainer {
     width:20%;
     float:right;
+    margin: 10px;
 }
