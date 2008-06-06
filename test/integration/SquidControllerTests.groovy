@@ -6,7 +6,7 @@ class SquidControllerTests extends GroovyTestCase {
         squid.params.playerB = "B"
         squid.params.rows = 10
         squid.params.columns = 10
-        squid.newGame()
+        squid.newGame.call()
         def game = Game.list().max()
         assertEquals("new game player a not set up correctly", game.playerA, "A")
         assertEquals("new game player b not set up correctly", game.playerB, "B")
@@ -53,7 +53,8 @@ class SquidControllerTests extends GroovyTestCase {
         squid.params.column = column
         squid.params.player = player
         squid.params.gameId = game.id
-        squid.order()
+        squid.params.turnType = "Move"
+        squid.order.call()
 
         assertEquals("Player " + player + " row wrong", game.playerRow(player), row)
         assertEquals("Player " + player + " column wrong", game.playerColumn(player), column)

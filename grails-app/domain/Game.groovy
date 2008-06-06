@@ -9,14 +9,14 @@ class Game implements Comparable {
     String playerAStatus
     String playerBStatus
 
-    static constraints = 
+    static constraints =
     {
-        playerA(nullable:false, blank:false)
-        playerB(nullable:false, blank:false)
-        rows(nullable:false, minSize:1, maxSize:12)
-        columns(nullable:false, minSize:1, maxSize:12)
-        playerAStatus(nullable:true)
-        playerBStatus(nullable:true)
+        playerA(nullable: false, blank: false)
+        playerB(nullable: false, blank: false)
+        rows(nullable: false, minSize: 1, maxSize: 12)
+        columns(nullable: false, minSize: 1, maxSize: 12)
+        playerAStatus(nullable: true)
+        playerBStatus(nullable: true)
     }
 
     public Game status() {
@@ -43,13 +43,11 @@ class Game implements Comparable {
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 
-    public String playerAStatus()
-    {
+    public String playerAStatus() {
         return lastTurnNumberMadeByPlayer("A") > lastTurnNumberMadeByPlayer("B") ? "waiting" : "ready"
     }
 
-    public String playerBStatus()
-    {
+    public String playerBStatus() {
         return lastTurnNumberMadeByPlayer("A") < lastTurnNumberMadeByPlayer("B") ? "waiting" : "ready"
     }
 

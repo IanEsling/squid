@@ -1,5 +1,3 @@
-import org.springframework.web.servlet.ModelAndView
-
 class SquidController {
 
     def defaultAction = "squid"
@@ -14,8 +12,7 @@ class SquidController {
 
     def newGame = {
         def game = new Game(params)
-        if (game.validate())
-            game.save(flush: true)
+        game.save(flush: true)
 
         redirect(uri: "/squid")
     }
@@ -24,7 +21,7 @@ class SquidController {
         order(params)
         redirect(uri: "/squid")
     }
-    
+
     def order = {
         def game = Game.get(params.gameId)
         def turn = new Turn(params)

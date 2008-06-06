@@ -7,19 +7,18 @@
 <h1 align="center">Welcome To Squid</h1>
 
 <div width="100%">
-        <h2><g:render template="/squid/playersTemplate" model="[game:game]"/></h2>
+    <h2><g:render template="/squid/playersTemplate"/></h2>
 
     <div class="boardContainer">
-        <g:render template="/squid/gameboardTemplate" model="[game:game]"/>
+        <g:render template="/squid/gameboardTemplate"/>
     </div>
 
     <div class="playersContainer">
         <g:render template="/squid/newGameTemplate"/>
 
-        <g:render template="/squid/orderTemplate" model="[game:game]"/>
+        <g:render template="/squid/orderTemplate"/>
     </div>
 
-    
 </div>
 </body>
 </html>
