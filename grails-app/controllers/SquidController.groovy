@@ -10,6 +10,14 @@ class SquidController {
         return [game: Game.findAll().max().status()]
     }
 
+    def playerA = {
+        currentGame.call()
+    }
+
+    def playerB = {
+        currentGame.call()
+    }
+
     def newGame = {
         def game = new Game(params)
         game.save(flush: true)

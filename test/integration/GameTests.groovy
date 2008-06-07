@@ -22,7 +22,7 @@ class GameTests extends GroovyTestCase {
     }
 
     void testAddNewTurn() {
-        def game = new Game(playerA: "A", playerB: "B", rows: 10, columns: 10).save(flush: true)
+        def game = newGame()
         assertTrue("new game has turns", game.turns == null)
         game.addToTurns(new Turn(player: "A", row: 1, column: 1, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
         game.save(flush: true)
@@ -36,5 +36,21 @@ class GameTests extends GroovyTestCase {
         game.save(flush: true)
         assertEquals("game doesn't have 3 turns", game.turns.size(), 3)
         assertEquals("game turn number not 1 for player B", game.lastTurnNumberMadeByPlayer("B"), 1)
+    }
+
+    void testGetGameTurn()
+    {
+        def game = newGame()
+        assertEquals("game turn not 1",game.status().turnNumber, 1)
+        game.addToTurns(new Turn(player: "A", row: 1, column: 1, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
+        game.save(flush: true)
+        assertEquals("game turn not 1",game.status().turnNumber, 1)
+        game.addToTurns(new Turn(player: "B", row: 9, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: "Move"))
+        game.save(flush: true)
+        assertEquals("game turn not 2",game.status().turnNumber, 2)
+    }
+
+    private def newGame() {
+        new Game(playerA: "A", playerB: "B", rows: 10, columns: 10).save(flush: true)
     }
 }

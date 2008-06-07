@@ -37,8 +37,16 @@ table.gameboard {
     vertical-align: middle;
 }
 
-.players {
-    text-align: center;
+.summary {
+    text-align: left;
+}
+
+.summaryPlayerA {
+    color: crimson;
+}
+
+.summaryPlayerB {
+    color: blue;
 }
 
 .boardContainer {

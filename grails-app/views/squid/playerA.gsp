@@ -10,13 +10,11 @@
     <h2><g:render template="/squid/gameSummaryTemplate"/></h2>
 
     <div class="boardContainer">
-        <g:render template="/squid/gameboardDisplayOnlyTemplate"/>
+        <g:render template="/squid/gameboardTemplate"/>
     </div>
 
     <div class="playersContainer">
-        <g:render template="/squid/newGameTemplate"/>
-
-        
+        <g:render template="/squid/playerAOrderTemplate"/>
     </div>
 
 </div>

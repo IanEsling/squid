@@ -11,9 +11,7 @@
                     </g:elseif>
 
                     <g:else>
-                        <td onclick="moveTo('${r}', '${c}')" onmouseout="this.className = 'gameboard'"
-                            onmouseover="this.className = 'cellHover';
-                            this.style.cursor = 'pointer'">
+                        <td>
                     </g:else>
                     ${r}-${c}
                     </td>

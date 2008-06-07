@@ -8,6 +8,7 @@ class Game implements Comparable {
     Integer columns = 10
     String playerAStatus
     String playerBStatus
+    Integer turnNumber
 
     static constraints =
     {
@@ -17,12 +18,20 @@ class Game implements Comparable {
         columns(nullable: false, minSize: 1, maxSize: 12)
         playerAStatus(nullable: true)
         playerBStatus(nullable: true)
+        turnNumber(nullable: true)
     }
 
     public Game status() {
         playerBStatus = playerBStatus()
         playerAStatus = playerAStatus()
+        turnNumber = turnNumber()
         return this
+    }
+
+    public Integer turnNumber() {
+        return lastTurnNumberMadeByPlayer("A")<lastTurnNumberMadeByPlayer("B")?
+            lastTurnNumberMadeByPlayer("A")+1:
+            lastTurnNumberMadeByPlayer("B")+1
     }
 
     private Integer defaultRow(String player) {
@@ -55,7 +64,7 @@ class Game implements Comparable {
         turns?.find {it?.player?.equals(player) && it?.turnNumber == lastTurnNumberMadeByPlayer(player)}
     }
 
-    public Integer lastTurnNumberMadeByPlayer(player) {
+    public Integer lastTurnNumberMadeByPlayer(String player) {
         def i = 0
         turns?.each {
             if (it.player.equals(player) && it.turnNumber > i)
