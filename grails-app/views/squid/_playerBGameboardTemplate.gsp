@@ -36,5 +36,6 @@
     {
         document.getElementById("row").value = row;
         document.getElementById("column").value = column;
+        document.getElementById("player").value = "B";
     }
 </script>

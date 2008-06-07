@@ -14,7 +14,11 @@
     </div>
 
     <div class="playersContainer">
-        <g:render template="/squid/playerAOrderTemplate"/>
+    <fieldset>
+        <legend>
+        Issue Orders for ${game?.playerA}</legend>
+        <g:render template="/squid/orderTemplate"/>
+        </fieldset>
     </div>
 
 </div>
