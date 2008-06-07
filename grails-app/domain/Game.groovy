@@ -1,7 +1,7 @@
 class Game implements Comparable {
 
-    private final static Integer ROWS_PLAYER_CAN_MOVE = 1
-    private final static Integer COLUMNS_PLAYER_CAN_MOVE = 1
+    private final static Integer ROWS_PLAYER_CAN_MOVE = 2
+    private final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
 
     static hasMany = [turns: Turn]
 
@@ -12,6 +12,8 @@ class Game implements Comparable {
     String playerAStatus
     String playerBStatus
     Integer turnNumber
+    boolean gameOver = false
+    String winner
 
     static constraints =
     {
@@ -22,12 +24,18 @@ class Game implements Comparable {
         playerAStatus(nullable: true)
         playerBStatus(nullable: true)
         turnNumber(nullable: true)
+        winner(nullable:true, inList:['Draw', 'PlayerA', 'PlayerB'])
     }
 
     public Game status() {
         playerBStatus = playerBStatus()
         playerAStatus = playerAStatus()
         turnNumber = turnNumber()
+        if (playerRow('A')==playerRow('B') && playerColumn('A')==playerColumn('B'))
+        {
+            gameOver = true
+            winner = 'Draw'
+        }
         return this
     }
 
