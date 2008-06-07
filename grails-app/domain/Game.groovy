@@ -43,13 +43,19 @@ class Game implements Comparable {
     }
 
     public Integer playerRow(String player) {
-        def turn = lastTurnByPlayer(player)
+        def turn = playerStatus(player).equals("waiting")?previousTurnByPlayer(player):lastTurnByPlayer(player)
         return (turn == null) ? defaultRow(player) : turn.row
     }
 
     public Integer playerColumn(String player) {
-        def turn = lastTurnByPlayer(player)
+
+        def turn = playerStatus(player).equals("waiting")?previousTurnByPlayer(player):lastTurnByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
+    }
+
+    private String playerStatus(String player)
+    {
+        player.equals("A")?playerAStatus():playerBStatus
     }
 
     public String playerAStatus() {
@@ -58,6 +64,11 @@ class Game implements Comparable {
 
     public String playerBStatus() {
         return lastTurnNumberMadeByPlayer("A") < lastTurnNumberMadeByPlayer("B") ? "waiting" : "ready"
+    }
+
+    private Turn previousTurnByPlayer(String player)
+    {
+        turns?.find {it?.player?.equals(player) && it?.turnNumber == lastTurnNumberMadeByPlayer(player) - 1}
     }
 
     private Turn lastTurnByPlayer(String player) {

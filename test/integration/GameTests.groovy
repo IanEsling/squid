@@ -11,7 +11,7 @@ class GameTests extends GroovyTestCase {
         assertEquals("max game id incorrect", Game.list().max().id, Game.findByRows(30).id)
     }
 
-    void testPlayerPositions() {
+    void testPlayerStartPositions() {
         def game = new Game(playerA: "A", playerB: "B", rows: 10, columns: 30)
         game.save(flush: true)
         assertTrue("new game has turns", game.turns == null)
@@ -50,7 +50,17 @@ class GameTests extends GroovyTestCase {
         assertEquals("game turn not 2",game.status().turnNumber, 2)
     }
 
-    private def newGame() {
+    void testGetPlayerPositionAfterSubmittingOrder()
+    {
+        def game = newGame()
+        game.addToTurns(new Turn(player: "A", row: 2, column: 2, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
+        game.save(flush: true)
+        assertEquals("player A column not still in first turn position", game.playerColumn("A"), 1)
+        assertEquals("player A row not still in first turn position", game.playerRow("A"), 1)
+
+    }
+
+    private Game newGame() {
         new Game(playerA: "A", playerB: "B", rows: 10, columns: 10).save(flush: true)
     }
 }

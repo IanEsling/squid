@@ -15,27 +15,10 @@ class SquidControllerTests extends GroovyTestCase {
         assertTrue("new game id not set up correctly", game.id > 0)
     }
 
-    void testOrdersForPlayersRecorded() {
-
-        def squid = new SquidController()
-        squid.newGame.call()
-        def game = newMove(2, 1, "A")
-        assertEquals("Player A row, turn 1 wrong", game.playerRow("A"), 2)
-        assertEquals("Player A column, turn 1 wrong", game.playerColumn("A"), 1)
-        game = newMove(3, 2, "A")
-        assertEquals("Player A row, turn 2 wrong", game.playerRow("A"), 3)
-        assertEquals("Player A column, turn 2 wrong", game.playerColumn("A"), 2)
-        game = newMove(9, 8, "B")
-        assertEquals("Player B row, turn 1 wrong", game.playerRow("B"), 9)
-        assertEquals("Player B column, turn 1 wrong", game.playerColumn("B"), 8)
-    }
-
     void testPlayerStatus() {
         def squid = new SquidController()
         squid.newGame.call()
         def game = newMove(2, 1, "A")
-        assertEquals("Player A row, turn 1 wrong", game.playerRow("A"), 2)
-        assertEquals("Player A column, turn 1 wrong", game.playerColumn("A"), 1)
         assertEquals("game not waiting for Player A", game.playerAStatus(), "waiting")
         assertEquals("game not ready for Player B", game.playerBStatus(), "ready")
         newMove(4, 3, "B")
@@ -55,9 +38,6 @@ class SquidControllerTests extends GroovyTestCase {
         squid.params.gameId = game.id
         squid.params.turnType = "Move"
         squid.order.call()
-
-        assertEquals("Player " + player + " row wrong", game.playerRow(player), row)
-        assertEquals("Player " + player + " column wrong", game.playerColumn(player), column)
 
         return game
     }
