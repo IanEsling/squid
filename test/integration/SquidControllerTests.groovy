@@ -41,13 +41,4 @@ class SquidControllerTests extends GroovyTestCase {
 
         return game
     }
-
-    private OrderForm newOrder(row, column, player, gameId) {
-        def order = new OrderForm()
-        order.row = row
-        order.column = column
-        order.player = player
-        order.gameId = gameId
-        return order
-    }
 }
