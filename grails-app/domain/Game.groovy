@@ -1,5 +1,8 @@
 class Game implements Comparable {
 
+    private final static Integer ROWS_PLAYER_CAN_MOVE = 1
+    private final static Integer COLUMNS_PLAYER_CAN_MOVE = 1
+
     static hasMany = [turns: Turn]
 
     String playerA = "A"
@@ -51,6 +54,12 @@ class Game implements Comparable {
 
         def turn = playerStatus(player).equals("waiting")?previousTurnByPlayer(player):lastTurnByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
+    }
+
+    public boolean playerCanMoveHere(String player, Integer row, Integer column)
+    {
+        return ((playerRow(player)-ROWS_PLAYER_CAN_MOVE..playerRow(player)+ROWS_PLAYER_CAN_MOVE).contains(row) &&
+         (playerColumn(player)-COLUMNS_PLAYER_CAN_MOVE..playerColumn(player)+COLUMNS_PLAYER_CAN_MOVE).contains(column))
     }
 
     private String playerStatus(String player)

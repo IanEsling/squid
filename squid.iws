@@ -115,7 +115,16 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="111" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.32403433">
+            <state line="60" column="0" selection-start="1858" selection-end="1858" vertical-scroll-proportion="0.09012876">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameTests.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="52" selection-start="3685" selection-end="3685" vertical-scroll-proportion="0.8742138">
               <folding />
             </state>
           </provider>
@@ -139,28 +148,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SquidControllerTests.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="0" selection-start="1779" selection-end="1779" vertical-scroll-proportion="1.3109756">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_playerAGameboardTemplate.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_playerAGameboardTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerAGameboardTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="62" selection-start="595" selection-end="595" vertical-scroll-proportion="0.3930131">
+            <state line="11" column="31" selection-start="532" selection-end="873" vertical-scroll-proportion="0.3488372">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_playerBGameboardTemplate.gsp" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="_playerBGameboardTemplate.gsp" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="53" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.8515284">
+            <state line="12" column="63" selection-start="596" selection-end="596" vertical-scroll-proportion="0.38054967">
               <folding />
             </state>
           </provider>
@@ -718,7 +718,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" order="1" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5809859" order="3" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5804196" order="3" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" order="3" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -822,13 +822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="84" selection-start="3386" selection-end="3386" vertical-scroll-proportion="0.7484277">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="41" selection-start="462" selection-end="462" vertical-scroll-proportion="0.73170733">
@@ -846,16 +839,6 @@
     <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="0" selection-start="1779" selection-end="1779" vertical-scroll-proportion="1.3109756">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/Game.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="111" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.32403433">
           <folding />
         </state>
       </provider>
@@ -881,13 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="53" selection-start="1792" selection-end="1792" vertical-scroll-proportion="0.8515284">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameSummaryTemplate.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="57" selection-start="449" selection-end="449" vertical-scroll-proportion="0.16375546">
@@ -909,9 +885,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="52" selection-start="3685" selection-end="3685" vertical-scroll-proportion="0.8742138">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/Game.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="0" selection-start="1858" selection-end="1858" vertical-scroll-proportion="0.09012876">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerAGameboardTemplate.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="62" selection-start="595" selection-end="595" vertical-scroll-proportion="0.3930131">
+        <state line="11" column="31" selection-start="532" selection-end="873" vertical-scroll-proportion="0.3488372">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="63" selection-start="596" selection-end="596" vertical-scroll-proportion="0.38054967">
           <folding />
         </state>
       </provider>

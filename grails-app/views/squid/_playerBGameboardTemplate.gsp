@@ -10,12 +10,7 @@
                         <td class="playerBPosition">
                     </g:elseif>
 
-                    <g:elseif test="${(r==game.playerRow('B') && (game.playerColumn('B')-1..game.playerColumn('B')+1).contains(c))}">
-                        <td onclick="moveTo('${r}', '${c}')" onmouseout="this.className = 'gameboard'"
-                            onmouseover="this.className = 'cellHover';
-                            this.style.cursor = 'pointer'">
-                    </g:elseif>
-                    <g:elseif test="${(c==game.playerColumn('B') && (game.playerRow('B')-1..game.playerRow('B')+1).contains(r))}">
+                    <g:elseif test="${game.playerCanMoveHere('B', r, c)}">
                         <td onclick="moveTo('${r}', '${c}')" onmouseout="this.className = 'gameboard'"
                             onmouseover="this.className = 'cellHover';
                             this.style.cursor = 'pointer'">

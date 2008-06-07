@@ -57,7 +57,15 @@ class GameTests extends GroovyTestCase {
         game.save(flush: true)
         assertEquals("player A column not still in first turn position", game.playerColumn("A"), 1)
         assertEquals("player A row not still in first turn position", game.playerRow("A"), 1)
+    }
 
+    void testPlayerCanMoveHere()
+    {
+        def game = newGame()
+        assertTrue(game.playerCanMoveHere("A", 1, 2))
+        assertTrue(game.playerCanMoveHere("A", 2, 1))
+        assertTrue(game.playerCanMoveHere("A", 2, 2))
+        assertFalse(game.playerCanMoveHere("A", 2, 3))
     }
 
     private Game newGame() {
