@@ -1,7 +1,7 @@
 class Game implements Comparable {
 
-    private final static Integer ROWS_PLAYER_CAN_MOVE = 2
-    private final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
+    public final static Integer ROWS_PLAYER_CAN_MOVE = 2
+    public final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
 
     static hasMany = [turns: Turn]
 
@@ -31,12 +31,16 @@ class Game implements Comparable {
         playerBStatus = playerBStatus()
         playerAStatus = playerAStatus()
         turnNumber = turnNumber()
-        if (playerRow('A')==playerRow('B') && playerColumn('A')==playerColumn('B'))
+        if (playersInSameCell())
         {
             gameOver = true
             winner = 'Draw'
         }
         return this
+    }
+
+    private boolean playersInSameCell() {
+        return playerRow('A') == playerRow('B') && playerColumn('A') == playerColumn('B')
     }
 
     public Integer turnNumber() {
