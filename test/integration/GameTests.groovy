@@ -55,6 +55,29 @@ class GameTests extends GroovyTestCase {
         game.save(flush: true)
         assertEquals("player A column not still in first turn position", game.playerColumn("A"), 1)
         assertEquals("player A row not still in first turn position", game.playerRow("A"), 1)
+        game.addToTurns(new Turn(player: "B", row: 9, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: "Move"))
+        game.save(flush:true)
+        assertEquals("player A column not moved", game.playerColumn("A"), 2)
+        assertEquals("player A row not moved", game.playerRow("A"), 2)
+        assertEquals("player B column not moved", game.playerColumn("B"), 9)
+        assertEquals("player B row not moved", game.playerRow("B"), 9)
+    }
+
+    void testGetPlayerPositionAfterSubmittingFireOrder() {
+        def game = new Game()
+        game.addToTurns(new Turn(player: "A", row: 2, column: 2, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
+        game.save(flush: true)
+        game.addToTurns(new Turn(player: "B", row: 9, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: "Move"))
+        game.save(flush:true)
+        game.addToTurns(new Turn(player: "A", row: 3, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Fire"))
+        game.save(flush: true)
+        game.addToTurns(new Turn(player: "B", row: 8, column: 8, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: "Move"))
+        game.save(flush: true)
+        assertEquals("player A column not correct after firing", game.playerColumn("A"), 2)
+        assertEquals("player A row not correct after firing", game.playerRow("A"), 2)
+        assertEquals("player B column not correct after firing", game.playerColumn("B"), 8)
+        assertEquals("player B row not correct after firing", game.playerRow("B"), 8)
+
     }
 
     void testPlayerCanMoveHere() {

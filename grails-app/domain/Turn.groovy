@@ -1,4 +1,15 @@
-class Turn {
+class Turn implements Comparable {
+
+    public int compareTo(Object o) {
+        if (!o instanceof Turn) return 0
+
+        def compareMe = (Turn) o
+        if (compareMe.player == player)
+        {
+            return turnNumber - compareMe.turnNumber
+        }
+        return 0                
+    }
 
     String player
     Integer turnNumber
