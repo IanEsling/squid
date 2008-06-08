@@ -1,5 +1,5 @@
 class Turn {
-    
+
     String player
     Integer turnNumber
     Integer row
@@ -11,6 +11,11 @@ class Turn {
         turnNumber(nullable: false)
         row(nullable: false)
         column(nullable: false)
-        turnType(inList:['Move','Fire'])
+        turnType(nullable: false, inList: TurnType.values().collect {it.toString()})
     }
+}
+
+enum TurnType {
+    Move,
+    Fire
 }

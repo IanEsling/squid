@@ -24,7 +24,7 @@ class Game implements Comparable {
         playerAStatus(nullable: true)
         playerBStatus(nullable: true)
         turnNumber(nullable: true)
-        winner(nullable:true, inList:['Draw', 'PlayerA', 'PlayerB'])
+        winner(nullable:true, inList: Winner.values().collect {it.toString()})
     }
 
     public Game status() {
@@ -112,4 +112,10 @@ class Game implements Comparable {
         }
         return 0
     }
+}
+
+enum Winner {
+    Draw,
+    PlayerA,
+    PlayerB
 }
