@@ -15,8 +15,7 @@ class SquidControllerTests extends GroovyTestCase {
         assertTrue("new game id not set up correctly", game.id > 0)
     }
 
-    void testStartNewGameWithMissingParams()
-    {
+    void testStartNewGameWithMissingParams() {
         def squid = new SquidController()
         squid.params.playerA = ""
         squid.params.playerB = ""
@@ -35,27 +34,65 @@ class SquidControllerTests extends GroovyTestCase {
     void testPlayerStatus() {
         def squid = new SquidController()
         squid.newGame.call()
-        def game = newMove(2, 1, "A")
-        assertEquals("game not waiting for Player A", game.playerAStatus(), "waiting")
-        assertEquals("game not ready for Player B", game.playerBStatus(), "ready")
+        newMove(2, 1, "A")
+        assertEquals("game not waiting for Player A", getGame().playerAStatus(), "waiting")
+        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
         newMove(4, 3, "B")
-        assertEquals("game not ready for Player A", game.playerAStatus(), "ready")
-        assertEquals("game not ready for Player B", game.playerBStatus(), "ready")
+        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
+        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
         newMove(8, 7, "B")
-        assertEquals("game not ready for Player A", game.playerAStatus(), "ready")
-        assertEquals("game not waiting for Player B", game.playerBStatus(), "waiting")
+        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
+        assertEquals("game not waiting for Player B", getGame().playerBStatus(), "waiting")
+        newMove(8, 8, "A", TurnType.Fire)
+        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
+        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
     }
 
-    private Game newMove(Integer row, Integer column, String player) {
+    void testPlayerPosition() {
         def squid = new SquidController()
-        def game = Game.list().max()
+        squid.newGame.call()
+        newMove(3, 2, 'A')
+        checkPlayer(1, 1, 'A')
+        checkPlayer(10, 10, 'B')
+        newMove(8, 9, 'B')
+        checkPlayer(3, 2, 'A')
+        checkPlayer(8, 9, 'B')
+        newMove(7, 6, 'A', TurnType.Fire)
+        checkPlayer(3, 2, 'A')
+        checkPlayer(8, 9, 'B')
+        newMove(7, 8, 'B')
+        checkPlayer(3, 2, 'A')
+        checkPlayer(7, 8, 'B')
+        newMove(4, 3, 'A')
+        checkPlayer(3, 2, 'A')
+        checkPlayer(7, 8, 'B')
+    }
+
+    private void checkPlayer(Integer row, Integer col, String player) {
+        checkPlayerRow(row, player)
+        checkPlayerColumn(col, player)
+    }
+
+    private void checkPlayerRow(Integer row, String player) {
+        assertEquals("player ${player} not in row ${row}", row, getGame().playerRow(player))
+    }
+
+    private void checkPlayerColumn(Integer col, String player) {
+        assertEquals("player ${player} not in column ${col}", col, getGame().playerColumn(player))
+    }
+
+    private Game getGame() {
+        def squid = new SquidController()
+        return squid.currentGame.call().get('game')
+    }
+
+    private void newMove(Integer row, Integer column, String player, TurnType turnType = TurnType.Move) {
+        def squid = new SquidController()
         squid.params.row = row
         squid.params.column = column
         squid.params.player = player
-        squid.params.gameId = game.id
-        squid.params.turnType = "Move"
+        squid.params.gameId = getGame().id
+        squid.params.turnType = turnType.toString()
         squid.order.call()
-
-        return game
     }
 }

@@ -4,7 +4,6 @@
     <input type="radio" name="turnType" value="Fire" />Fire At<br>
 
     <input type="hidden" id="gameId" name="gameId" value="${game?.id}"/>
-    <input type="hidden" id="turnType" name="turnType" value="Move"/>
     <input type="hidden" id="player" name="player"/>
     <g:actionSubmit method="post" value="Submit Order"/>
 </g:form>

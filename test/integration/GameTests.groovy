@@ -77,7 +77,6 @@ class GameTests extends GroovyTestCase {
         assertEquals("player A row not correct after firing", game.playerRow("A"), 2)
         assertEquals("player B column not correct after firing", game.playerColumn("B"), 8)
         assertEquals("player B row not correct after firing", game.playerRow("B"), 8)
-
     }
 
     void testPlayerCanMoveHere() {

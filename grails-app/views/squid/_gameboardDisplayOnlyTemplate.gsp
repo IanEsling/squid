@@ -20,11 +20,3 @@
         </g:each>
     </table>
 </g:if>
-
-<script type="text/javascript">
-    function moveTo(row, column)
-    {
-        document.getElementById("row").value = row;
-        document.getElementById("column").value = column;
-    }
-</script>

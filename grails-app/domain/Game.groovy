@@ -33,7 +33,7 @@ class Game implements Comparable {
         turnNumber = turnNumber()
         if (playersInSameCell()) {
             gameOver = true
-            winner = 'Draw'
+            winner = Winner.Draw.toString()
         }
         return this
     }
@@ -57,13 +57,12 @@ class Game implements Comparable {
     }
 
     public Integer playerRow(String player) {
-        def turn = playerStatus(player).equals("waiting") ? previousTurnByPlayer(player) : lastMoveByPlayer(player)
+        def turn = playerStatus(player).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
         return (turn == null) ? defaultRow(player) : turn.row
     }
 
     public Integer playerColumn(String player) {
-
-        def turn = playerStatus(player).equals("waiting") ? previousTurnByPlayer(player) : lastMoveByPlayer(player)
+        def turn = playerStatus(player).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 
@@ -86,6 +85,14 @@ class Game implements Comparable {
 
     private Turn previousTurnByPlayer(String player) {
         turns?.find {it?.player?.equals(player) && it?.turnNumber == lastTurnNumberMadeByPlayer(player) - 1}
+    }
+
+    private Turn previousMoveByPlayer(String player) {
+        turns?.findAll {
+            (it?.player == player
+            && it?.turnType == TurnType.Move.toString()
+            && it?.turnNumber < lastTurnNumberMadeByPlayer(player))
+        }?.max()
     }
 
     private Turn lastMoveByPlayer(String player) {
