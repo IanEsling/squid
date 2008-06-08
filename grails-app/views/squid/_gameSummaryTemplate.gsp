@@ -13,9 +13,12 @@
                 <g:if test="${game.winner=='Draw'}">
                     The game is a draw.
                     </g:if>
-                <g:else>
-                    The winner is ${game.winner}
-                </g:else>            
+                <g:elseif test="${game.winner=='PlayerA'}">
+                    The winner is ${game.playerA}
+                </g:elseif>
+                <g:elseif test="${game.winner=='PlayerB'}">
+                    The winner is ${game.playerB}
+                </g:elseif>
             </div>
         </g:else>
     </g:if>

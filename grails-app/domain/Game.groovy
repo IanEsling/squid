@@ -35,10 +35,11 @@ class Game implements Comparable {
             gameOver = true
             winner = Winner.Draw.toString()
         }
-        if (playerAHasWon() || playerBHasWon())
-        {
+        if (playerAHasWon() || playerBHasWon()) {
             gameOver = true
-            winner = playerAHasWon() ? (playerBHasWon()? Winner.Draw.toString() : Winner.PlayerA.toString()) : Winner.PlayerB.toString()
+            winner = playerAHasWon() ?
+                (playerBHasWon() ? Winner.Draw.toString() : Winner.PlayerA.toString()) :
+                Winner.PlayerB.toString()
         }
         return this
     }
