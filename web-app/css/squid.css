@@ -15,6 +15,7 @@ table.gameboard {
 }
 
 .cellHover {
+    border: 1px solid black;
     background-color: green;
     color: white;
 }
@@ -31,36 +32,48 @@ table.gameboard {
 
 .gameboard td {
     padding: 4pt;
-    /*margin: 10px;*/
-    border: 1px solid black;
     text-align: center;
     vertical-align: middle;
+}
+
+.normalGameboardCell {
+    border: 1px solid black;
+}
+
+.playerAShot {
+    border: 1px crimson dashed;
+    color: crimson;
+}
+
+.playerBShot {
+    border: 1px blue dashed;
+    color: blue;
 }
 
 .summary {
     text-align: left;
 }
 
-.summaryPlayerA, div.summaryPlayerA a:visited, div.summaryPlayerA a{
+.summaryPlayerA, div.summaryPlayerA a:visited, div.summaryPlayerA a {
     color: crimson;
 }
 
-.summaryPlayerB, div.summaryPlayerB a:visited, div.summaryPlayerB a{
+.summaryPlayerB, div.summaryPlayerB a:visited, div.summaryPlayerB a {
     color: blue;
 }
 
 .boardContainer {
     width: 70%;
-    float:left;
+    float: left;
 }
 
 .playersContainer {
-    width:20%;
-    float:right;
+    width: 20%;
+    float: right;
     margin: 10px;
 }
 
 .waitingPlayer {
-    font:x-large;
-    color:red;
+    font: x-large;
+    color: red;
 }

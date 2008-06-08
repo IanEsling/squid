@@ -35,7 +35,55 @@ class Game implements Comparable {
             gameOver = true
             winner = Winner.Draw.toString()
         }
+        if (playerAHasWon())
+        {
+            gameOver = true
+            winner = Winner.PlayerA.toString()
+        }
+        if (playerBHasWon())
+        {
+            gameOver = true
+            winner = Winner.PlayerB.toString()
+        }
         return this
+    }
+
+    boolean playerAHasWon() {
+        if (shotLanded('A') && playerBStatus() == 'ready') {
+            def turn = lastTurnByPlayer('A')
+            return (turn.row == playerRow('B') && turn.column == playerColumn('B'))
+        }
+    }
+
+    boolean playerBHasWon() {
+        if (shotLanded('B') && playerAStatus() == 'ready') {
+            def turn = lastTurnByPlayer('B')
+            return (turn.row == playerRow('A') && turn.column == playerColumn('A'))
+        }
+    }
+
+    boolean shotLanded(String player) {
+        if (playerStatus(player) == 'ready') {
+            return turns?.findAll {it.player == player}?.max()?.turnType == TurnType.Fire.toString()
+        }
+    }
+
+    boolean shotLandedInRow(String player, Integer row) {
+        if (shotLanded(player)) {
+            return turns?.findAll {
+                (it.player == player
+                        && it.turnType == TurnType.Fire.toString())
+            }?.max()?.row == row
+        }
+    }
+
+    boolean shotLandedInColumn(String player, Integer column) {
+        if (shotLanded(player)) {
+            return turns?.findAll {
+                (it.player == player
+                        && it.turnType == TurnType.Fire.toString())
+            }?.max()?.column == column
+        }
     }
 
     private boolean playersInSameCell() {
@@ -72,7 +120,7 @@ class Game implements Comparable {
     }
 
     private String playerStatus(String player) {
-        player.equals("A") ? playerAStatus() : playerBStatus
+        player == 'A' ? playerAStatus() : playerBStatus()
     }
 
     public String playerAStatus() {
@@ -90,9 +138,13 @@ class Game implements Comparable {
     private Turn previousMoveByPlayer(String player) {
         turns?.findAll {
             (it?.player == player
-            && it?.turnType == TurnType.Move.toString()
-            && it?.turnNumber < lastTurnNumberMadeByPlayer(player))
+                    && it?.turnType == TurnType.Move.toString()
+                    && it?.turnNumber < lastTurnNumberMadeByPlayer(player))
         }?.max()
+    }
+
+    private Turn lastTurnByPlayer(String player) {
+        turns?.findAll {it?.player == player}?.max()
     }
 
     private Turn lastMoveByPlayer(String player) {
@@ -106,7 +158,7 @@ class Game implements Comparable {
         def turn = turns?.findAll {
             it.player == player
         }?.max()?.turnNumber
-        return turn==null?0:turn
+        return turn == null ? 0 : turn
     }
 
     public int compareTo(Object o) {

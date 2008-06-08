@@ -6,20 +6,27 @@
                     <g:if test="${r==game.playerRow('A') && c==game.playerColumn('A')}">
                         <td class="playerAPosition">
                     </g:if>
-                    <g:elseif test="${r==game.playerRow('B') && c==game.playerColumn('B')}">
-                        <td class="playerBPosition" onclick="moveTo('${r}', '${c}')"
-                            onmouseout="this.className = 'playerBPosition'"
-                            onmouseover="this.className = 'cellHover';
-                            this.style.cursor = 'pointer'">
-                    </g:elseif>
-
-                    <g:elseif test="${game.playerCanMoveHere('A', r, c)}">
-                        <td onclick="moveTo('${r}', '${c}')" onmouseout="this.className = 'gameboard'"
-                            onmouseover="this.className = 'cellHover';
-                            this.style.cursor = 'pointer'">
-                    </g:elseif>
                     <g:else>
-                        <td>
+                        <g:set var="cellClass" value="normalGameboardCell"/>
+                        <g:if test="${r==game.playerRow('B') && c==game.playerColumn('B')}">
+                            <g:set var="cellClass" value="playerBPosition"/>
+                        </g:if>
+                        <g:elseif test="${game.shotLandedInRow('A', r) && game.shotLandedInColumn('A', c)}">
+                            <g:set var="cellClass" value="playerAShot"/>
+                        </g:elseif>
+                        <g:elseif test="${game.shotLandedInRow('B', r) && game.shotLandedInColumn('B', c)}">
+                            <g:set var="cellClass" value="playerBShot"/>
+                        </g:elseif>
+
+                        <g:if test="${game.playerCanMoveHere('A', r, c)}">
+                            <td class="${cellClass}"
+                            onclick="moveTo('${r}', '${c}')"
+                            onmouseout="this.className = '${cellClass}'"
+                            onmouseover="this.className = 'cellHover';this.style.cursor = 'pointer'">
+                        </g:if>
+                        <g:else>
+                            <td class="${cellClass}">
+                        </g:else>
                     </g:else>
                     ${r}-${c}
                     </td>

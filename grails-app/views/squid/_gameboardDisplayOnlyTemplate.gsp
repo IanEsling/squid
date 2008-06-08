@@ -9,9 +9,14 @@
                     <g:elseif test="${r==game.playerRow('B') && c==game.playerColumn('B')}">
                         <td class="playerBPosition">
                     </g:elseif>
-
+                    <g:elseif test="${game.shotLandedInRow('A', r) && game.shotLandedInColumn('A', c)}">
+                        <td class="playerAShot">
+                    </g:elseif>
+                    <g:elseif test="${game.shotLandedInRow('B', r) && game.shotLandedInColumn('B', c)}">
+                        <td class="playerBShot">
+                    </g:elseif>
                     <g:else>
-                        <td>
+                        <td class="normalGameboardCell">
                     </g:else>
                     ${r}-${c}
                     </td>
