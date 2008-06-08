@@ -5,8 +5,8 @@ class Game implements Comparable {
 
     static hasMany = [turns: Turn]
 
-    String playerA = "A"
-    String playerB = "B"
+    String playerA = "Player A"
+    String playerB = "Player B"
     Integer rows = 10
     Integer columns = 10
     String playerAStatus
@@ -19,8 +19,8 @@ class Game implements Comparable {
     {
         playerA(nullable: false, blank: false)
         playerB(nullable: false, blank: false)
-        rows(nullable: false, minSize: 1, maxSize: 12)
-        columns(nullable: false, minSize: 1, maxSize: 12)
+        rows(nullable: false, min: 1, max: 12)
+        columns(nullable: false, min: 1, max: 12)
         playerAStatus(nullable: true)
         playerBStatus(nullable: true)
         turnNumber(nullable: true)

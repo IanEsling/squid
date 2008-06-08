@@ -115,7 +115,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="60" selection-start="154" selection-end="154" vertical-scroll-proportion="0.09656652">
+            <state line="8" column="29" selection-start="253" selection-end="253" vertical-scroll-proportion="0.25751072">
               <folding />
             </state>
           </provider>
@@ -125,15 +125,6 @@
         <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="78" column="63" selection-start="4417" selection-end="4417" vertical-scroll-proportion="0.7798742">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="playerA.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/playerA.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="4" selection-start="454" selection-end="609" vertical-scroll-proportion="0.50739956">
               <folding />
             </state>
           </provider>
@@ -804,13 +795,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///home/ian/grails/lib/groovy-all-1.5.4.jar!/groovy/lang/MetaClassImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="3947" selection-end="3947" vertical-scroll-proportion="0.32934132">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/squid/squid.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="8" selection-start="517" selection-end="517" vertical-scroll-proportion="0.5708245">
@@ -912,12 +896,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/jdk/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="19" selection-start="1124" selection-end="1131" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/Game.groovy">
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="60" selection-start="154" selection-end="154" vertical-scroll-proportion="0.09656652">
+        <state line="8" column="29" selection-start="253" selection-end="253" vertical-scroll-proportion="0.25751072">
           <folding />
         </state>
       </provider>
