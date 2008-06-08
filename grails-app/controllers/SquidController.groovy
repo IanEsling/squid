@@ -19,6 +19,10 @@ class SquidController {
     }
 
     def newGame = {
+        if (params.playerA == "") params.remove("playerA")
+        if (params.playerB == "") params.remove("playerB")
+        if (params.rows == "") params.remove("rows")
+        if (params.columns == "") params.remove("columns")
         def game = new Game(params)
         game.save(flush: true)
 

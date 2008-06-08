@@ -108,7 +108,7 @@ class Game implements Comparable {
     public int compareTo(Object o) {
         if (o instanceof Game) {
             def game = (Game) o
-            return id - game.id
+            return this.id - game.id
         }
         return 0
     }

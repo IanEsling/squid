@@ -4,14 +4,31 @@ class SquidControllerTests extends GroovyTestCase {
         def squid = new SquidController()
         squid.params.playerA = "A"
         squid.params.playerB = "B"
-        squid.params.rows = 10
-        squid.params.columns = 10
+        squid.params.rows = "10"
+        squid.params.columns = "10"
         squid.newGame.call()
         def game = Game.list().max()
         assertEquals("new game player a not set up correctly", game.playerA, "A")
         assertEquals("new game player b not set up correctly", game.playerB, "B")
-        assertTrue("no rows for new game", game.rows > 0)
-        assertTrue("no columns for new game", game.columns > 0)
+        assertTrue("no rows for new game", game.rows == 10)
+        assertTrue("no columns for new game", game.columns == 10)
+        assertTrue("new game id not set up correctly", game.id > 0)
+    }
+
+    void testStartNewGameWithMissingParams()
+    {
+        def squid = new SquidController()
+        squid.params.playerA = ""
+        squid.params.playerB = ""
+        squid.params.rows = ""
+        squid.params.columns = ""
+        squid.newGame.call()
+        assertTrue("New Game not created", Game.list().size() > 0)
+        def game = Game.list().max()
+        assertEquals("new game player a not set up correctly", game.playerA, "Player A")
+        assertEquals("new game player b not set up correctly", game.playerB, "Player B")
+        assertTrue("no rows for new game", game.rows == 10)
+        assertTrue("no columns for new game", game.columns == 10)
         assertTrue("new game id not set up correctly", game.id > 0)
     }
 
