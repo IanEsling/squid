@@ -144,6 +144,19 @@ class GameTests extends GroovyTestCase {
         assertEquals("player B has not won", game.playerBHasWon(), true);
     }
 
+    void testDrawIfPlayersShootEachOther() {
+        def game = new Game()
+        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Move.toString()))
+        game.save(flush: true)
+        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.save(flush: true)
+        game.addToTurns(new Turn(player: "B", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Fire.toString()))
+        game.save(flush: true)
+        game.addToTurns(new Turn(player: "A", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Fire.toString()))
+        game.save(flush: true)
+        assertEquals("game not a draw", game.status().winner, Winner.Draw.toString())
+    }
+
     private Game newGame() {
         new Game(playerA: "A", playerB: "B", rows: 10, columns: 10).save(flush: true)
     }
