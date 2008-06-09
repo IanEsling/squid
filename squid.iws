@@ -34,7 +34,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/grails-app/domain/Game.groovy" line="54" class="Class at Game.groovy:58" package="">
+      <breakpoint url="file://$PROJECT_DIR$/grails-app/domain/Game.groovy" line="57" class="Class at Game.groovy:54" package="">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -97,19 +97,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SquidController.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="39" selection-start="341" selection-end="341" vertical-scroll-proportion="0.5487805">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SquidControllerTests.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="78" selection-start="3238" selection-end="3238" vertical-scroll-proportion="0.36382115">
+            <state line="27" column="36" selection-start="1175" selection-end="1175" vertical-scroll-proportion="-67.5">
               <folding />
             </state>
           </provider>
@@ -121,25 +112,37 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="19" selection-start="1377" selection-end="1377" vertical-scroll-proportion="1.4301552">
+            <state line="59" column="24" selection-start="1848" selection-end="1848" vertical-scroll-proportion="-8.035714">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameTests.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Turn.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/Turn.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="49" selection-start="681" selection-end="681" vertical-scroll-proportion="-11.142858">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TurnTests.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="33" selection-start="757" selection-end="757" vertical-scroll-proportion="-49.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameTests.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="156" column="84" selection-start="10119" selection-end="10119" vertical-scroll-proportion="0.8742138">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_playerAGameboardTemplate.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerAGameboardTemplate.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6659619">
+            <state line="156" column="71" selection-start="9896" selection-end="9896" vertical-scroll-proportion="-139.0">
               <folding />
             </state>
           </provider>
@@ -148,7 +151,7 @@
       <file leaf-file-name="_playerBGameboardTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="63" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.5560254">
+            <state line="20" column="63" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-1.3809524">
               <folding />
             </state>
           </provider>
@@ -157,16 +160,16 @@
       <file leaf-file-name="_gameboardDisplayOnlyTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameboardDisplayOnlyTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="56" selection-start="989" selection-end="989" vertical-scroll-proportion="0.5708245">
+            <state line="18" column="56" selection-start="989" selection-end="989" vertical-scroll-proportion="-12.857142">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_gameSummaryTemplate.gsp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_gameSummaryTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameSummaryTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="48" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.62227076">
+            <state line="19" column="49" selection-start="1230" selection-end="1230" vertical-scroll-proportion="-13.571428">
               <folding />
             </state>
           </provider>
@@ -175,7 +178,7 @@
       <file leaf-file-name="squid.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/css/squid.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="16" selection-start="721" selection-end="721" vertical-scroll-proportion="0.8891013">
+            <state line="49" column="16" selection-start="721" selection-end="721" vertical-scroll-proportion="0.51724136">
               <folding />
             </state>
           </provider>
@@ -184,7 +187,7 @@
       <file leaf-file-name="_orderTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_orderTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="0.19650654">
+            <state line="6" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="-4.285714">
               <folding />
             </state>
           </provider>
@@ -484,7 +487,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="0.16666667" version="1" splitterProportion="0.5">
+    <navigator currentView="ProjectPane" proportions="0.5" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -507,7 +510,7 @@
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
-  <component name="RunManager" selected="Grails Application.Squid Application">
+  <component name="RunManager" selected="Grails Application.Squid Tests">
     <tempConfiguration default="false" name="TurnTests.testTurn" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="squid" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -532,69 +535,6 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
-      <module name="squid" />
-      <setting name="vmparams" value="" />
-      <setting name="grailsparams" value="" />
-      <setting name="operation" value="test-app" />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <method>
-        <option name="Make" value="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -624,6 +564,15 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
+      <module name="squid" />
+      <setting name="vmparams" value="" />
+      <setting name="grailsparams" value="" />
+      <setting name="operation" value="test-app" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
       <module name="" />
       <setting name="path" value="" />
@@ -631,6 +580,60 @@
       <setting name="params" value="" />
       <setting name="workDir" value="." />
       <setting name="debug" value="false" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </configuration>
     <configuration default="false" name="Squid Application" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="squid" />
@@ -667,9 +670,9 @@
       </method>
     </configuration>
     <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Grails Application.Squid Application" />
-      <item index="1" class="java.lang.String" itemvalue="Grails Application.Squid Tests" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.TurnTests.testTurn" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.TurnTests.testTurn" />
+      <item index="1" class="java.lang.String" itemvalue="Grails Application.Squid Application" />
+      <item index="2" class="java.lang.String" itemvalue="Grails Application.Squid Tests" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -724,15 +727,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="25" width="1033" height="722" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="25" width="1024" height="718" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="SQL" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8251748" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" order="1" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32570422" order="1" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5804196" order="3" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" order="3" />
@@ -743,12 +746,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32953367" order="3" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31314167" order="0" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31295338" order="0" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3989455" order="6" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8513986" order="2" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.8503521" order="2" />
       <window_info id="SQL Schema" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48506153" order="8" />
       <window_info id="Grails" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3321617" order="8" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
@@ -837,16 +840,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/playerB.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="113" selection-end="113" vertical-scroll-proportion="0.12195122">
+        <state line="18" column="48" selection-start="538" selection-end="538" vertical-scroll-proportion="0.5708245">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/playerB.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="48" selection-start="538" selection-end="538" vertical-scroll-proportion="0.5708245">
+        <state line="18" column="39" selection-start="341" selection-end="341" vertical-scroll-proportion="0.07021277">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerAGameboardTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.09756097">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="63" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-1.3809524">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameboardDisplayOnlyTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="56" selection-start="989" selection-end="989" vertical-scroll-proportion="-12.857142">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameSummaryTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="49" selection-start="1230" selection-end="1230" vertical-scroll-proportion="-13.571428">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/squid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="16" selection-start="721" selection-end="721" vertical-scroll-proportion="0.51724136">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_orderTemplate.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="-4.285714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="36" selection-start="1175" selection-end="1175" vertical-scroll-proportion="-67.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/TurnTests.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="33" selection-start="757" selection-end="757" vertical-scroll-proportion="-49.0">
           <folding />
         </state>
       </provider>
@@ -856,56 +915,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="52" selection-start="250" selection-end="250" vertical-scroll-proportion="-4.285714">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_orderTemplate.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="0.19650654">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/SquidController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="39" selection-start="341" selection-end="341" vertical-scroll-proportion="0.5487805">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/SquidControllerTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="78" selection-start="3238" selection-end="3238" vertical-scroll-proportion="0.36382115">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerBGameboardTemplate.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="63" selection-start="1162" selection-end="1162" vertical-scroll-proportion="0.5560254">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/css/squid.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="16" selection-start="721" selection-end="721" vertical-scroll-proportion="0.8891013">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="84" selection-start="10119" selection-end="10119" vertical-scroll-proportion="0.8742138">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_playerAGameboardTemplate.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6659619">
+        <state line="28" column="49" selection-start="681" selection-end="681" vertical-scroll-proportion="-11.142858">
           <folding />
         </state>
       </provider>
@@ -915,21 +925,14 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="19" selection-start="1377" selection-end="1377" vertical-scroll-proportion="1.4301552">
+        <state line="59" column="24" selection-start="1848" selection-end="1848" vertical-scroll-proportion="-8.035714">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameboardDisplayOnlyTemplate.gsp">
+    <entry file="file://$PROJECT_DIR$/test/integration/GameTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="56" selection-start="989" selection-end="989" vertical-scroll-proportion="0.5708245">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/squid/_gameSummaryTemplate.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="48" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.62227076">
+        <state line="156" column="71" selection-start="9896" selection-end="9896" vertical-scroll-proportion="-139.0">
           <folding />
         </state>
       </provider>

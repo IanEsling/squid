@@ -1,6 +1,10 @@
-class Turn implements Comparable {
+class Turn implements Comparable
+{
+    public static final String MOVE = 'Move'
+    public static final String FIRE = 'Fire'
 
-    public int compareTo(Object o) {
+    public int compareTo(Object o)
+    {
         if (!o instanceof Turn) return 0
 
         def compareMe = (Turn) o
@@ -8,7 +12,7 @@ class Turn implements Comparable {
         {
             return turnNumber - compareMe.turnNumber
         }
-        return 0                
+        return 0
     }
 
     String player
@@ -22,11 +26,7 @@ class Turn implements Comparable {
         turnNumber(nullable: false)
         row(nullable: false)
         column(nullable: false)
-        turnType(nullable: false, inList: TurnType.values().collect {it.toString()})
+        turnType(nullable: false, inList: [MOVE, FIRE])
     }
 }
 
-enum TurnType {
-    Move,
-    Fire
-}

@@ -43,7 +43,7 @@ class SquidControllerTests extends GroovyTestCase {
         newMove(8, 7, "B")
         assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
         assertEquals("game not waiting for Player B", getGame().playerBStatus(), "waiting")
-        newMove(8, 8, "A", TurnType.Fire)
+        newMove(8, 8, "A", Turn.FIRE)
         assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
         assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
     }
@@ -57,7 +57,7 @@ class SquidControllerTests extends GroovyTestCase {
         newMove(8, 9, 'B')
         checkPlayer(3, 2, 'A')
         checkPlayer(8, 9, 'B')
-        newMove(7, 6, 'A', TurnType.Fire)
+        newMove(7, 6, 'A', Turn.FIRE)
         checkPlayer(3, 2, 'A')
         checkPlayer(8, 9, 'B')
         newMove(7, 8, 'B')
@@ -86,7 +86,7 @@ class SquidControllerTests extends GroovyTestCase {
         return squid.currentGame.call().get('game')
     }
 
-    private void newMove(Integer row, Integer column, String player, TurnType turnType = TurnType.Move) {
+    private void newMove(Integer row, Integer column, String player, String turnType = Turn.MOVE) {
         def squid = new SquidController()
         squid.params.row = row
         squid.params.column = column

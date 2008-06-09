@@ -105,10 +105,10 @@ class GameTests extends GroovyTestCase {
         def game = new Game()
         assertEquals("shot landed before turn taken", game.shotLandedInRow('A', 2), false)
         assertEquals("shot landed before turn taken", game.shotLandedInColumn('A', 3), false)
-        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Fire.toString()))
+        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.FIRE))
         game.save(flush: true)
         assertFalse("shot landed before player B moved", game.shotLanded('A'))
-        game.addToTurns(new Turn(player: "B", row: 9, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "B", row: 9, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
         assertTrue("shot not landed before player B moved", game.shotLanded('A'))
         assertFalse("shot landed by player B", game.shotLanded('B'))
@@ -120,41 +120,41 @@ class GameTests extends GroovyTestCase {
 
     void testPlayerAWins() {
         def game = new Game()
-        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "B", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "A", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Fire.toString()))
+        game.addToTurns(new Turn(player: "A", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.FIRE))
         game.save(flush: true)
         assertEquals("player A has not won", game.playerAHasWon(), true);
     }
 
     void testPlayerBWins() {
         def game = new Game()
-        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Fire.toString()))
+        game.addToTurns(new Turn(player: "B", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.FIRE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "A", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "A", row: 5, column: 6, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
         assertEquals("player B has not won", game.playerBHasWon(), true);
     }
 
     void testDrawIfPlayersShootEachOther() {
         def game = new Game()
-        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Move.toString()))
+        game.addToTurns(new Turn(player: "B", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "B", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: TurnType.Fire.toString()))
+        game.addToTurns(new Turn(player: "B", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("B") + 1, turnType: Turn.FIRE))
         game.save(flush: true)
-        game.addToTurns(new Turn(player: "A", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: TurnType.Fire.toString()))
+        game.addToTurns(new Turn(player: "A", row: 8, column: 9, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.FIRE))
         game.save(flush: true)
-        assertEquals("game not a draw", game.status().winner, Winner.Draw.toString())
+        assertEquals("game not a draw", game.status().winner, Game.DRAW)
     }
 
     private Game newGame() {

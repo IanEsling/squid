@@ -2,6 +2,9 @@ class Game implements Comparable {
 
     public final static Integer ROWS_PLAYER_CAN_MOVE = 2
     public final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
+    public final static String DRAW = 'Draw'
+    public final static String PLAYER_A = 'PlayerA'
+    public final static String PLAYER_B = 'PlayerB'
 
     static hasMany = [turns: Turn]
 
@@ -24,7 +27,7 @@ class Game implements Comparable {
         playerAStatus(nullable: true)
         playerBStatus(nullable: true)
         turnNumber(nullable: true)
-        winner(nullable: true, inList: Winner.values().collect {it.toString()})
+        winner(nullable: true, inList: [DRAW, PLAYER_A, PLAYER_B])
     }
 
     public Game status() {
@@ -33,13 +36,13 @@ class Game implements Comparable {
         turnNumber = turnNumber()
         if (playersInSameCell()) {
             gameOver = true
-            winner = Winner.Draw.toString()
+            winner = DRAW
         }
         if (playerAHasWon() || playerBHasWon()) {
             gameOver = true
             winner = playerAHasWon() ?
-                (playerBHasWon() ? Winner.Draw.toString() : Winner.PlayerA.toString()) :
-                Winner.PlayerB.toString()
+                (playerBHasWon() ? DRAW : PLAYER_A) :
+                PLAYER_B
         }
         return this
     }
@@ -60,7 +63,7 @@ class Game implements Comparable {
 
     boolean shotLanded(String player) {
         if (playerStatus(player) == 'ready') {
-            return turns?.findAll {it.player == player}?.max()?.turnType == TurnType.Fire.toString()
+            return turns?.findAll {it.player == player}?.max()?.turnType == Turn.FIRE
         }
     }
 
@@ -68,7 +71,7 @@ class Game implements Comparable {
         if (shotLanded(player)) {
             return turns?.findAll {
                 (it.player == player
-                        && it.turnType == TurnType.Fire.toString())
+                        && it.turnType == Turn.FIRE)
             }?.max()?.row == row
         }
     }
@@ -77,7 +80,7 @@ class Game implements Comparable {
         if (shotLanded(player)) {
             return turns?.findAll {
                 (it.player == player
-                        && it.turnType == TurnType.Fire.toString())
+                        && it.turnType == Turn.FIRE)
             }?.max()?.column == column
         }
     }
@@ -134,7 +137,7 @@ class Game implements Comparable {
     private Turn previousMoveByPlayer(String player) {
         turns?.findAll {
             (it?.player == player
-                    && it?.turnType == TurnType.Move.toString()
+                    && it?.turnType == Turn.MOVE
                     && it?.turnNumber < lastTurnNumberMadeByPlayer(player))
         }?.max()
     }
@@ -146,7 +149,7 @@ class Game implements Comparable {
     private Turn lastMoveByPlayer(String player) {
         turns?.findAll {
             (it?.player == player
-                    && it.turnType == TurnType.Move.toString())
+                    && it.turnType == Turn.MOVE)
         }?.max()
     }
 
@@ -166,8 +169,4 @@ class Game implements Comparable {
     }
 }
 
-enum Winner {
-    Draw,
-    PlayerA,
-    PlayerB
-}
+

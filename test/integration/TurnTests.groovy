@@ -6,7 +6,7 @@ class TurnTests extends GroovyTestCase {
         turn.turnNumber = 2
         turn.row = 1
         turn.column = 2
-        turn.turnType = TurnType.Move.toString()
+        turn.turnType = Turn.MOVE
         if (turn.save(flush: true))
         {
         assertEquals(Turn.get(1).player, "A")
@@ -24,7 +24,7 @@ class TurnTests extends GroovyTestCase {
         turn.turnNumber = 3
         turn.row = 3
         turn.column = 3
-        turn.turnType = TurnType.Fire.toString()
+        turn.turnType = Turn.FIRE
         if (turn.save(flush: true))
         {
         assertEquals(Turn.get(2).player, "A")
