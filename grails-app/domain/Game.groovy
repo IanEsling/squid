@@ -1,6 +1,5 @@
 class Game implements Comparable
 {
-
     public final static Integer ROWS_PLAYER_CAN_MOVE = 2
     public final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
     public final static String DRAW = 'Draw'

@@ -45,8 +45,13 @@ class TurnTests extends GroovyTestCase
     {
         def turn = new Turn()
         turn.turnType = "Bobbins"
-
-        if (turn.save(flush: true)) assertTrue(false)
+        assertFalse("bogus turn validates", turn.validate())
+        assertEquals("wrong number of errors", turn.errors.getErrorCount(), 5)
+        assertTrue('no player errors', turn.errors.hasFieldErrors('player'))
+        assertTrue('no turnNumber errors', turn.errors.hasFieldErrors('turnNumber'))
+        assertTrue('no row errors', turn.errors.hasFieldErrors('row'))
+        assertTrue('no column errors', turn.errors.hasFieldErrors('column'))
+        assertTrue('no turnType errors', turn.errors.hasFieldErrors('turnType'))
 
     }
 }
