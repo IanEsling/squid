@@ -1,6 +1,8 @@
-class GameTests extends GroovyTestCase {
+class GameTests extends GroovyTestCase
+{
 
-    void testGameOrdering() {
+    void testGameOrdering()
+    {
         new Game(playerA: "A", playerB: "B", rows: 1, columns: 10).save(flush: true)
         new Game(playerA: "A", playerB: "B", rows: 4, columns: 10).save(flush: true)
         new Game(playerA: "A", playerB: "B", rows: 2, columns: 10).save(flush: true)
@@ -11,7 +13,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("max game id incorrect", Game.list().max().id, Game.findByRows(3).id)
     }
 
-    void testPlayerStartPositions() {
+    void testPlayerStartPositions()
+    {
         def game = new Game(playerA: "A", playerB: "B", rows: 10, columns: 3)
         game.save(flush: true)
         assertTrue("new game has turns", game.turns == null)
@@ -21,7 +24,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("player B not in starting column", game.playerColumn("B"), 3)
     }
 
-    void testAddNewTurn() {
+    void testAddNewTurn()
+    {
         def game = newGame()
         assertTrue("new game has turns", game.turns == null)
         game.addToTurns(new Turn(player: "A", row: 1, column: 1, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
@@ -38,7 +42,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("game turn number not 1 for player B", game.lastTurnNumberMadeByPlayer("B"), 1)
     }
 
-    void testGetGameTurn() {
+    void testGetGameTurn()
+    {
         def game = newGame()
         assertEquals("game turn not 1", game.status().turnNumber, 1)
         game.addToTurns(new Turn(player: "A", row: 1, column: 1, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
@@ -49,7 +54,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("game turn not 2", game.status().turnNumber, 2)
     }
 
-    void testGetPlayerPositionAfterSubmittingOrder() {
+    void testGetPlayerPositionAfterSubmittingOrder()
+    {
         def game = newGame()
         game.addToTurns(new Turn(player: "A", row: 2, column: 2, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
         game.save(flush: true)
@@ -63,7 +69,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("player B row not moved", game.playerRow("B"), 9)
     }
 
-    void testGetPlayerPositionAfterSubmittingFireOrder() {
+    void testGetPlayerPositionAfterSubmittingFireOrder()
+    {
         def game = new Game()
         game.addToTurns(new Turn(player: "A", row: 2, column: 2, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
         game.save(flush: true)
@@ -79,7 +86,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("player B row not correct after firing", game.playerRow("B"), 8)
     }
 
-    void testPlayerCanMoveHere() {
+    void testPlayerCanMoveHere()
+    {
         def game = newGame()
         assertTrue(game.playerCanMoveHere("A", Game.ROWS_PLAYER_CAN_MOVE + 1, 1))
         assertTrue(game.playerCanMoveHere("A", 1, Game.COLUMNS_PLAYER_CAN_MOVE + 1))
@@ -87,7 +95,8 @@ class GameTests extends GroovyTestCase {
         assertFalse(game.playerCanMoveHere("A", Game.ROWS_PLAYER_CAN_MOVE + 2, Game.COLUMNS_PLAYER_CAN_MOVE + 2))
     }
 
-    void testGameOverIfBothPlayersMoveOntoSameSpot() {
+    void testGameOverIfBothPlayersMoveOntoSameSpot()
+    {
         def game = newGame()
         game.addToTurns(new Turn(player: "A", row: 2, column: 2, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: "Move"))
         game.save(flush: true)
@@ -101,7 +110,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("game progress not a draw", game.status().winner, "Draw")
     }
 
-    void testShotLanded() {
+    void testShotLanded()
+    {
         def game = new Game()
         assertEquals("shot landed before turn taken", game.shotLandedInRow('A', 2), false)
         assertEquals("shot landed before turn taken", game.shotLandedInColumn('A', 3), false)
@@ -118,7 +128,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("shot landed in column for Player B", game.shotLandedInColumn('B', 9), false)
     }
 
-    void testPlayerAWins() {
+    void testPlayerAWins()
+    {
         def game = new Game()
         game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
@@ -131,7 +142,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("player A has not won", game.playerAHasWon(), true);
     }
 
-    void testPlayerBWins() {
+    void testPlayerBWins()
+    {
         def game = new Game()
         game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
@@ -144,7 +156,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("player B has not won", game.playerBHasWon(), true);
     }
 
-    void testDrawIfPlayersShootEachOther() {
+    void testDrawIfPlayersShootEachOther()
+    {
         def game = new Game()
         game.addToTurns(new Turn(player: "A", row: 2, column: 3, turnNumber: game.lastTurnNumberMadeByPlayer("A") + 1, turnType: Turn.MOVE))
         game.save(flush: true)
@@ -157,7 +170,8 @@ class GameTests extends GroovyTestCase {
         assertEquals("game not a draw", game.status().winner, Game.DRAW)
     }
 
-    private Game newGame() {
+    private Game newGame()
+    {
         new Game(playerA: "A", playerB: "B", rows: 10, columns: 10).save(flush: true)
     }
 }

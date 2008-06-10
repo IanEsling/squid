@@ -1,6 +1,8 @@
-class TurnTests extends GroovyTestCase {
+class TurnTests extends GroovyTestCase
+{
 
-    void testTurn() {
+    void testTurn()
+    {
         def turn = new Turn()
         turn.player = "A"
         turn.turnNumber = 2
@@ -9,11 +11,11 @@ class TurnTests extends GroovyTestCase {
         turn.turnType = Turn.MOVE
         if (turn.save(flush: true))
         {
-        assertEquals(Turn.get(1).player, "A")
-        assertEquals(Turn.get(1).turnNumber, 2)
-        assertEquals(Turn.get(1).row, 1)
-        assertEquals(Turn.get(1).column, 2)
-        assertEquals(Turn.get(1).turnType, "Move")
+            assertEquals(Turn.get(1).player, "A")
+            assertEquals(Turn.get(1).turnNumber, 2)
+            assertEquals(Turn.get(1).row, 1)
+            assertEquals(Turn.get(1).column, 2)
+            assertEquals(Turn.get(1).turnType, "Move")
         }
         else
         {
@@ -27,11 +29,11 @@ class TurnTests extends GroovyTestCase {
         turn.turnType = Turn.FIRE
         if (turn.save(flush: true))
         {
-        assertEquals(Turn.get(2).player, "A")
-        assertEquals(Turn.get(2).turnNumber, 3)
-        assertEquals(Turn.get(2).row, 3)
-        assertEquals(Turn.get(2).column, 3)
-        assertEquals(Turn.get(2).turnType, "Fire")
+            assertEquals(Turn.get(2).player, "A")
+            assertEquals(Turn.get(2).turnNumber, 3)
+            assertEquals(Turn.get(2).row, 3)
+            assertEquals(Turn.get(2).column, 3)
+            assertEquals(Turn.get(2).turnType, "Fire")
         }
         else
         {
@@ -39,7 +41,8 @@ class TurnTests extends GroovyTestCase {
         }
     }
 
-    void testBogusTurn() {
+    void testBogusTurn()
+    {
         def turn = new Turn()
         turn.turnType = "Bobbins"
 
