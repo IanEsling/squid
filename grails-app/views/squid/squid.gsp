@@ -14,9 +14,7 @@
     </div>
 
     <div class="playersContainer">
-        <g:render template="/squid/newGameTemplate"/>
-
-        
+        <g:render template="/squid/newGameTemplate"/>        
     </div>
 
 </div>

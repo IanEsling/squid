@@ -15,8 +15,7 @@
 
     <div class="playersContainer">
     <fieldset>
-        <legend>
-        Issue Orders for ${game?.playerA}</legend>
+        <legend>Issue Orders for ${game?.playerA}</legend>
         <g:render template="/squid/orderTemplate"/>
         </fieldset>
     </div>
