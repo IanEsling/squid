@@ -19,11 +19,11 @@ class Turn implements Comparable
 
     public Turn(){}
 
-    public Turn(String player, Integer row, Integer column, String turnType, Game game)
+    public Turn(player, row, column, turnType, Game game)
     {
         this.player = player
-        this.row = row
-        this.column = column
+        this.row = row.asType(Integer.class)
+        this.column = column.asType(Integer.class)
         this.turnType = turnType
         def turnNumber = game.turns?.findAll {
             it.player == player

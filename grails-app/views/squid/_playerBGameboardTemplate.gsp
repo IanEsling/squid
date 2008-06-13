@@ -3,18 +3,18 @@
         <g:each in="${(1..game.rows)}" var="r">
             <tr>
                 <g:each in="${(1..game.columns)}" var="c">
-                    <g:if test="${r==game.playerRow('B') && c==game.playerColumn('B')}">
+                    <g:if test="${r==gameState.playerRow('B', game) && c==gameState.playerColumn('B', game)}">
                         <td class="playerBPosition">
                     </g:if>
                     <g:else>
                         <g:set var="cellClass" value="normalGameboardCell"/>
-                        <g:if test="${r==game.playerRow('A') && c==game.playerColumn('A')}">
+                        <g:if test="${r==gameState.playerRow('A', game) && c==gameState.playerColumn('A', game)}">
                             <g:set var="cellClass" value="playerAPosition"/>
                         </g:if>
-                        <g:elseif test="${game.shotLandedInRow('A', r) && game.shotLandedInColumn('A', c)}">
+                        <g:elseif test="${gameState.shotLandedInRow('A', r, game) && gameState.shotLandedInColumn('A', c, game)}">
                             <g:set var="cellClass" value="playerAShot"/>
                         </g:elseif>
-                        <g:elseif test="${game.shotLandedInRow('B', r) && game.shotLandedInColumn('B', c)}">
+                        <g:elseif test="${gameState.shotLandedInRow('B', r, game) && gameState.shotLandedInColumn('B', c, game)}">
                             <g:set var="cellClass" value="playerBShot"/>
                         </g:elseif>
 

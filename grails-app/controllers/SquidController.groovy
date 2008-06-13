@@ -5,18 +5,23 @@ class SquidController
 
     def squid = { currentGame.call() }
 
-    def currentGame = {
+    def currentGame = {player ->
         if (Game.findAll().size() == 0) return null
 
-        return [game: Game.findAll().max().currentGameState()]
+        def game = Game.findAll().max()
+        [gameState: game.currentGameState(), game:game, player:player, playerName:game.playerName(player)]
+    }
+
+    def move = {
+        currentGame.call(params.player)
     }
 
     def playerA = {
-        currentGame.call()
+        currentGame.call('A')
     }
 
     def playerB = {
-        currentGame.call()
+        currentGame.call('B')
     }
 
     def newGame = {
@@ -37,6 +42,6 @@ class SquidController
 
     def order = {
         def game = Game.get(params.gameId)
-        game.newTurn(new Turn(params.player, params.row, params.column, params.turnType, game))
+        game.newTurn(new Turn(params.player, Integer.valueOf(params.row), Integer.valueOf(params.column), params.turnType, game))
     }
 }

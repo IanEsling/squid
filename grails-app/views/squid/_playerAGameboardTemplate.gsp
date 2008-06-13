@@ -3,22 +3,22 @@
         <g:each in="${(1..game.rows)}" var="r">
             <tr>
                 <g:each in="${(1..game.columns)}" var="c">
-                    <g:if test="${r==game.playerRow('A') && c==game.playerColumn('A')}">
+                    <g:if test="${r==gameState.playerARow && c==gameState.playerAColumn}">
                         <td class="playerAPosition">
                     </g:if>
                     <g:else>
                         <g:set var="cellClass" value="normalGameboardCell"/>
-                        <g:if test="${r==game.playerRow('B') && c==game.playerColumn('B')}">
+                        <g:if test="${r==gameState.playerBRow && c==gameState.playerBColumn}">
                             <g:set var="cellClass" value="playerBPosition"/>
                         </g:if>
-                        <g:elseif test="${game.shotLandedInRow('A', r) && game.shotLandedInColumn('A', c)}">
+                        <g:elseif test="${r==gameState.playerAShotRow && c==gameState.playerAShotColumn}">
                             <g:set var="cellClass" value="playerAShot"/>
                         </g:elseif>
-                        <g:elseif test="${game.shotLandedInRow('B', r) && game.shotLandedInColumn('B', c)}">
+                        <g:elseif test="${c==gameState.playerBShotColumn && r==gameState.playerBShotRow}">
                             <g:set var="cellClass" value="playerBShot"/>
                         </g:elseif>
 
-                        <g:if test="${game.playerCanMoveHere('A', r, c)}">
+                        <g:if test="${game.playerCanMoveHere(player, r, c)}">
                             <td class="${cellClass}"
                             onclick="moveTo('${r}', '${c}')"
                             onmouseout="this.className = '${cellClass}'"

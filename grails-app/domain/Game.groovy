@@ -32,13 +32,19 @@ class Game implements Comparable
         new GameState(this)
     }
 
+    String playerName(String player)
+    {
+        player=='A'?playerA:playerB
+    }
+
     public boolean playerCanMoveHere(String player, Integer row, Integer column)
     {
         def gameState = currentGameState()
-        return ((gameState.playerRow(player, this) - ROWS_PLAYER_CAN_MOVE..gameState.playerRow(player, this) + ROWS_PLAYER_CAN_MOVE).contains(row)
+        return (((gameState.playerRow(player, this) - ROWS_PLAYER_CAN_MOVE..gameState.playerRow(player, this) + ROWS_PLAYER_CAN_MOVE).contains(row)
                 &&
                 (gameState.playerColumn(player, this) - COLUMNS_PLAYER_CAN_MOVE..gameState.playerColumn(player, this)
                         + COLUMNS_PLAYER_CAN_MOVE).contains(column))
+        && !(gameState.playerRow(player, this) == row && gameState.playerColumn(player, this) == column))
     }
     
     public int compareTo(Object o)
