@@ -35,17 +35,17 @@ class SquidControllerTests extends GroovyTestCase {
         def squid = new SquidController()
         squid.newGame.call()
         newMove(2, 1, "A")
-        assertEquals("game not waiting for Player A", getGame().playerAStatus(), "waiting")
-        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
+        assertEquals("game not waiting for Player A", getGame().playerAStatus, "waiting")
+        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
         newMove(4, 3, "B")
-        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
-        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
+        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
+        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
         newMove(8, 7, "B")
-        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
-        assertEquals("game not waiting for Player B", getGame().playerBStatus(), "waiting")
+        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
+        assertEquals("game not waiting for Player B", getGame().playerBStatus, "waiting")
         newMove(8, 8, "A", Turn.FIRE)
-        assertEquals("game not ready for Player A", getGame().playerAStatus(), "ready")
-        assertEquals("game not ready for Player B", getGame().playerBStatus(), "ready")
+        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
+        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
     }
 
     void testPlayerPosition() {
@@ -74,14 +74,14 @@ class SquidControllerTests extends GroovyTestCase {
     }
 
     private void checkPlayerRow(Integer row, String player) {
-        assertEquals("player ${player} not in row ${row}", row, getGame().playerRow(player))
+        assertEquals("player ${player} not in row ${row}", row, getGame().playerRow(player, Game.list().max()))
     }
 
     private void checkPlayerColumn(Integer col, String player) {
-        assertEquals("player ${player} not in column ${col}", col, getGame().playerColumn(player))
+        assertEquals("player ${player} not in column ${col}", col, getGame().playerColumn(player, Game.list().max()))
     }
 
-    private Game getGame() {
+    private GameState getGame() {
         def squid = new SquidController()
         return squid.currentGame.call().get('game')
     }
@@ -91,7 +91,7 @@ class SquidControllerTests extends GroovyTestCase {
         squid.params.row = row
         squid.params.column = column
         squid.params.player = player
-        squid.params.gameId = getGame().id
+        squid.params.gameId = Game.list().max().id
         squid.params.turnType = turnType.toString()
         squid.order.call()
     }

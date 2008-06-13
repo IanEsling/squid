@@ -1,4 +1,4 @@
-<g:if test="${game != null}">
+<g:if test="${game}">
     <table class="gameboard">
         <g:each in="${(1..game.rows)}" var="r">
             <tr>

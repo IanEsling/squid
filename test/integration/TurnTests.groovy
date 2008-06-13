@@ -3,6 +3,7 @@ class TurnTests extends GroovyTestCase
 
     void testTurn()
     {
+        Turn.list()*.delete()
         def turn = new Turn()
         turn.player = "A"
         turn.turnNumber = 2
@@ -11,11 +12,11 @@ class TurnTests extends GroovyTestCase
         turn.turnType = Turn.MOVE
         if (turn.save(flush: true))
         {
-            assertEquals(Turn.get(1).player, "A")
-            assertEquals(Turn.get(1).turnNumber, 2)
-            assertEquals(Turn.get(1).row, 1)
-            assertEquals(Turn.get(1).column, 2)
-            assertEquals(Turn.get(1).turnType, "Move")
+            assertEquals(Turn.findByPlayer('A').player, "A")
+            assertEquals(Turn.findByPlayer('A').turnNumber, 2)
+            assertEquals(Turn.findByPlayer('A').row, 1)
+            assertEquals(Turn.findByPlayer('A').column, 2)
+            assertEquals(Turn.findByPlayer('A').turnType, "Move")
         }
         else
         {
@@ -29,11 +30,11 @@ class TurnTests extends GroovyTestCase
         turn.turnType = Turn.FIRE
         if (turn.save(flush: true))
         {
-            assertEquals(Turn.get(2).player, "A")
-            assertEquals(Turn.get(2).turnNumber, 3)
-            assertEquals(Turn.get(2).row, 3)
-            assertEquals(Turn.get(2).column, 3)
-            assertEquals(Turn.get(2).turnType, "Fire")
+            assertEquals(Turn.findByPlayerAndTurnNumber('A',3).player, "A")
+            assertEquals(Turn.findByPlayerAndTurnNumber('A',3).turnNumber, 3)
+            assertEquals(Turn.findByPlayerAndTurnNumber('A',3).row, 3)
+            assertEquals(Turn.findByPlayerAndTurnNumber('A',3).column, 3)
+            assertEquals(Turn.findByPlayerAndTurnNumber('A',3).turnType, "Fire")
         }
         else
         {

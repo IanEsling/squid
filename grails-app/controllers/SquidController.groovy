@@ -1,4 +1,5 @@
-class SquidController {
+class SquidController
+{
 
     def defaultAction = "squid"
 
@@ -7,7 +8,7 @@ class SquidController {
     def currentGame = {
         if (Game.findAll().size() == 0) return null
 
-        return [game: Game.findAll().max().status()]
+        return [game: Game.findAll().max().currentGameState()]
     }
 
     def playerA = {
@@ -36,9 +37,6 @@ class SquidController {
 
     def order = {
         def game = Game.get(params.gameId)
-        def turn = new Turn(params)
-        turn.turnNumber = game.lastTurnNumberMadeByPlayer(params.player) + 1
-        game.addToTurns(turn)
-        game.save(flush: true)
+        game.newTurn(new Turn(params.player, params.row, params.column, params.turnType, game))
     }
 }
