@@ -1,3 +1,7 @@
+package squid
+
+import squid.Turn
+
 class TurnTests extends GroovyTestCase
 {
 

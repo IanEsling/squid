@@ -1,3 +1,4 @@
+package squid
 class Game implements Comparable
 {
     public final static Integer ROWS_PLAYER_CAN_MOVE = 2
@@ -12,6 +13,8 @@ class Game implements Comparable
     String playerB = "Player B"
     Integer rows = 10
     Integer columns = 10
+
+    def gameStateService
 
     static constraints =
     {
@@ -29,7 +32,7 @@ class Game implements Comparable
     
     GameState currentGameState()
     {
-        new GameState(this)
+        gameStateService.gameState(this)
     }
 
     String playerName(String player)
@@ -40,11 +43,11 @@ class Game implements Comparable
     public boolean playerCanMoveHere(String player, Integer row, Integer column)
     {
         def gameState = currentGameState()
-        return (((gameState.playerRow(player, this) - ROWS_PLAYER_CAN_MOVE..gameState.playerRow(player, this) + ROWS_PLAYER_CAN_MOVE).contains(row)
+        return (((gameStateService.playerRow(player, this) - ROWS_PLAYER_CAN_MOVE..gameStateService.playerRow(player, this) + ROWS_PLAYER_CAN_MOVE).contains(row)
                 &&
-                (gameState.playerColumn(player, this) - COLUMNS_PLAYER_CAN_MOVE..gameState.playerColumn(player, this)
+                (gameStateService.playerColumn(player, this) - COLUMNS_PLAYER_CAN_MOVE..gameStateService.playerColumn(player, this)
                         + COLUMNS_PLAYER_CAN_MOVE).contains(column))
-        && !(gameState.playerRow(player, this) == row && gameState.playerColumn(player, this) == column))
+        && !(gameStateService.playerRow(player, this) == row && gameStateService.playerColumn(player, this) == column))
     }
     
     public int compareTo(Object o)

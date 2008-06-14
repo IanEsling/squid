@@ -1,3 +1,5 @@
+package squid
+
 class GameTests extends GroovyTestCase
 {
     void testGameOrdering()

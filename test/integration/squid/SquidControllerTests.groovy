@@ -1,3 +1,10 @@
+package squid
+
+import squid.Game
+import squid.GameState
+import squid.Turn
+import squid.SquidController
+
 class SquidControllerTests extends GroovyTestCase
 {
 

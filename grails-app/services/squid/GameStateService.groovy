@@ -1,81 +1,63 @@
-class GameState
-{
-    public final static String DRAW = 'Draw'
-    public final static String PLAYER_A = 'PlayerA'
-    public final static String PLAYER_B = 'PlayerB'
+package squid
+class GameStateService {
 
-    String playerAStatus
-    String playerBStatus
-    Integer playerARow
-    Integer playerAShotRow
-    Integer playerAColumn
-    Integer playerAShotColumn
-    Integer playerBRow
-    Integer playerBColumn
-    Integer playerBShotRow
-    Integer playerBShotColumn
-    Integer turnNumber
-    boolean gameOver = false
-    String winner
-    Integer gameId
-
-    GameState() {}
-
-    GameState(Game game)
+    GameState gameState(Game game)
     {
-        gameId = game?.id
-        turnNumber = turnNumber(game)
-        playerAStatus = playerStatus('A', game)
-        playerBStatus = playerStatus('B', game)
-        playerARow = playerRow('A', game)
+        GameState gameState = new GameState()
+        gameState.gameId = game?.id
+        gameState.turnNumber = turnNumber(game)
+        gameState.playerAStatus = playerStatus('A', game)
+        gameState.playerBStatus = playerStatus('B', game)
+        gameState.playerARow = playerRow('A', game)
         if (shotLanded('A', game))
         {
             def turn = game.turns.findAll {
                 (it.player == 'A'
                         && it.turnType == Turn.FIRE)
             }.max()
-            playerAShotRow = turn.row
-            playerAShotColumn = turn.column
+            gameState.playerAShotRow = turn.row
+            gameState.playerAShotColumn = turn.column
         }
-        playerAColumn = playerColumn('A', game)
+        gameState.playerAColumn = playerColumn('A', game)
 
-        playerBRow = playerRow('B', game)
+        gameState.playerBRow = playerRow('B', game)
         if (shotLanded('B', game))
         {
             def turn = game.turns.findAll {
                 (it.player == 'B'
                         && it.turnType == Turn.FIRE)
             }.max()
-            playerBShotRow = turn.row
-            playerBShotColumn = turn.column
+            gameState.playerBShotRow = turn.row
+            gameState.playerBShotColumn = turn.column
         }
-        playerBColumn = playerColumn('B', game)
+        gameState.playerBColumn = playerColumn('B', game)
         if (playersInSameCell(game))
         {
-            gameOver = true
-            winner = DRAW
+            gameState.gameOver = true
+            gameState.winner = GameState.DRAW
         }
-        if (playerAHasWon(game) || playerBHasWon(game))
+        if (playerAHasWon(game, gameState) || playerBHasWon(game, gameState))
         {
-            gameOver = true
-            winner = playerAHasWon(game) ?
-                (playerBHasWon(game) ? DRAW : PLAYER_A) :
-                PLAYER_B
+            gameState.gameOver = true
+            gameState.winner = playerAHasWon(game, gameState) ?
+                (playerBHasWon(game, gameState) ? GameState.DRAW : GameState.PLAYER_A) :
+                GameState.PLAYER_B
         }
+        return gameState
     }
 
-    boolean playerAHasWon(Game game)
+    boolean playerAHasWon(Game game, GameState gameState)
     {
-        if (shotLanded('A', game) && playerBStatus == 'ready')
+        if (shotLanded('A', game) && gameState.playerBStatus == 'ready')
         {
             def turn = lastTurnByPlayer('A', game)
             return (turn.row == playerRow('B', game) && turn.column == playerColumn('B', game))
         }
     }
 
-    boolean playerBHasWon(Game game)
+    boolean playerBHasWon(Game game, GameState gameState)
     {
-        if (shotLanded('B', game) && playerAStatus == 'ready')
+        if (shotLanded('B', game) && gameState.playerAStatus == 'ready')
         {
             def turn = lastTurnByPlayer('B', game)
             return (turn.row == playerRow('A', game) && turn.column == playerColumn('A', game))

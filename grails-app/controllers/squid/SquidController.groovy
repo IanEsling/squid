@@ -1,3 +1,8 @@
+package squid
+
+import squid.Turn
+import squid.Game
+
 class SquidController
 {
 

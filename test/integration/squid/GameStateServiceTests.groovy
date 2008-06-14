@@ -1,5 +1,5 @@
-class GameStateTests extends GroovyTestCase
-{
+package squid
+class GameStateServiceTests extends GroovyTestCase {
     void testPlayerPositions()
     {
         def game = newGame()
@@ -12,7 +12,7 @@ class GameStateTests extends GroovyTestCase
         assertEquals("player A row wrong after move", game.currentGameState().playerARow, 2)
         assertEquals("player A column wrong after move", game.currentGameState().playerAColumn, 3)
         assertEquals("player B row wrong after move", game.currentGameState().playerBRow, 8)
-        assertEquals("player B column wrong after move", game.currentGameState().playerBColumn, 9)        
+        assertEquals("player B column wrong after move", game.currentGameState().playerBColumn, 9)
     }
 
     void testPlayerStatusAndTurnNumber()
@@ -60,10 +60,10 @@ class GameStateTests extends GroovyTestCase
         game.save(flush: true)
         assertTrue("new game has turns", game.turns == null)
         def gameState = game.currentGameState()
-        assertEquals("player A not in starting row", gameState.playerRow("A", game), 1)
-        assertEquals("player B not in starting row", gameState.playerRow("B", game), 10)
-        assertEquals("player A not in starting column", gameState.playerColumn("A", game), 1)
-        assertEquals("player B not in starting column", gameState.playerColumn("B", game), 3)
+        assertEquals("player A not in starting row", gameState.playerARow, 1)
+        assertEquals("player B not in starting row", gameState.playerBRow, 10)
+        assertEquals("player A not in starting column", gameState.playerAColumn, 1)
+        assertEquals("player B not in starting column", gameState.playerBColumn, 3)
     }
 
     void testAddNewTurn()
@@ -73,30 +73,25 @@ class GameStateTests extends GroovyTestCase
         game.newTurn(new Turn("A", 1, 1, Turn.MOVE, game)).save(flush: true)
         assertEquals("game doesn't have 1 turn", game.turns.size(), 1)
         def gameState = game.currentGameState()
-        assertEquals("game turn number not 1", gameState.lastTurnNumberMadeByPlayer("A", game), 1)
-        game.newTurn(new Turn("A", 2, 1, Turn.FIRE, game)).save(flush: true)
-        assertEquals("game doesn't have 2 turn", game.turns.size(), 2)
-        gameState = game.currentGameState()
-        assertEquals("game turn number not 2", gameState.lastTurnNumberMadeByPlayer("A", game), 2)
+        assertEquals("game turn number not 1", gameState.turnNumber, 1)
         game.newTurn(new Turn("B", 9, 9, Turn.MOVE, game)).save(flush: true)
-        assertEquals("game doesn't have 3 turns", game.turns.size(), 3)
+        assertEquals("game doesn't have 3 turns", game.turns.size(), 2)
         gameState = game.currentGameState()
-        assertEquals("game turn number not 1 for player B", gameState.lastTurnNumberMadeByPlayer("B", game), 1)
+        assertEquals("game turn number not 1 for player B", gameState.turnNumber, 2)
     }
 
     void testShotLanded()
     {
         def game = new Game()
         def gameState = game.currentGameState()
-        assertEquals("shot landed before turn taken", gameState.shotLandedInRow('A', 2, game), false)
-        assertEquals("shot landed before turn taken", gameState.shotLandedInColumn('A', 3, game), false)
+        assertEquals("shot landed before turn taken", gameState.playerAShotRow, null)
+        assertEquals("shot landed before turn taken", gameState.playerAShotColumn, null)
         game.newTurn(new Turn("A", 2, 3, Turn.FIRE, game)).save(flush: true)
         gameState = game.currentGameState()
-        assertFalse("shot landed before player B moved", gameState.shotLanded('A', game))
+        assertEquals("shot landed before player B moved", gameState.playerAShotColumn, null)
+        assertEquals("shot landed before player B moved", gameState.playerAShotRow, null)
         game.newTurn(new Turn("B", 9, 9, Turn.MOVE, game)).save(flush: true)
         gameState = game.currentGameState()
-        assertTrue("shot not landed before player B moved", gameState.shotLanded('A', game))
-        assertFalse("shot landed by player B", gameState.shotLanded('B', game))
         assertEquals("shot not landed in correct row", gameState.playerAShotRow, 2)
         assertEquals("shot not landed in correct column", gameState.playerAShotColumn, 3)
         assertEquals("shot landed in row for Player B", gameState.playerBShotRow, null)
