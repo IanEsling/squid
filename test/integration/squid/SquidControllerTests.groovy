@@ -4,6 +4,7 @@ import squid.Game
 import squid.GameState
 import squid.Turn
 import squid.SquidController
+import groovy.util.*
 
 class SquidControllerTests extends GroovyTestCase
 {

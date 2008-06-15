@@ -7,16 +7,16 @@
 <h1 align="center">Welcome To Squid</h1>
 
 <div width="100%">
-    <h2><g:render template="/squid/gameSummaryTemplate"/></h2>
+    <h2><g:render template="/squid/templates/gameSummaryTemplate"/></h2>
 
     <div class="boardContainer">
-        <g:render template="/squid/gameboardMovementTemplate"/>
+        <g:render template="/squid/templates/gameboardMovementTemplate"/>
     </div>
 
     <div class="playersContainer">
     <fieldset>
         <legend>Issue Orders for ${playerName}</legend>
-        <g:render template="/squid/orderTemplate"/>
+        <g:render template="/squid/templates/orderTemplate"/>
         </fieldset>
     </div>
 

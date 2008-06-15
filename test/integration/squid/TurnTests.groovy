@@ -1,5 +1,6 @@
 package squid
 
+import groovy.util.*
 import squid.Turn
 
 class TurnTests extends GroovyTestCase

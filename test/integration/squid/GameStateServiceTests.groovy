@@ -1,4 +1,7 @@
 package squid
+
+import groovy.util.*
+
 class GameStateServiceTests extends GroovyTestCase {
     void testPlayerPositions()
     {
@@ -109,7 +112,6 @@ class GameStateServiceTests extends GroovyTestCase {
         assertEquals("game not a draw", gameState.winner, Game.DRAW)
         assertEquals("game not a draw", gameState.gameOver, true)
     }
-
 
     private void checkPlayerStatusesAndTurnNumber(Game game, String playerAStatus, String playerBStatus, Integer turnNumber)
     {

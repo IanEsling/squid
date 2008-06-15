@@ -249,5 +249,15 @@
     <mapping directory="" vcs="" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="Grails">
+      <CLASSES>
+        <root url="file:///media/home/ian/grails/lib" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+      <jarDirectory url="file:///media/home/ian/grails/lib" recursive="false" />
+    </library>
+  </component>
 </project>
 

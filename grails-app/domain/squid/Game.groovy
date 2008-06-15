@@ -39,16 +39,6 @@ class Game implements Comparable
     {
         player=='A'?playerA:playerB
     }
-
-    public boolean playerCanMoveHere(String player, Integer row, Integer column)
-    {
-        def gameState = currentGameState()
-        return (((gameStateService.playerRow(player, this) - ROWS_PLAYER_CAN_MOVE..gameStateService.playerRow(player, this) + ROWS_PLAYER_CAN_MOVE).contains(row)
-                &&
-                (gameStateService.playerColumn(player, this) - COLUMNS_PLAYER_CAN_MOVE..gameStateService.playerColumn(player, this)
-                        + COLUMNS_PLAYER_CAN_MOVE).contains(column))
-        && !(gameStateService.playerRow(player, this) == row && gameStateService.playerColumn(player, this) == column))
-    }
     
     public int compareTo(Object o)
     {

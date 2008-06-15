@@ -1,6 +1,6 @@
 package squid
-class GameStateService {
-
+class GameStateService
+{
     GameState gameState(Game game)
     {
         GameState gameState = new GameState()

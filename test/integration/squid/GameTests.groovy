@@ -1,5 +1,7 @@
 package squid
 
+import groovy.util.*
+
 class GameTests extends GroovyTestCase
 {
     void testGameOrdering()

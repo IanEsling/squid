@@ -17,7 +17,7 @@
                         <g:set var="cellClass" value="playerBShot"/>
                     </g:elseif>
 
-                    <g:if test="${game.playerCanMoveHere(player, r, c)}">
+                    <g:if test="${((player == 'A') && (r >= gameState.playerARow-game.ROWS_PLAYER_CAN_MOVE) && (r <= gameState.playerARow+game.ROWS_PLAYER_CAN_MOVE) && (c >= gameState.playerAColumn-game.COLUMNS_PLAYER_CAN_MOVE) && c <= (gameState.playerAColumn+game.COLUMNS_PLAYER_CAN_MOVE)) || ((player == 'B') && (r >= gameState.playerBRow-game.ROWS_PLAYER_CAN_MOVE) && (r <= gameState.playerBRow+game.ROWS_PLAYER_CAN_MOVE) && (c >= gameState.playerBColumn-game.COLUMNS_PLAYER_CAN_MOVE) && c <= (gameState.playerBColumn+game.COLUMNS_PLAYER_CAN_MOVE))}">
                         <td class="${cellClass}"
                             onclick="moveTo('${r}', '${c}')"
                             onmouseout="this.className = '${cellClass}'"
