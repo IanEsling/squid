@@ -1,11 +1,10 @@
 package squid
 
-import squid.Turn
 import squid.Game
+import squid.Turn
 
 class SquidController
 {
-
     def defaultAction = "squid"
 
     def squid = { currentGame.call() }
@@ -14,7 +13,7 @@ class SquidController
         if (Game.findAll().size() == 0) return null
 
         def game = Game.findAll().max()
-        [gameState: game.currentGameState(), game:game, player:player, playerName:game.playerName(player)]
+        [gameState: game.currentGameState(), game: game, player: player, playerName: game.playerName(player)]
     }
 
     def move = {
@@ -30,11 +29,11 @@ class SquidController
     }
 
     def newGame = {
-        if (params.playerA == "") params.remove("playerA")
-        if (params.playerB == "") params.remove("playerB")
-        if (params.rows == "") params.remove("rows")
-        if (params.columns == "") params.remove("columns")
-        def game = new Game(params)
+        String playerA = paramMissing('playerA') ? "Player A" : params.playerA
+        String playerB = paramMissing('playerB') ? "Player B" : params.playerB
+        def rows = paramMissing('rows') ? 10 : Integer.valueOf(params.rows)
+        def columns = paramMissing('columns') ? 10 : Integer.valueOf(params.columns)
+        def game = new Game(rows, columns, playerA, playerB)
         game.save(flush: true)
 
         redirect(uri: "/squid")
@@ -47,6 +46,11 @@ class SquidController
 
     def order = {
         def game = Game.get(params.gameId)
-        game.newTurn(new Turn(params.player, Integer.valueOf(params.row), Integer.valueOf(params.column), params.turnType, game))
+        game.newTurn(new Turn(Integer.valueOf(params.row), Integer.valueOf(params.column), params.turnType), params.player)
+    }
+
+    boolean paramMissing(property)
+    {
+        params?.get(property)==""||params?.get(property)==null
     }
 }

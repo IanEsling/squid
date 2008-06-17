@@ -1,37 +1,46 @@
 package squid
 
-import groovy.util.*
+class GameStateServiceTests extends GroovyTestCase
+{
 
-class GameStateServiceTests extends GroovyTestCase {
+    def game
+    def gameStateService
+
+    protected void setUp()
+    {
+        game = newGame()
+        game.gameStateService = gameStateService
+    }
+
+
+
     void testPlayerPositions()
     {
-        def game = newGame()
-        game.newTurn(new Turn("A", 2, 3, Turn.MOVE, game)).save(flush: true)
-        assertEquals("player A row moved before player B move received", game.currentGameState().playerARow, 1)
-        assertEquals("player A column moved before player B move received", game.currentGameState().playerAColumn, 1)
-        assertEquals("player B row moved after player A move received", game.currentGameState().playerBRow, 10)
-        assertEquals("player B column moved after player A move received", game.currentGameState().playerBColumn, 10)
-        game.newTurn(new Turn('B', 8, 9, Turn.MOVE, game)).save(flush: true)
-        assertEquals("player A row wrong after move", game.currentGameState().playerARow, 2)
-        assertEquals("player A column wrong after move", game.currentGameState().playerAColumn, 3)
-        assertEquals("player B row wrong after move", game.currentGameState().playerBRow, 8)
-        assertEquals("player B column wrong after move", game.currentGameState().playerBColumn, 9)
+        game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
+        assertEquals("player A row moved before player B move received", game.currentGameState().player('A').get('row'), '1')
+        assertEquals("player A column moved before player B move received", game.currentGameState().player('A').get('column'), '1')
+        assertEquals("player B row moved after player A move received", game.currentGameState().player('B').get('row'), '10')
+        assertEquals("player B column moved after player A move received", game.currentGameState().player('B').get('column'), '10')
+        game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
+        assertEquals("player A row wrong after move", game.currentGameState().player('A').get('row'), '2')
+        assertEquals("player A column wrong after move", game.currentGameState().player('A').get('column'), '3')
+        assertEquals("player B row wrong after move", game.currentGameState().player('B').get('row'), '8')
+        assertEquals("player B column wrong after move", game.currentGameState().player('B').get('column'), '9')
     }
 
     void testPlayerStatusAndTurnNumber()
     {
-        def game = newGame()
-        game.newTurn(new Turn("A", 2, 2, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(2, 2, Turn.MOVE), 'A').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'waiting', 'ready', 1)
-        game.newTurn(new Turn('B', 9, 9, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(9, 9, Turn.MOVE), 'B').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'ready', 'ready', 2)
-        game.newTurn(new Turn("A", 3, 3, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(3, 3, Turn.MOVE), 'A').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'waiting', 'ready', 2)
-        game.newTurn(new Turn('B', 8, 7, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(8, 7, Turn.MOVE), 'B').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'ready', 'ready', 3)
-        game.newTurn(new Turn('B', 6, 5, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(6, 5, Turn.MOVE), 'B').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'ready', 'waiting', 3)
-        game.newTurn(new Turn("A", 5, 4, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(5, 4, Turn.MOVE), 'A').save(flush: true)
         checkPlayerStatusesAndTurnNumber(game, 'ready', 'ready', 4)
     }
 
@@ -116,14 +125,14 @@ class GameStateServiceTests extends GroovyTestCase {
     private void checkPlayerStatusesAndTurnNumber(Game game, String playerAStatus, String playerBStatus, Integer turnNumber)
     {
         def gameState = game.currentGameState()
-        assertEquals("player A status incorrect on turn ${turnNumber}", gameState.playerAStatus, playerAStatus)
-        assertEquals("player B status incorrect on turn ${turnNumber}", gameState.playerBStatus, playerBStatus)
+        assertEquals("player A status incorrect on turn ${turnNumber}", gameState.player('A').get('status'), playerAStatus)
+        assertEquals("player B status incorrect on turn ${turnNumber}", gameState.player('B').get('status'), playerBStatus)
         assertEquals("turn number incorrect", gameState.turnNumber, turnNumber)
     }
 
     private Game newGame()
     {
-        def newGame = new Game(playerA: "A", playerB: "B", rows: 10, columns: 10)
+        def newGame = new Game(10, 10, "A", "B")
         newGame.save(flush: true)
         return newGame
     }

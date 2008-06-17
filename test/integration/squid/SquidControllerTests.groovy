@@ -8,7 +8,8 @@ import groovy.util.*
 
 class SquidControllerTests extends GroovyTestCase
 {
-
+    def gameStateService
+    
     void testStartNewGame()
     {
         def squid = new SquidController()
@@ -18,8 +19,10 @@ class SquidControllerTests extends GroovyTestCase
         squid.params.columns = "10"
         squid.newGame.call()
         def game = Game.list().max()
-        assertEquals("new game player a not set up correctly", game.playerA, "A")
-        assertEquals("new game player b not set up correctly", game.playerB, "B")
+        assertEquals("players not correct for new game", game.players.size(), 2)
+        game.players.each{
+            assertTrue("player name not A or B",it.name == 'A'||it.name=='B')
+        }
         assertTrue("no rows for new game", game.rows == 10)
         assertTrue("no columns for new game", game.columns == 10)
         assertTrue("new game id not set up correctly", game.id > 0)
@@ -35,8 +38,8 @@ class SquidControllerTests extends GroovyTestCase
         squid.newGame.call()
         assertTrue("New Game not created", Game.list().size() > 0)
         def game = Game.list().max()
-        assertEquals("new game player a not set up correctly", game.playerA, "Player A")
-        assertEquals("new game player b not set up correctly", game.playerB, "Player B")
+        assertEquals("new game player a not set up correctly", game.players.find{it.name="Player A"}.name, "Player A")
+        assertEquals("new game player b not set up correctly", game.players.find{it.name="Player B"}.name, "Player B")
         assertTrue("no rows for new game", game.rows == 10)
         assertTrue("no columns for new game", game.columns == 10)
         assertTrue("new game id not set up correctly", game.id > 0)
@@ -46,16 +49,16 @@ class SquidControllerTests extends GroovyTestCase
     {
         def squid = new SquidController()
         squid.newGame.call()
-        newMove('2', '1', "A")
+        newMove('2', '1', "Player A")
         assertEquals("game not waiting for Player A", getGame().playerAStatus, "waiting")
         assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
-        newMove('4', '3', "B")
+        newMove('4', '3', "Player B")
         assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
         assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
-        newMove('8', '7', "B")
+        newMove('8', '7', "Player B")
         assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
         assertEquals("game not waiting for Player B", getGame().playerBStatus, "waiting")
-        newMove('8', '8', "A", Turn.FIRE)
+        newMove('8', '8', "Player A", Turn.FIRE)
         assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
         assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
     }
@@ -101,8 +104,9 @@ class SquidControllerTests extends GroovyTestCase
 
     private GameState getGame()
     {
-        def squid = new SquidController()
-        return squid.currentGame.call().get('gameState')
+        def game = Game.list().max()
+        game.gameStateService = gameStateService
+        game.currentGameState()
     }
 
     private void newMove(String row, String column, String player, String turnType = Turn.MOVE)

@@ -1,89 +1,76 @@
 package squid
+
 class GameStateService
 {
     GameState gameState(Game game)
     {
-        GameState gameState = new GameState()
-        gameState.gameId = game?.id
+        GameState gameState = new GameState(game)
+        game.players.each {
+            gameState.player(it).put('status', playerStatus(it, game))
+            gameState.player(it).put('row', playerRow(it, game).toString())
+            gameState.player(it).put('column', playerColumn(it, game).toString())
+            gameState.player(it).put('shotLanded', shotLanded(it, game).toString())
+            if (shotLanded(it, game))
+            {
+                def fireTurn = player.turns.findAll {
+                    it.turnType == Turn.FIRE
+                }.max()
+                gameState.player(it).put('shotLandedRow', fireTurn.row)
+                gameState.player(it).put('shotLandedColumn', fireTurn.column)
+            }
+        }
         gameState.turnNumber = turnNumber(game)
-        gameState.playerAStatus = playerStatus('A', game)
-        gameState.playerBStatus = playerStatus('B', game)
-        gameState.playerARow = playerRow('A', game)
-        if (shotLanded('A', game))
-        {
-            def turn = game.turns.findAll {
-                (it.player == 'A'
-                        && it.turnType == Turn.FIRE)
-            }.max()
-            gameState.playerAShotRow = turn.row
-            gameState.playerAShotColumn = turn.column
-        }
-        gameState.playerAColumn = playerColumn('A', game)
-
-        gameState.playerBRow = playerRow('B', game)
-        if (shotLanded('B', game))
-        {
-            def turn = game.turns.findAll {
-                (it.player == 'B'
-                        && it.turnType == Turn.FIRE)
-            }.max()
-            gameState.playerBShotRow = turn.row
-            gameState.playerBShotColumn = turn.column
-        }
-        gameState.playerBColumn = playerColumn('B', game)
-        if (playersInSameCell(game))
-        {
-            gameState.gameOver = true
-            gameState.winner = GameState.DRAW
-        }
-        if (playerAHasWon(game, gameState) || playerBHasWon(game, gameState))
-        {
-            gameState.gameOver = true
-            gameState.winner = playerAHasWon(game, gameState) ?
-                (playerBHasWon(game, gameState) ? GameState.DRAW : GameState.PLAYER_A) :
-                GameState.PLAYER_B
-        }
+//        if (playersInSameCell(game))
+//        {
+//            gameState.gameOver = true
+//            gameState.winner = GameState.DRAW
+//        }
+//        if (playerAHasWon(game, gameState) || playerBHasWon(game, gameState))
+//        {
+//            gameState.gameOver = true
+//            gameState.winner = playerAHasWon(game, gameState) ?
+//                (playerBHasWon(game, gameState) ? GameState.DRAW : GameState.PLAYER_A) :
+//                GameState.PLAYER_B
+//        }
         return gameState
     }
 
-    boolean playerAHasWon(Game game, GameState gameState)
+//    boolean playerAHasWon(Game game, GameState gameState)
+//    {
+//        if (shotLanded('A', game) && gameState.playerBStatus == 'ready')
+//        {
+//            def turn = lastTurnByPlayer('A', game)
+//            return (turn.row == playerRow('B', game) && turn.column == playerColumn('B', game))
+//        }
+//    }
+//
+//    boolean playerBHasWon(Game game, GameState gameState)
+//    {
+//        if (shotLanded('B', game) && gameState.playerAStatus == 'ready')
+//        {
+//            def turn = lastTurnByPlayer('B', game)
+//            return (turn.row == playerRow('A', game) && turn.column == playerColumn('A', game))
+//        }
+//    }
+
+    boolean shotLanded(Player player, Game game)
     {
-        if (shotLanded('A', game) && gameState.playerBStatus == 'ready')
-        {
-            def turn = lastTurnByPlayer('A', game)
-            return (turn.row == playerRow('B', game) && turn.column == playerColumn('B', game))
-        }
+        return ((player.turns?.max()?.turnType == Turn.FIRE && playerStatus(player, game) == 'ready')
+                ||
+                (previousMoveByPlayer(player)?.turnType) == Turn.FIRE && playerStatus(player, game) == 'waiting')
     }
 
-    boolean playerBHasWon(Game game, GameState gameState)
-    {
-        if (shotLanded('B', game) && gameState.playerAStatus == 'ready')
-        {
-            def turn = lastTurnByPlayer('B', game)
-            return (turn.row == playerRow('A', game) && turn.column == playerColumn('A', game))
-        }
-    }
-
-    boolean shotLanded(String player, Game game)
-    {
-        if (playerStatus(player, game) == 'ready')
-        {
-            return game.turns?.findAll {it.player == player}?.max()?.turnType == Turn.FIRE
-        }
-    }
-
-    boolean shotLandedInRow(String player, Integer row, Game game)
+    boolean shotLandedInRow(Player player, Integer row, Game game)
     {
         if (shotLanded(player, game))
         {
-            return game.turns?.findAll {
-                (it.player == player
-                        && it.turnType == Turn.FIRE)
+            return player.turns?.findAll {
+                (it.turnType == Turn.FIRE)
             }?.max()?.row == row
         }
     }
 
-    boolean shotLandedInColumn(String player, Integer column, Game game)
+    boolean shotLandedInColumn(Player player, Integer column, Game game)
     {
         if (shotLanded(player, game))
         {
@@ -94,74 +81,92 @@ class GameStateService
         }
     }
 
-    private Turn lastTurnByPlayer(String player, Game game)
+    private Turn lastTurnByPlayer(Player player, Game game)
     {
         game.turns?.findAll {it?.player == player}?.max()
     }
 
-    private Turn previousMoveByPlayer(String player, Game game)
+    private Turn previousMoveByPlayer(Player player)
     {
-        game.turns?.findAll {
-            (it?.player == player
-                    && it?.turnType == Turn.MOVE
-                    && it?.turnNumber < lastTurnNumberMadeByPlayer(player, game))
+        player.turns?.findAll {
+            (it?.turnType == Turn.MOVE
+                    && it?.turnNumber < lastTurnNumberMadeByPlayer(player))
         }?.max()
     }
 
-    private Turn lastMoveByPlayer(String player, Game game)
+    private Turn lastMoveByPlayer(Player player)
     {
-        game.turns?.findAll {
-            (it?.player == player
-                    && it.turnType == Turn.MOVE)
+        player.turns?.findAll {
+            (it?.turnType == Turn.MOVE)
         }?.max()
     }
 
-    private Integer defaultRow(String player, Game game)
+    private Integer defaultRow(Player player)
     {
-        return player.equals("A") ? 1 : game.rows
+        return player.startingRow
     }
 
-    private Integer defaultColumn(String player, Game game)
+    private Integer defaultColumn(Player player)
     {
-        return player.equals("A") ? 1 : game.columns
+        return player.startingColumn
     }
 
-    public Integer playerRow(String player, Game game)
+    public Integer playerRow(Player player, Game game)
     {
-        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player, game) : lastMoveByPlayer(player, game)
-        return (turn == null) ? defaultRow(player, game) : turn.row
+        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        return (turn == null) ? defaultRow(player) : turn.row
     }
 
-    public Integer playerColumn(String player, Game game)
+    public Integer playerColumn(Player player, Game game)
     {
-        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player, game) : lastMoveByPlayer(player, game)
-        return (turn == null) ? defaultColumn(player, game) : turn.column
+        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        return (turn == null) ? defaultColumn(player) : turn.column
     }
 
     private boolean playersInSameCell(Game game)
     {
-        return playerRow('A', game) == playerRow('B', game) && playerColumn('A', game) == playerColumn('B', game)
+        boolean sameRow = true
+        boolean sameColumn = true
+        Integer lastRow, lastColumn
+        game.players.each {
+            if (lastRow != null && it.row != lastRow) {sameRow = false}
+            if (lastColumn != null && it.column != lastColumn) {sameColumn = false}
+            lastRow = it.row
+            lastColumn = it.column
+        }
+        return sameRow && sameColumn
     }
 
     public Integer turnNumber(Game game)
     {
-        return lastTurnNumberMadeByPlayer('A', game) < lastTurnNumberMadeByPlayer('B', game) ?
-            lastTurnNumberMadeByPlayer('A', game) + 1 :
-            lastTurnNumberMadeByPlayer('B', game) + 1
+        def turnNumber = 0
+        game.players.each {
+            if (playerStatus(it, game)=='ready')
+                turnNumber = lastTurnNumberMadeByPlayer(it) + 1
+        }
+        return turnNumber
     }
 
-    Integer lastTurnNumberMadeByPlayer(String player, Game game)
+    Integer lastTurnNumberMadeByPlayer(Player player)
     {
-        def turn = game.turns?.findAll {
-            it.player == player
-        }?.max()?.turnNumber
+        def turn = player.turns?.max()?.turnNumber
 
         return turn == null ? 0 : turn
     }
 
-    private String playerStatus(String player, Game game)
+    Integer lastTurnNumberMadeByOtherPlayer(Player player, Game game)
     {
-        return lastTurnNumberMadeByPlayer(player, game) > lastTurnNumberMadeByPlayer(otherPlayer(player), game) ? "waiting" : "ready"
+        Integer turnNumber = 0
+        game.players.each {
+            if (it.name != player.name && lastTurnNumberMadeByPlayer(it) > turnNumber)
+                turnNumber = lastTurnNumberMadeByPlayer(it)
+        }
+        return turnNumber
+    }
+
+    private String playerStatus(Player player, Game game)
+    {
+        return lastTurnNumberMadeByPlayer(player) > lastTurnNumberMadeByOtherPlayer(player, game) ? "waiting" : "ready"
     }
 
     private String otherPlayer(String player)

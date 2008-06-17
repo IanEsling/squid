@@ -58,6 +58,5 @@ class TurnTests extends GroovyTestCase
         assertTrue('no row errors', turn.errors.hasFieldErrors('row'))
         assertTrue('no column errors', turn.errors.hasFieldErrors('column'))
         assertTrue('no turnType errors', turn.errors.hasFieldErrors('turnType'))
-
     }
 }
