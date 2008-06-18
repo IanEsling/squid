@@ -50,38 +50,38 @@ class SquidControllerTests extends GroovyTestCase
         def squid = new SquidController()
         squid.newGame.call()
         newMove('2', '1', "Player A")
-        assertEquals("game not waiting for Player A", getGame().playerAStatus, "waiting")
-        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
+        assertEquals("game not waiting for Player A", getGame().player('Player A').get(GameState.PLAYER_STATUS), "waiting")
+        assertEquals("game not ready for Player B", getGame().player('Player B').get(GameState.PLAYER_STATUS), "ready")
         newMove('4', '3', "Player B")
-        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
-        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
+        assertEquals("game not ready for Player A", getGame().player('Player A').get(GameState.PLAYER_STATUS), "ready")
+        assertEquals("game not ready for Player B", getGame().player('Player B').get(GameState.PLAYER_STATUS), "ready")
         newMove('8', '7', "Player B")
-        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
-        assertEquals("game not waiting for Player B", getGame().playerBStatus, "waiting")
+        assertEquals("game not ready for Player A", getGame().player('Player A').get(GameState.PLAYER_STATUS), "ready")
+        assertEquals("game not waiting for Player B", getGame().player('Player B').get(GameState.PLAYER_STATUS), "waiting")
         newMove('8', '8', "Player A", Turn.FIRE)
-        assertEquals("game not ready for Player A", getGame().playerAStatus, "ready")
-        assertEquals("game not ready for Player B", getGame().playerBStatus, "ready")
+        assertEquals("game not ready for Player A", getGame().player('Player A').get(GameState.PLAYER_STATUS), "ready")
+        assertEquals("game not ready for Player B", getGame().player('Player B').get(GameState.PLAYER_STATUS), "ready")
     }
 
     void testPlayerPosition()
     {
         def squid = new SquidController()
         squid.newGame.call()
-        newMove('3', '2', 'A')
-        checkPlayer(1, 1, 'A')
-        checkPlayer(10, 10, 'B')
-        newMove('8', '9', 'B')
-        checkPlayer(3, 2, 'A')
-        checkPlayer(8, 9, 'B')
-        newMove('7', '6', 'A', Turn.FIRE)
-        checkPlayer(3, 2, 'A')
-        checkPlayer(8, 9, 'B')
-        newMove('7', '8', 'B')
-        checkPlayer(3, 2, 'A')
-        checkPlayer(7, 8, 'B')
-        newMove('4', '3', 'A')
-        checkPlayer(3, 2, 'A')
-        checkPlayer(7, 8, 'B')
+        newMove('3', '2', 'Player A')
+        checkPlayer(1, 1, 'Player A')
+        checkPlayer(10, 10, 'Player B')
+        newMove('8', '9', 'Player B')
+        checkPlayer(3, 2, 'Player A')
+        checkPlayer(8, 9, 'Player B')
+        newMove('7', '6', 'Player A', Turn.FIRE)
+        checkPlayer(3, 2, 'Player A')
+        checkPlayer(8, 9, 'Player B')
+        newMove('7', '8', 'Player B')
+        checkPlayer(3, 2, 'Player A')
+        checkPlayer(7, 8, 'Player B')
+        newMove('4', '3', 'Player A')
+        checkPlayer(3, 2, 'Player A')
+        checkPlayer(7, 8, 'Player B')
     }
 
     private void checkPlayer(Integer row, Integer col, String player)
@@ -92,14 +92,12 @@ class SquidControllerTests extends GroovyTestCase
 
     private void checkPlayerRow(Integer row, String player)
     {
-        assertEquals("player ${player} not in row ${row}", row,
-                player == 'A' ? getGame().playerARow : getGame().playerBRow)
+        assertEquals("player ${player} not in row ${row}", row.toString(), getGame().player(player).get(GameState.PLAYER_ROW))
     }
 
     private void checkPlayerColumn(Integer col, String player)
     {
-        assertEquals("player ${player} not in column ${col}", col,
-                player == 'A' ? getGame().playerAColumn : getGame().playerBColumn)
+        assertEquals("player ${player} not in column ${col}", col.toString(), getGame().player(player).get(GameState.PLAYER_COLUMN))
     }
 
     private GameState getGame()

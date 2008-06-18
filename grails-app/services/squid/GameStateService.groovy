@@ -16,8 +16,8 @@ class GameStateService
                 def fireTurn = it.turns.findAll {
                     it.turnType == Turn.FIRE
                 }.max()
-                gameState.player(it).put(GameState.SHOT_LANDED_ROW, fireTurn.row)
-                gameState.player(it).put(GameState.SHOT_LANDED_COLUMN, fireTurn.column)
+                gameState.player(it).put(GameState.SHOT_LANDED_ROW, fireTurn.row.toString())
+                gameState.player(it).put(GameState.SHOT_LANDED_COLUMN, fireTurn.column.toString())
             }
         }
         gameState.turnNumber = turnNumber(game)
