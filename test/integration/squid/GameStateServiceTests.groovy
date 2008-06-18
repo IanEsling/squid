@@ -79,16 +79,14 @@ class GameStateServiceTests extends GroovyTestCase
 
     void testAddNewTurn()
     {
-        def game = newGame()
-        assertTrue("new game has turns", game.turns == null)
-        game.newTurn(new Turn("A", 1, 1, Turn.MOVE, game)).save(flush: true)
-        assertEquals("game doesn't have 1 turn", game.turns.size(), 1)
+        game.newTurn(new Turn(1, 1, Turn.MOVE), 'A').save(flush: true)
+        assertEquals("player A doesn't have 1 turn", game.players.find{it.name=='A'}.turns.size(), 1)
         def gameState = game.currentGameState()
         assertEquals("game turn number not 1", gameState.turnNumber, 1)
-        game.newTurn(new Turn("B", 9, 9, Turn.MOVE, game)).save(flush: true)
-        assertEquals("game doesn't have 3 turns", game.turns.size(), 2)
+        game.newTurn(new Turn(9, 9, Turn.MOVE), 'B').save(flush: true)
+        assertEquals("player B doesn't have 1 turn", game.players.every{it.turns.size()==1}, true)
         gameState = game.currentGameState()
-        assertEquals("game turn number not 1 for player B", gameState.turnNumber, 2)
+        assertEquals("game turn number not 2", gameState.turnNumber, 2)
     }
 
     void testShotLanded()

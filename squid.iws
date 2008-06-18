@@ -148,7 +148,7 @@
       <file leaf-file-name="GameStateServiceTests.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="78" selection-start="3775" selection-end="3775" vertical-scroll-proportion="0.43887776">
+            <state line="82" column="80" selection-start="4396" selection-end="4396" vertical-scroll-proportion="0.4428858">
               <folding />
             </state>
           </provider>
@@ -932,7 +932,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="78" selection-start="3775" selection-end="3775" vertical-scroll-proportion="0.43887776">
+        <state line="82" column="80" selection-start="4396" selection-end="4396" vertical-scroll-proportion="0.4428858">
           <folding />
         </state>
       </provider>
