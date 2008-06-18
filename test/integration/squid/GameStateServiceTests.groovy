@@ -67,7 +67,7 @@ class GameStateServiceTests extends GroovyTestCase
 
     void testPlayerStartPositions()
     {
-        assertTrue("new game has turns", game.players.every{it.turns == null})
+        assertTrue("new game has too many turns", game.players.every{it.turns.size()==1})
         def gameState = game.currentGameState()
         assertEquals("player A not in starting row", gameState.player('A').get(GameState.PLAYER_ROW), "1")
         assertEquals("player B not in starting row", gameState.player('B').get(GameState.PLAYER_ROW), "10")
@@ -78,11 +78,11 @@ class GameStateServiceTests extends GroovyTestCase
     void testAddNewTurn()
     {
         game.newTurn(new Turn(1, 1, Turn.MOVE), 'A').save(flush: true)
-        assertEquals("player A doesn't have 1 turn", game.players.find{it.name=='A'}.turns.size(), 1)
+        assertEquals("player A doesn't have new turn", game.players.find{it.name=='A'}.turns.size(), 2)
         def gameState = game.currentGameState()
         assertEquals("game turn number not 1", gameState.turnNumber, 1)
         game.newTurn(new Turn(9, 9, Turn.MOVE), 'B').save(flush: true)
-        assertEquals("player B doesn't have 1 turn", game.players.every{it.turns.size()==1}, true)
+        assertEquals("player B doesn't have 1 turn", game.players.every{it.turns.size()==2}, true)
         gameState = game.currentGameState()
         assertEquals("game turn number not 2", gameState.turnNumber, 2)
     }

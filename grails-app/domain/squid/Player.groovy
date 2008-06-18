@@ -5,21 +5,21 @@ class Player
     static hasMany = [turns: Turn]
 
     String name
-    Integer startingRow, startingColumn
 
     Player() {}
 
     Player(String name, Game game)
     {
         this.name = name
-        this.startingRow = game.players == null ? 1 : game.rows
-        this.startingColumn = game.players == null ? 1 : game.columns
+        Integer startingRow = game.players == null ? 1 : game.rows
+        Integer startingColumn = game.players == null ? 1 : game.columns
+        newTurn(new Turn(startingRow, startingColumn, Turn.MOVE))
     }
 
     void newTurn(turn)
     {
         def turnNumber = turns?.max()?.turnNumber
-        turn.turnNumber = turnNumber == null ? 1 : turnNumber + 1
+        turn.turnNumber = turnNumber == null ? 0 : turnNumber + 1
         addToTurns(turn)
     }
 
@@ -31,6 +31,4 @@ class Player
         }
         return false
     }
-
-
 }

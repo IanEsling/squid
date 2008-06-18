@@ -125,14 +125,14 @@
       <file leaf-file-name="PlayerTests.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/integration/squid/PlayerTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="44" selection-start="985" selection-end="985" vertical-scroll-proportion="18.88889">
+            <state line="32" column="90" selection-start="1130" selection-end="1130" vertical-scroll-proportion="14.037037">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Player.groovy">
+      <file leaf-file-name="Game.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Game.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="2" column="6" selection-start="21" selection-end="21" vertical-scroll-proportion="34.0">
               <folding />
@@ -140,6 +140,27 @@
           </provider>
           <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Player.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="48" selection-start="506" selection-end="506" vertical-scroll-proportion="357.0">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameStateServiceTests.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="90" selection-start="4890" selection-end="4890" vertical-scroll-proportion="27.5">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -802,16 +823,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Game.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="79" selection-start="787" selection-end="787" vertical-scroll-proportion="-1.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/squid/GameTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="106" selection-start="298" selection-end="298" vertical-scroll-proportion="0.087548636">
@@ -861,13 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="76" selection-start="6666" selection-end="6666" vertical-scroll-proportion="0.8977956">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Turn.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="6" selection-start="20" selection-end="20" vertical-scroll-proportion="17.0">
@@ -878,7 +882,24 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="90" selection-start="4890" selection-end="4890" vertical-scroll-proportion="27.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Player.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="48" selection-start="506" selection-end="506" vertical-scroll-proportion="357.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Game.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="6" selection-start="21" selection-end="21" vertical-scroll-proportion="34.0">
           <folding />
@@ -890,7 +911,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/squid/PlayerTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="44" selection-start="985" selection-end="985" vertical-scroll-proportion="18.88889">
+        <state line="32" column="90" selection-start="1130" selection-end="1130" vertical-scroll-proportion="14.037037">
           <folding />
         </state>
       </provider>

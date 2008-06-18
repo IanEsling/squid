@@ -20,14 +20,16 @@ class PlayerTests extends GroovyTestCase
     void testTurnsForPlayer()
     {
         def player = new Player(name: 'A')
-        player.save(flush: true)
+        if (!player.save(flush: true)) fail("failed to save new player")
+
         player.newTurn(new Turn(10, 10, Turn.MOVE))
-        player.save(flush: true)
+        if (!player.save(flush: true)) fail("failed to save new turn for player")
+        
         assertEquals("player doesn't have turn", player.turns.size(), 1)
-        assertEquals("first turn has wrong turn number", player.turns.max().turnNumber, 1)
+        assertEquals("first turn has wrong turn number", player.turns.max().turnNumber, 0)
         player.newTurn(new Turn(8, 9, Turn.MOVE))
         player.save(flush: true)
         assertEquals("player doesn't have second turn", player.turns.size(), 2)
-        assertEquals("second turn has wrong turn number", player.turns.max().turnNumber, 2)
+        assertEquals("second turn has wrong turn number", player.turns.max().turnNumber, 1)
     }
 }
