@@ -12,7 +12,7 @@ class GameStateService
             gameState.player(it).put('shotLanded', shotLanded(it, game).toString())
             if (shotLanded(it, game))
             {
-                def fireTurn = player.turns.findAll {
+                def fireTurn = it.turns.findAll {
                     it.turnType == Turn.FIRE
                 }.max()
                 gameState.player(it).put('shotLandedRow', fireTurn.row)
@@ -20,38 +20,42 @@ class GameStateService
             }
         }
         gameState.turnNumber = turnNumber(game)
-//        if (playersInSameCell(game))
-//        {
-//            gameState.gameOver = true
-//            gameState.winner = GameState.DRAW
-//        }
-//        if (playerAHasWon(game, gameState) || playerBHasWon(game, gameState))
-//        {
-//            gameState.gameOver = true
-//            gameState.winner = playerAHasWon(game, gameState) ?
-//                (playerBHasWon(game, gameState) ? GameState.DRAW : GameState.PLAYER_A) :
-//                GameState.PLAYER_B
-//        }
+        if (playersInSameCell(game))
+        {
+            gameState.gameOver = true
+            game.players.each {gameState.winner << it}
+        }
+        if (aPlayerHasWon(gameState).size() > 0)
+        {
+            gameState.gameOver = true
+            gameState.winner = aPlayerHasWon(gameState)
+        }
         return gameState
     }
 
-//    boolean playerAHasWon(Game game, GameState gameState)
-//    {
-//        if (shotLanded('A', game) && gameState.playerBStatus == 'ready')
-//        {
-//            def turn = lastTurnByPlayer('A', game)
-//            return (turn.row == playerRow('B', game) && turn.column == playerColumn('B', game))
-//        }
-//    }
-//
-//    boolean playerBHasWon(Game game, GameState gameState)
-//    {
-//        if (shotLanded('B', game) && gameState.playerAStatus == 'ready')
-//        {
-//            def turn = lastTurnByPlayer('B', game)
-//            return (turn.row == playerRow('A', game) && turn.column == playerColumn('A', game))
-//        }
-//    }
+    List<Player> aPlayerHasWon(GameState gameState)
+    {
+        List<Player> winners = new ArrayList<Player>()
+        if (gameState.players.collect {player, value -> value.get('status')}.every {'ready'}
+                && gameState.players.collect {player, value -> value.get('shotLanded')}.any {'true'})
+        {
+            gameState.players.each {player, value ->
+                String shotRow = value.get('shotLandedRow')
+                String shotColumn = value.get('shotLandedColumn')
+                if (value.get('shotLanded') == 'true')
+                {
+                    if (gameState.players.any {shotAtPlayer, shotAtValue ->
+                        shotAtValue.get('row') == shotRow && shotAtValue.get('column') == shotColumn
+                    })
+                    {
+                        winners << player
+                    }
+                }
+            }
+            return winners
+        }
+        return winners
+    }
 
     boolean shotLanded(Player player, Game game)
     {
@@ -129,10 +133,12 @@ class GameStateService
         boolean sameColumn = true
         Integer lastRow, lastColumn
         game.players.each {
-            if (lastRow != null && it.row != lastRow) {sameRow = false}
-            if (lastColumn != null && it.column != lastColumn) {sameColumn = false}
-            lastRow = it.row
-            lastColumn = it.column
+            def thisRow = playerRow(it, game)
+            def thisColumn = playerColumn(it, game)
+            if (lastRow != null && thisRow != lastRow) {sameRow = false}
+            if (lastColumn != null && thisColumn != lastColumn) {sameColumn = false}
+            lastRow = thisRow
+            lastColumn = thisColumn
         }
         return sameRow && sameColumn
     }
@@ -141,7 +147,7 @@ class GameStateService
     {
         def turnNumber = 0
         game.players.each {
-            if (playerStatus(it, game)=='ready')
+            if (playerStatus(it, game) == 'ready')
                 turnNumber = lastTurnNumberMadeByPlayer(it) + 1
         }
         return turnNumber

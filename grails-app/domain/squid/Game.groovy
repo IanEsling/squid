@@ -27,7 +27,7 @@ class Game implements Comparable
     {
         this.rows = rows
         this.columns = columns
-        player.each {playerName -> addToPlayers(new Player(playerName, this))}
+        player.each {playerName -> addToPlayers(new Player(playerName, delegate))}
     }
 
     Game newTurn(Turn turn, playerName)

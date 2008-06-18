@@ -8,11 +8,12 @@ class GameState
     Map<Player, Map<String, String>> players
     Integer turnNumber
     boolean gameOver = false
-    String winner
+    List<Player> winner
     Integer gameId
 
     GameState(Game game)
     {
+        winner = new ArrayList<Player>()
         players = new HashMap<Player, Map<String, String>>()
         game.players.each {players.put(it, new HashMap<String, String>())}
         gameId = game.id

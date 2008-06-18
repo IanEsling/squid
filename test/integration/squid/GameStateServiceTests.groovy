@@ -46,24 +46,25 @@ class GameStateServiceTests extends GroovyTestCase
 
     void testGameOverConditions()
     {
-        def game = newGame()
-        game.newTurn(new Turn("A", 5, 5, Turn.MOVE, game)).save(flush: true)
-        game.newTurn(new Turn('B', 5, 5, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'A').save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'B').save(flush: true)
         def gameState = game.currentGameState()
         assertEquals("game not over when players on same cell", gameState.gameOver, true)
-        assertEquals("game not a draw when players on same cell", gameState.winner, GameState.DRAW)
+        assertEquals("game not a draw when players on same cell", gameState.winner.size(), 2)
         game = newGame()
-        game.newTurn(new Turn('A', 5, 5, Turn.FIRE, game)).save(flush: true)
-        game.newTurn(new Turn('B', 5, 5, Turn.MOVE, game)).save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.FIRE), 'A').save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'B').save(flush: true)
         gameState = game.currentGameState()
         assertEquals("game not over when player A shot B", gameState.gameOver, true)
-        assertEquals("player A not the winner after shooting player B", gameState.winner, GameState.PLAYER_A)
+        assertEquals("A not the only winner", gameState.winner.size(), 1)
+        assertEquals("player A not the winner after shooting player B", gameState.winner.every {it.name=='A'}, true)
         game = newGame()
-        game.newTurn(new Turn('A', 5, 5, Turn.MOVE, game)).save(flush: true)
-        game.newTurn(new Turn('B', 5, 5, Turn.FIRE, game)).save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'A').save(flush: true)
+        game.newTurn(new Turn(5, 5, Turn.FIRE), 'B').save(flush: true)
         gameState = game.currentGameState()
         assertEquals("game not over when player B shot A", gameState.gameOver, true)
-        assertEquals("player B not the winner after shooting player A", gameState.winner, GameState.PLAYER_B)
+        assertEquals("B not the only winner", gameState.winner.size(), 1)
+        assertEquals("player B not the winner after shooting player A", gameState.winner.every {it.name=='B'}, true)
     }
 
     void testPlayerStartPositions()
@@ -134,6 +135,7 @@ class GameStateServiceTests extends GroovyTestCase
     {
         def newGame = new Game(10, 10, "A", "B")
         newGame.save(flush: true)
+        newGame.gameStateService = gameStateService
         return newGame
     }
 }
