@@ -12,20 +12,18 @@ class GameStateServiceTests extends GroovyTestCase
         game.gameStateService = gameStateService
     }
 
-
-
     void testPlayerPositions()
     {
         game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
-        assertEquals("player A row moved before player B move received", game.currentGameState().player('A').get('row'), '1')
-        assertEquals("player A column moved before player B move received", game.currentGameState().player('A').get('column'), '1')
-        assertEquals("player B row moved after player A move received", game.currentGameState().player('B').get('row'), '10')
-        assertEquals("player B column moved after player A move received", game.currentGameState().player('B').get('column'), '10')
+        assertEquals("player A row moved before player B move received", game.currentGameState().player('A').get(GameState.PLAYER_ROW), '1')
+        assertEquals("player A column moved before player B move received", game.currentGameState().player('A').get(GameState.PLAYER_COLUMN), '1')
+        assertEquals("player B row moved after player A move received", game.currentGameState().player('B').get(GameState.PLAYER_ROW), '10')
+        assertEquals("player B column moved after player A move received", game.currentGameState().player('B').get(GameState.PLAYER_COLUMN), '10')
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
-        assertEquals("player A row wrong after move", game.currentGameState().player('A').get('row'), '2')
-        assertEquals("player A column wrong after move", game.currentGameState().player('A').get('column'), '3')
-        assertEquals("player B row wrong after move", game.currentGameState().player('B').get('row'), '8')
-        assertEquals("player B column wrong after move", game.currentGameState().player('B').get('column'), '9')
+        assertEquals("player A row wrong after move", game.currentGameState().player('A').get(GameState.PLAYER_ROW), '2')
+        assertEquals("player A column wrong after move", game.currentGameState().player('A').get(GameState.PLAYER_COLUMN), '3')
+        assertEquals("player B row wrong after move", game.currentGameState().player('B').get(GameState.PLAYER_ROW), '8')
+        assertEquals("player B column wrong after move", game.currentGameState().player('B').get(GameState.PLAYER_COLUMN), '9')
     }
 
     void testPlayerStatusAndTurnNumber()
@@ -71,10 +69,10 @@ class GameStateServiceTests extends GroovyTestCase
     {
         assertTrue("new game has turns", game.players.every{it.turns == null})
         def gameState = game.currentGameState()
-        assertEquals("player A not in starting row", gameState.player('A').get('row'), "1")
-        assertEquals("player B not in starting row", gameState.player('B').get('row'), "10")
-        assertEquals("player A not in starting column", gameState.player('A').get('column'), "1")
-        assertEquals("player B not in starting column", gameState.player('B').get('column'), "10")
+        assertEquals("player A not in starting row", gameState.player('A').get(GameState.PLAYER_ROW), "1")
+        assertEquals("player B not in starting row", gameState.player('B').get(GameState.PLAYER_ROW), "10")
+        assertEquals("player A not in starting column", gameState.player('A').get(GameState.PLAYER_COLUMN), "1")
+        assertEquals("player B not in starting column", gameState.player('B').get(GameState.PLAYER_COLUMN), "10")
     }
 
     void testAddNewTurn()
@@ -92,18 +90,22 @@ class GameStateServiceTests extends GroovyTestCase
     void testShotLanded()
     {
         def gameState = game.currentGameState()
-        assertEquals("shot landed before turn taken", gameState.player('A').get('shotRow'), null)
-        assertEquals("shot landed before turn taken", gameState.player('A').get('shotColumn'), null)
+        assertEquals("shot landed before turn taken", gameState.player('A').get(GameState.SHOT_LANDED), "false")
+        assertEquals("shot landed before turn taken", gameState.player('A').get(GameState.SHOT_LANDED_ROW), null)
+        assertEquals("shot landed before turn taken", gameState.player('A').get(GameState.SHOT_LANDED_COLUMN), null)
         game.newTurn(new Turn(2, 3, Turn.FIRE), 'A').save(flush: true)
         gameState = game.currentGameState()
-        assertEquals("shot landed before player B moved", gameState.player('A').get('shotColumn'), null)
-        assertEquals("shot landed before player B moved", gameState.player('A').get('shotRow'), null)
+        assertEquals("shot landed before turn taken", gameState.player('A').get(GameState.SHOT_LANDED), "false")
+        assertEquals("shot landed before player B moved", gameState.player('A').get(GameState.SHOT_LANDED_COLUMN), null)
+        assertEquals("shot landed before player B moved", gameState.player('A').get(GameState.SHOT_LANDED_ROW), null)
         game.newTurn(new Turn(9, 9, Turn.MOVE), 'B').save(flush: true)
         gameState = game.currentGameState()
-        assertEquals("shot not landed in correct row", gameState.player('A').get('shotRow'), "2")
-        assertEquals("shot not landed in correct column", gameState.player('A').get('shotColumn'), "3")
-        assertEquals("shot landed in row for Player B", gameState.player('B').get('shotRow'), null)
-        assertEquals("shot landed in column for Player B", gameState.player('B').get('shotColumn'), null)
+        assertEquals("shot landed before turn taken", gameState.player('A').get(GameState.SHOT_LANDED), "true")
+        assertEquals("shot not landed in correct row", gameState.player('A').get(GameState.SHOT_LANDED_ROW), 2)
+        assertEquals("shot not landed in correct column", gameState.player('A').get(GameState.SHOT_LANDED_COLUMN), 3)
+        assertEquals("shot landed before turn taken", gameState.player('B').get(GameState.SHOT_LANDED), "false")
+        assertEquals("shot landed in row for Player B", gameState.player('B').get(GameState.SHOT_LANDED_ROW), null)
+        assertEquals("shot landed in column for Player B", gameState.player('B').get(GameState.SHOT_LANDED_COLUMN), null)
     }
 
     void testDrawIfPlayersShootEachOther()

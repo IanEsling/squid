@@ -47,6 +47,19 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy" line="103" class="Class at GameStateServiceTests.groovy:103" package="">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="false" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
@@ -130,7 +143,7 @@
       <file leaf-file-name="GameStateService.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameStateService.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="30" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.016981132">
+            <state line="144" column="0" selection-start="4961" selection-end="4961" vertical-scroll-proportion="4.618868">
               <folding />
             </state>
           </provider>
@@ -139,7 +152,7 @@
       <file leaf-file-name="GameState.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameState.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="40" selection-start="394" selection-end="394" vertical-scroll-proportion="0.4678899">
+            <state line="12" column="0" selection-start="537" selection-end="537" vertical-scroll-proportion="0.37431192">
               <folding />
             </state>
           </provider>
@@ -148,7 +161,7 @@
       <file leaf-file-name="GameStateServiceTests.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="0" selection-start="5961" selection-end="5961" vertical-scroll-proportion="0.17034069">
+            <state line="104" column="116" selection-start="6355" selection-end="6355" vertical-scroll-proportion="0.13226452">
               <folding />
             </state>
           </provider>
@@ -157,7 +170,7 @@
       <file leaf-file-name="PersistentSet.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/PersistentSet.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="1911" selection-end="1911" vertical-scroll-proportion="0.11320755">
+            <state line="35" column="0" selection-start="1911" selection-end="1911" vertical-scroll-proportion="0.032075472">
               <folding />
             </state>
           </provider>
@@ -166,7 +179,7 @@
       <file leaf-file-name="AbstractPersistentCollection.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/AbstractPersistentCollection.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="0" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.11320755">
+            <state line="101" column="0" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.032075472">
               <folding />
             </state>
           </provider>
@@ -184,7 +197,7 @@
       <file leaf-file-name="Player.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Player.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="34" selection-start="174" selection-end="174" vertical-scroll-proportion="0.3831967">
+            <state line="11" column="34" selection-start="174" selection-end="174" vertical-scroll-proportion="0.034836065">
               <folding />
             </state>
           </provider>
@@ -534,28 +547,12 @@
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveMembersDialog.RECENTS_KEY">
+      <recent name="squid.GameState" />
+    </key>
+  </component>
   <component name="RunManager" selected="Grails Application.Squid Tests">
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="." />
-      <setting name="debug" value="false" />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -577,6 +574,38 @@
       <method>
         <option name="Make" value="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
@@ -607,6 +636,14 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
+    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="." />
+      <setting name="debug" value="false" />
+    </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="squid" />
       <setting name="vmparams" value="" />
@@ -615,25 +652,6 @@
       <method>
         <option name="Make" value="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="false" name="Squid Application" type="GrailsRunConfigurationType" factoryName="Grails Application">
       <module name="squid" />
@@ -885,6 +903,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/PersistentSet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1911" selection-end="1911" vertical-scroll-proportion="0.032075472">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/AbstractPersistentCollection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="0" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.032075472">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar:///usr/jdk1.6.0_02/src.zip!/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="364" column="0" selection-start="17878" selection-end="17878" vertical-scroll-proportion="0.03119266">
@@ -894,7 +926,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/domain/squid/Player.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="34" selection-start="174" selection-end="174" vertical-scroll-proportion="0.3831967">
+        <state line="11" column="34" selection-start="174" selection-end="174" vertical-scroll-proportion="0.034836065">
           <folding />
         </state>
       </provider>
@@ -902,37 +934,23 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/PersistentSet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1911" selection-end="1911" vertical-scroll-proportion="0.11320755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///media/home/ian/grails-1.0.2/lib/hibernate3.jar!/org/hibernate/collection/AbstractPersistentCollection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="4192" selection-end="4192" vertical-scroll-proportion="0.11320755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameState.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="40" selection-start="394" selection-end="394" vertical-scroll-proportion="0.4678899">
+        <state line="12" column="0" selection-start="537" selection-end="537" vertical-scroll-proportion="0.37431192">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameStateService.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="30" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.016981132">
+        <state line="144" column="0" selection-start="4961" selection-end="4961" vertical-scroll-proportion="4.618868">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="0" selection-start="5961" selection-end="5961" vertical-scroll-proportion="0.17034069">
+        <state line="104" column="116" selection-start="6355" selection-end="6355" vertical-scroll-proportion="0.13226452">
           <folding />
         </state>
       </provider>
