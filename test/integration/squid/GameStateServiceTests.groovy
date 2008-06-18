@@ -69,14 +69,12 @@ class GameStateServiceTests extends GroovyTestCase
 
     void testPlayerStartPositions()
     {
-        def game = new Game(playerA: "A", playerB: "B", rows: 10, columns: 3)
-        game.save(flush: true)
-        assertTrue("new game has turns", game.turns == null)
+        assertTrue("new game has turns", game.players.every{it.turns == null})
         def gameState = game.currentGameState()
-        assertEquals("player A not in starting row", gameState.playerARow, 1)
-        assertEquals("player B not in starting row", gameState.playerBRow, 10)
-        assertEquals("player A not in starting column", gameState.playerAColumn, 1)
-        assertEquals("player B not in starting column", gameState.playerBColumn, 3)
+        assertEquals("player A not in starting row", gameState.player('A').get('row'), "1")
+        assertEquals("player B not in starting row", gameState.player('B').get('row'), "10")
+        assertEquals("player A not in starting column", gameState.player('A').get('column'), "1")
+        assertEquals("player B not in starting column", gameState.player('B').get('column'), "10")
     }
 
     void testAddNewTurn()
