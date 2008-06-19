@@ -29,8 +29,8 @@ class SquidController
     }
 
     def newGame = {
-        String playerA = paramMissing('playerA') ? "Player A" : params.playerA
-        String playerB = paramMissing('playerB') ? "Player B" : params.playerB
+        String playerA = paramMissing('playerA') ? "PlayerA" : params.playerA
+        String playerB = paramMissing('playerB') ? "PlayerB" : params.playerB
         def rows = paramMissing('rows') ? 10 : Integer.valueOf(params.rows)
         def columns = paramMissing('columns') ? 10 : Integer.valueOf(params.columns)
         def game = new Game(rows, columns, playerA, playerB)

@@ -3,21 +3,14 @@
         <g:each in="${(1..game.rows)}" var="r">
             <tr>
                 <g:each in="${(1..game.columns)}" var="c">
-                    <g:if test="${r==gameState.playerARow && c==gameState.playerAColumn}">
-                        <td class="playerAPosition">
+                    <g:set var="cellClass" value="normalGameboardCell"/>
+                    <g:if test="${gameState.aPlayerHere(r,c)}">
+                        <g:set var="cellClass" value="player${gameState.playerHere(r,c)}Position"/>
                     </g:if>
-                    <g:elseif test="${r==gameState.playerBRow && c==gameState.playerBColumn}">
-                        <td class="playerBPosition">
+                    <g:elseif test="${gameState.aShotHere(r,c)}">
+                        <g:set var="cellClass" value="player${gameState.playerShotHere(r,c)}Shot"/>
                     </g:elseif>
-                    <g:elseif test="${r==gameState.playerAShotRow && c==gameState.playerAShotColumn}">
-                        <td class="playerAShot">
-                    </g:elseif>
-                    <g:elseif test="${r==gameState.playerBShotRow && c==gameState.playerBShotColumn}">
-                        <td class="playerBShot">
-                    </g:elseif>
-                    <g:else>
-                        <td class="normalGameboardCell">
-                    </g:else>
+                    <td class="${cellClass}">
                     ${r}-${c}
                     </td>
                 </g:each>

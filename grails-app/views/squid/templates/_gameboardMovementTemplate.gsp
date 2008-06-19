@@ -11,7 +11,7 @@
                         <g:set var="cellClass" value="player${gameState.playerShotHere(r,c)}Shot"/>
                     </g:elseif>
 
-                    <g:if test="${playerCanMoveHere(r, c, player)}">
+                    <g:if test="${gameState.playerCanMoveHere(r, c, player)}">
                         <td class="${cellClass}"
                             onclick="moveTo('${r}', '${c}')"
                             onmouseout="this.className = '${cellClass}'"

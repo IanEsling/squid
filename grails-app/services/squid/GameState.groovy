@@ -32,7 +32,7 @@ class GameState
     boolean aPlayerHere(row, column)
     {
         players.any {player, values ->
-            values.get(PLAYER_ROW)==row && values.get(PLAYER_COLUMN)==column
+            Integer.valueOf(values.get(PLAYER_ROW))==Integer.valueOf(row) && Integer.valueOf(values.get(PLAYER_COLUMN))==Integer.valueOf(column)
         }
     }
 
@@ -40,7 +40,7 @@ class GameState
     {
         Integer index = null
         players.eachWithIndex {player, values, i->
-            if (values.get(PLAYER_ROW)==row && values.get(PLAYER_COLUMN)==column) index = i
+            if (Integer.valueOf(values.get(PLAYER_ROW))==Integer.valueOf(row) && Integer.valueOf(values.get(PLAYER_COLUMN))==Integer.valueOf(column)) index = Integer.valueOf(i)
         }
         index
     }
@@ -48,7 +48,7 @@ class GameState
     boolean aShotHere(row, column)
     {
         players.any {player, values ->
-            values.get(SHOT_LANDED)=='true' && values.get(SHOT_LANDED_COLUMN)==column && values.get(SHOT_LANDED_ROW)==row
+            values.get(SHOT_LANDED)=='true' && Integer.valueOf(values.get(SHOT_LANDED_COLUMN))==Integer.valueOf(column) && Integer.valueOf(values.get(SHOT_LANDED_ROW))==Integer.valueOf(row)
         }
     }
 
@@ -57,7 +57,7 @@ class GameState
 
         Integer index = null
         players.eachWithIndex {player, values, i ->
-            if (values.get(SHOT_LANDED)=='true' && values.get(SHOT_LANDED_COLUMN)==column && values.get(SHOT_LANDED_ROW)==row) index = i
+            if (values.get(SHOT_LANDED)=='true' && Integer.valueOf(values.get(SHOT_LANDED_COLUMN))==Integer.valueOf(column) && Integer.valueOf(values.get(SHOT_LANDED_ROW))==Integer.valueOf(row)) index = i
         }
         index
     }
