@@ -1,6 +1,6 @@
 package squid
 
-class Player
+class Player implements Comparable
 {
     static hasMany = [turns: Turn]
 
@@ -30,5 +30,13 @@ class Player
             return ((Player) obj).name == this.name
         }
         return obj.equals(this.name)
+    }
+
+    public int compareTo(Object o)
+    {
+        if (o instanceof Player)
+            return this.id - o.id
+
+        return 0
     }
 }

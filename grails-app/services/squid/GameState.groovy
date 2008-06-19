@@ -14,7 +14,7 @@ class GameState
     public final static String PLAYER_ROW = 'row'
     public final static String PLAYER_COLUMN = 'column'
 
-    Map<Player, Map<String, String>> players
+    SortedMap<Player, Map<String, String>> players
     
     Integer turnNumber
     boolean gameOver = false
@@ -24,7 +24,7 @@ class GameState
     GameState(Game game)
     {
         winner = new ArrayList<Player>()
-        players = new HashMap<Player, Map<String, String>>()
+        players = new TreeMap<Player, Map<String, String>>()
         game.players.each {players.put(it, new HashMap<String, String>())}
         gameId = game.id
     }
@@ -39,7 +39,7 @@ class GameState
     Integer playerHere(row, column)
     {
         Integer index = null
-        players.eachWithIndex {player, values, i ->
+        players.eachWithIndex {player, values, i->
             if (values.get(PLAYER_ROW)==row && values.get(PLAYER_COLUMN)==column) index = i
         }
         index
