@@ -145,6 +145,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SquidControllerTests.groovy" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/integration/squid/SquidControllerTests.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="76" selection-start="2864" selection-end="2864" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="_gameboardMovementTemplate.gsp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/squid/templates/_gameboardMovementTemplate.gsp">
           <provider selected="true" editor-type-id="text-editor">
@@ -172,7 +181,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameState.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GameState.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameState.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="59" column="0" selection-start="1940" selection-end="1940" vertical-scroll-proportion="9.2">
@@ -218,15 +227,6 @@
         <entry file="file://$PROJECT_DIR$/test/integration/squid/GameStateServiceTests.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="153" column="20" selection-start="9431" selection-end="9431" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameStateService.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameStateService.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="136" column="6" selection-start="4620" selection-end="4620" vertical-scroll-proportion="0.68">
               <folding />
             </state>
           </provider>
@@ -618,7 +618,7 @@
       <recent name="squid.GameState" />
     </key>
   </component>
-  <component name="RunManager" selected="Grails Application.Squid Application">
+  <component name="RunManager" selected="Grails Application.Squid Tests">
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -911,13 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/squid/SquidControllerTests.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="4" selection-start="4357" selection-end="4357" vertical-scroll-proportion="0.9318637">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/squid/PlayerTests.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="90" selection-start="1130" selection-end="1130" vertical-scroll-proportion="0.7840467">
@@ -997,13 +990,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/squid/SquidController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="58" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/squid/templates/_gameboardDisplayOnlyTemplate.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
@@ -1021,6 +1007,20 @@
     <entry file="file://$PROJECT_DIR$/grails-app/services/squid/GameState.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="0" selection-start="1940" selection-end="1940" vertical-scroll-proportion="9.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/squid/SquidController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="58" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/squid/SquidControllerTests.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="76" selection-start="2864" selection-end="2864" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
