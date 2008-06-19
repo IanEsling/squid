@@ -2,11 +2,11 @@
     <g:if test="${game}">
         <g:if test="${!gameState.gameOver}">
             <div class="summaryGameNumber">current game is number ${game.id}, turn number ${gameState.turnNumber}</div>
-            <div class="summaryPlayerA">player A: ${game.playerA} - <g:if test="${gameState.playerAStatus.equals('waiting')}">Orders Received</g:if>
-                <g:else><a href="/squid/squid/move/A">Issue Orders</a></g:else></div>
-            <div class="summaryPlayerB">player B: ${game.playerB} - <g:if test="${gameState.playerBStatus.equals('waiting')}">Orders Received</g:if>
-                <g:else><a href="/squid/squid/move/B">Issue Orders</a></g:else></div>
             <div class="summaryBoardSize">board size: ${game.rows} x ${game.columns}</div>
+            <g:each in="${game.players}" var="p">
+            <div class="summaryPlayerA">player : ${p.name} - <g:if test="${gameState.player(p.name).get('status').equals('waiting')}">Orders Received</g:if>
+                <g:else><a href="/squid/squid/move/${p.name}">Issue Orders</a></g:else></div>
+                </g:each>
         </g:if>
         <g:else>
             <div class="gameOver">Game Over<br>

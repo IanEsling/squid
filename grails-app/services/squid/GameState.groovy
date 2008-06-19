@@ -1,4 +1,7 @@
 package squid
+
+import java.util.*
+
 class GameState
 {
     public final static String DRAW = 'Draw'
@@ -12,6 +15,7 @@ class GameState
     public final static String PLAYER_COLUMN = 'column'
 
     Map<Player, Map<String, String>> players
+    
     Integer turnNumber
     boolean gameOver = false
     List<Player> winner
@@ -23,6 +27,48 @@ class GameState
         players = new HashMap<Player, Map<String, String>>()
         game.players.each {players.put(it, new HashMap<String, String>())}
         gameId = game.id
+    }
+
+    boolean aPlayerHere(row, column)
+    {
+        players.any {player, values ->
+            values.get(PLAYER_ROW)==row && values.get(PLAYER_COLUMN)==column
+        }
+    }
+
+    Integer playerHere(row, column)
+    {
+        Integer index = null
+        players.eachWithIndex {player, values, i ->
+            if (values.get(PLAYER_ROW)==row && values.get(PLAYER_COLUMN)==column) index = i
+        }
+        index
+    }
+
+    boolean aShotHere(row, column)
+    {
+        players.any {player, values ->
+            values.get(SHOT_LANDED)=='true' && values.get(SHOT_LANDED_COLUMN)==column && values.get(SHOT_LANDED_ROW)==row
+        }
+    }
+
+    Integer playerShotHere(row, column)
+    {
+
+        Integer index = null
+        players.eachWithIndex {player, values, i ->
+            if (values.get(SHOT_LANDED)=='true' && values.get(SHOT_LANDED_COLUMN)==column && values.get(SHOT_LANDED_ROW)==row) index = i
+        }
+        index
+    }
+
+    boolean playerCanMoveHere(row, column, playerName)
+    {
+        def playerValues = new HashMap<String, String>()
+        players.find{player, values ->
+            if (player.name == playerName) playerValues = values
+        }
+        (Math.abs(Integer.valueOf(row)-Integer.valueOf(playerValues.get(PLAYER_ROW))) <= Game.ROWS_PLAYER_CAN_MOVE) && (Math.abs(Integer.valueOf(column)-Integer.valueOf(playerValues.get(PLAYER_COLUMN))) <= Game.ROWS_PLAYER_CAN_MOVE)
     }
 
     Map<String, String> player(String playerName)

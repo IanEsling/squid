@@ -29,6 +29,6 @@ class Player
         {
             return ((Player) obj).name == this.name
         }
-        return false
+        return obj.equals(this.name)
     }
 }

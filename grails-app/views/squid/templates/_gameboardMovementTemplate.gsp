@@ -4,20 +4,14 @@
             <tr>
                 <g:each in="${(1..game.columns)}" var="c">
                     <g:set var="cellClass" value="normalGameboardCell"/>
-                    <g:if test="${r==gameState.playerARow && c==gameState.playerAColumn}">
-                        <g:set var="cellClass" value="playerAPosition"/>
+                    <g:if test="${gameState.aPlayerHere(r,c)}">
+                        <g:set var="cellClass" value="player${gameState.playerHere(r,c)}Position"/>
                     </g:if>
-                    <g:elseif test="${r==gameState.playerBRow && c==gameState.playerBColumn}">
-                        <g:set var="cellClass" value="playerBPosition"/>
-                    </g:elseif>
-                    <g:elseif test="${r==gameState.playerAShotRow && c==gameState.playerAShotColumn}">
-                        <g:set var="cellClass" value="playerAShot"/>
-                    </g:elseif>
-                    <g:elseif test="${c==gameState.playerBShotColumn && r==gameState.playerBShotRow}">
-                        <g:set var="cellClass" value="playerBShot"/>
+                    <g:elseif test="${gameState.aShotHere(r,c)}">
+                        <g:set var="cellClass" value="player${gameState.playerShotHere(r,c)}Shot"/>
                     </g:elseif>
 
-                    <g:if test="${((player == 'A') && (r >= gameState.playerARow-game.ROWS_PLAYER_CAN_MOVE) && (r <= gameState.playerARow+game.ROWS_PLAYER_CAN_MOVE) && (c >= gameState.playerAColumn-game.COLUMNS_PLAYER_CAN_MOVE) && c <= (gameState.playerAColumn+game.COLUMNS_PLAYER_CAN_MOVE)) || ((player == 'B') && (r >= gameState.playerBRow-game.ROWS_PLAYER_CAN_MOVE) && (r <= gameState.playerBRow+game.ROWS_PLAYER_CAN_MOVE) && (c >= gameState.playerBColumn-game.COLUMNS_PLAYER_CAN_MOVE) && c <= (gameState.playerBColumn+game.COLUMNS_PLAYER_CAN_MOVE))}">
+                    <g:if test="${playerCanMoveHere(r, c, player)}">
                         <td class="${cellClass}"
                             onclick="moveTo('${r}', '${c}')"
                             onmouseout="this.className = '${cellClass}'"

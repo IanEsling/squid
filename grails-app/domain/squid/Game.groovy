@@ -6,14 +6,12 @@ class Game implements Comparable
     
     public final static Integer ROWS_PLAYER_CAN_MOVE = 2
     public final static Integer COLUMNS_PLAYER_CAN_MOVE = 2
-    public final static String DRAW = 'Draw'
-    public final static String PLAYER_A = 'PlayerA'
-    public final static String PLAYER_B = 'PlayerB'
 
     static hasMany = [players: Player]
 
     Integer rows = 10
     Integer columns = 10
+    List<Player> players
 
     static constraints =
     {

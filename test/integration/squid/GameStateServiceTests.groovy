@@ -9,7 +9,6 @@ class GameStateServiceTests extends GroovyTestCase
     protected void setUp()
     {
         game = newGame()
-        game.gameStateService = gameStateService
     }
 
     void testPlayerPositions()
@@ -118,6 +117,70 @@ class GameStateServiceTests extends GroovyTestCase
         assertEquals("game not a draw", gameState.winner.size(), 2)
         assertEquals("game not a draw", gameState.gameOver, true)
     }
+
+    void testPlayerHere()
+    {
+        game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
+        def gameState = game.currentGameState()
+        assertEquals("player not found in position 1, 1", gameState.aPlayerHere("1", "1"), true)
+        assertEquals("wrong player found at 1, 1", gameState.playerHere("1", "1"), 1)
+        assertEquals("player found in wrong position 2, 3", gameState.aPlayerHere("2", "3"), false)
+        assertEquals("player not found in position, 10, 10", gameState.aPlayerHere("10", "10"), true)
+        assertEquals("wrong player found at 10, 10", gameState.playerHere("10", "10"), 0)
+        game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush:true)
+        gameState = game.currentGameState()
+        assertEquals("player not found in position 2, 3", gameState.aPlayerHere("2", "3"), true)
+        assertEquals("wrong player found at 2, 3", gameState.playerHere("2", "3"), 1)
+        assertEquals("player found in wrong position 1, 1", gameState.aPlayerHere("1", "1"), false)
+        assertEquals("player found in wrong position 10, 10", gameState.aPlayerHere("10", "10"), false)
+        assertEquals("player not found in position 8, 9", gameState.aPlayerHere("8", "9"), true)
+        assertEquals("wrong player found at 10, 10", gameState.playerHere("8", "9"), 0)
+    }
+
+    void testShootingHere()
+    {
+        game.newTurn(new Turn(2, 3, Turn.FIRE), 'A').save(flush:true)
+        def gameState = game.currentGameState()
+        assertFalse("shot landed before B has moved", gameState.aShotHere("2", "3"))
+        game.newTurn(new Turn(7, 8, Turn.MOVE), 'B').save(flush:true)
+        gameState = game.currentGameState()
+        assertTrue("shot not landed after B has moved", gameState.aShotHere("2", "3"))
+        assertEquals("wrong player has fired", gameState.playerShotHere("2", "3"), 1)
+    }
+
+    void testPlayerCanMoveHere()
+    {
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'A').save(flush:true)
+        game.newTurn(new Turn(6, 9, Turn.MOVE), 'B').save(flush:true)
+        def gameState = game.currentGameState()
+        def rows = 5-Game.ROWS_PLAYER_CAN_MOVE..5+Game.ROWS_PLAYER_CAN_MOVE
+        def columns = 5-Game.COLUMNS_PLAYER_CAN_MOVE..5+Game.COLUMNS_PLAYER_CAN_MOVE
+        rows.each {row->
+            columns.each {column->
+                assertTrue("player A should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
+            }
+        }
+        rows = 1..4-Game.ROWS_PLAYER_CAN_MOVE
+        rows.each {row->
+            columns.each {column->
+                assertFalse("player A should not be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
+            }
+        }
+        columns = 1..4-Game.COLUMNS_PLAYER_CAN_MOVE
+        rows.each {row->
+                    columns.each {column->
+                        assertFalse("player A should not be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
+                    }
+                }
+        rows = 6-Game.ROWS_PLAYER_CAN_MOVE..6+Game.ROWS_PLAYER_CAN_MOVE
+        columns = 9-Game.COLUMNS_PLAYER_CAN_MOVE..9+Game.COLUMNS_PLAYER_CAN_MOVE
+        rows.each {row->
+            columns.each {column->
+                assertTrue("player B should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'B'))
+            }
+        }
+    }
+
 
     private void checkPlayerStatusesAndTurnNumber(Game game, String playerAStatus, String playerBStatus, Integer turnNumber)
     {

@@ -20,12 +20,12 @@ table.gameboard {
     color: white;
 }
 
-.playerAPosition {
+.player0Position {
     background-color: crimson;
     color: white;
 }
 
-.playerBPosition {
+.player1Position {
     background-color: blue;
     color: white;
 }
@@ -40,12 +40,12 @@ table.gameboard {
     border: 1px solid black;
 }
 
-.playerAShot {
+.player0Shot {
     border: 1px crimson dashed;
     color: crimson;
 }
 
-.playerBShot {
+.player1Shot {
     border: 1px blue dashed;
     color: blue;
 }

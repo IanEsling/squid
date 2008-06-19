@@ -13,7 +13,7 @@ class SquidController
         if (Game.findAll().size() == 0) return null
 
         def game = Game.findAll().max()
-        [gameState: game.currentGameState(), game: game, player: player, playerName: game.playerName(player)]
+        [gameState: game.currentGameState(), game: game, player: player, playerName: player]
     }
 
     def move = {
