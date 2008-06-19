@@ -6,18 +6,16 @@ class GameStateService
     GameState gameState(Game game)
     {
         GameState gameState = new GameState(game)
-        game.players.each {
-            gameState.player(it).put(GameState.PLAYER_STATUS, playerStatus(it, game))
-            gameState.player(it).put(GameState.PLAYER_ROW, playerRow(it, game).toString())
-            gameState.player(it).put(GameState.PLAYER_COLUMN, playerColumn(it, game).toString())
-            gameState.player(it).put(GameState.SHOT_LANDED, shotLanded(it, game).toString())
-            if (shotLanded(it, game))
+        game.players.each {player->
+            gameState.player(player).put(GameState.PLAYER_STATUS, playerStatus(player, game))
+            gameState.player(player).put(GameState.PLAYER_ROW, playerRow(player, game).toString())
+            gameState.player(player).put(GameState.PLAYER_COLUMN, playerColumn(player, game).toString())
+            gameState.player(player).put(GameState.SHOT_LANDED, shotLanded(player, game).toString())
+            if (shotLanded(player, game))
             {
-                def fireTurn = it.turns.findAll {
-                    it.turnType == Turn.FIRE
-                }.max()
-                gameState.player(it).put(GameState.SHOT_LANDED_ROW, fireTurn.row.toString())
-                gameState.player(it).put(GameState.SHOT_LANDED_COLUMN, fireTurn.column.toString())
+                def fireTurn = playerStatus(player, game)=='ready'?lastTurnByPlayer(player):previousTurnByPlayer(player)
+                gameState.player(player).put(GameState.SHOT_LANDED_ROW, fireTurn.row.toString())
+                gameState.player(player).put(GameState.SHOT_LANDED_COLUMN, fireTurn.column.toString())
             }
         }
         gameState.turnNumber = turnNumber(game)
@@ -62,33 +60,40 @@ class GameStateService
     {
         return ((player.turns?.max()?.turnType == Turn.FIRE && playerStatus(player, game) == 'ready')
                 ||
-                (previousMoveByPlayer(player)?.turnType) == Turn.FIRE && playerStatus(player, game) == 'waiting')
+                (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && playerStatus(player, game) == 'waiting')
     }
 
-    boolean shotLandedInRow(Player player, Integer row, Game game)
+//    boolean shotLandedInRow(Player player, Integer row, Game game)
+//    {
+//        if (shotLanded(player, game))
+//        {
+//            return player.turns?.findAll {
+//                (it.turnType == Turn.FIRE)
+//            }?.max()?.row == row
+//        }
+//    }
+//
+//    boolean shotLandedInColumn(Player player, Integer column, Game game)
+//    {
+//        if (shotLanded(player, game))
+//        {
+//            return game.turns?.findAll {
+//                (it.player == player
+//                        && it.turnType == Turn.FIRE)
+//            }?.max()?.column == column
+//        }
+//    }
+
+    private Turn lastTurnByPlayer(Player player)
     {
-        if (shotLanded(player, game))
-        {
-            return player.turns?.findAll {
-                (it.turnType == Turn.FIRE)
-            }?.max()?.row == row
-        }
+        player.turns?.max()
     }
 
-    boolean shotLandedInColumn(Player player, Integer column, Game game)
+    private Turn previousTurnByPlayer(Player player)
     {
-        if (shotLanded(player, game))
-        {
-            return game.turns?.findAll {
-                (it.player == player
-                        && it.turnType == Turn.FIRE)
-            }?.max()?.column == column
-        }
-    }
-
-    private Turn lastTurnByPlayer(Player player, Game game)
-    {
-        game.turns?.findAll {it?.player == player}?.max()
+        player.turns?.findAll {
+            it?.turnNumber < lastTurnNumberMadeByPlayer(player)
+        }?.max()
     }
 
     private Turn previousMoveByPlayer(Player player)
@@ -174,10 +179,5 @@ class GameStateService
     private String playerStatus(Player player, Game game)
     {
         return lastTurnNumberMadeByPlayer(player) > lastTurnNumberMadeByOtherPlayer(player, game) ? "waiting" : "ready"
-    }
-
-    private String otherPlayer(String player)
-    {
-        return player == 'A' ? 'B' : 'A'
     }
 }
