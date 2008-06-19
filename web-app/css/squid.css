@@ -54,11 +54,11 @@ table.gameboard {
     text-align: left;
 }
 
-.summaryPlayerA, div.summaryPlayerA a:visited, div.summaryPlayerA a {
+.summaryPlayer0, div.summaryPlayer0 a:visited, div.summaryPlayer0 a {
     color: crimson;
 }
 
-.summaryPlayerB, div.summaryPlayerB a:visited, div.summaryPlayerB a {
+.summaryPlayer1, div.summaryPlayer1 a:visited, div.summaryPlayer1 a {
     color: blue;
 }
 

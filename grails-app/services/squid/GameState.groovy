@@ -29,6 +29,13 @@ class GameState
         gameId = game.id
     }
 
+    String declareWinner()
+    {
+        if (winner.size() > 1) return 'The game is a draw'
+        else
+        return "The winner is ${winner.get(0).name}"
+    }
+
     boolean aPlayerHere(row, column)
     {
         players.any {player, values ->
