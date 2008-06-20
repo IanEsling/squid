@@ -27,7 +27,7 @@ class GameTests extends GroovyTestCase
         }
         catch (Exception e)
         {
-            assertTrue("Exception thrown ${e}", e instanceof PlayerNotFoundException)
+            assertTrue("wrong exception thrown: ${e}", e instanceof PlayerNotFoundException)
         }
     }
 }
