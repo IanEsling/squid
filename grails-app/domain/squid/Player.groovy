@@ -3,6 +3,9 @@ package squid
 class Player implements Comparable
 {
     static hasMany = [turns: Turn]
+    static belongsTo = [game: Game]
+
+    def gameStateService
 
     String name
 
@@ -11,9 +14,15 @@ class Player implements Comparable
     Player(String name, Game game)
     {
         this.name = name
+        this.game = game
         Integer startingRow = game.players == null ? 1 : game.rows
         Integer startingColumn = game.players == null ? 1 : game.columns
         newTurn(new Turn(startingRow, startingColumn, Turn.MOVE))
+    }
+
+    String status()
+    {
+        gameStateService.playerStatus(this, game)
     }
 
     void newTurn(turn)

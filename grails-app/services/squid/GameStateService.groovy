@@ -3,11 +3,19 @@ package squid
 class GameStateService
 {
 
+    void addStatus(Player player, Game game)
+    {
+        player.metaClass.status = {
+            playerStatus(player, game)
+        }
+    }
+
     GameState gameState(Game game)
     {
         GameState gameState = new GameState(game)
         game.players.each {player->
-            gameState.player(player).put(GameState.PLAYER_STATUS, playerStatus(player, game))
+            addStatus(player, game)
+//            gameState.player(player).put(GameState.PLAYER_STATUS, playerStatus(player, game))
             gameState.player(player).put(GameState.PLAYER_ROW, playerRow(player, game).toString())
             gameState.player(player).put(GameState.PLAYER_COLUMN, playerColumn(player, game).toString())
             gameState.player(player).put(GameState.SHOT_LANDED, shotLanded(player, game).toString())
@@ -62,27 +70,6 @@ class GameStateService
                 ||
                 (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && playerStatus(player, game) == 'waiting')
     }
-
-//    boolean shotLandedInRow(Player player, Integer row, Game game)
-//    {
-//        if (shotLanded(player, game))
-//        {
-//            return player.turns?.findAll {
-//                (it.turnType == Turn.FIRE)
-//            }?.max()?.row == row
-//        }
-//    }
-//
-//    boolean shotLandedInColumn(Player player, Integer column, Game game)
-//    {
-//        if (shotLanded(player, game))
-//        {
-//            return game.turns?.findAll {
-//                (it.player == player
-//                        && it.turnType == Turn.FIRE)
-//            }?.max()?.column == column
-//        }
-//    }
 
     private Turn lastTurnByPlayer(Player player)
     {

@@ -4,7 +4,7 @@
             <tr>
                 <g:each in="${(1..game.columns)}" var="c">
                     <g:set var="cellClass" value="normalGameboardCell"/>
-                    <g:if test="${gameState.aPlayerHere(r,c)}">
+                    <g:if test="${gameState.anyoneThere(r,c)}">
                         <g:set var="cellClass" value="player${gameState.playerHere(r,c)}Position"/>
                     </g:if>
                     <g:elseif test="${gameState.aShotHere(r,c)}">

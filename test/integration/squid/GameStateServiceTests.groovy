@@ -122,18 +122,18 @@ class GameStateServiceTests extends GroovyTestCase
     {
         game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
         def gameState = game.currentGameState()
-        assertEquals("player not found in position 1, 1", gameState.aPlayerHere("1", "1"), true)
+        assertEquals("player not found in position 1, 1", gameState.anyoneThere("1", "1"), true)
         assertEquals("wrong player found at 1, 1", gameState.playerHere("1", "1"), 0)
-        assertEquals("player found in wrong position 2, 3", gameState.aPlayerHere("2", "3"), false)
-        assertEquals("player not found in position, 10, 10", gameState.aPlayerHere("10", "10"), true)
+        assertEquals("player found in wrong position 2, 3", gameState.anyoneThere("2", "3"), false)
+        assertEquals("player not found in position, 10, 10", gameState.anyoneThere("10", "10"), true)
         assertEquals("wrong player found at 10, 10", gameState.playerHere("10", "10"), 1)
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush:true)
         gameState = game.currentGameState()
-        assertEquals("player not found in position 2, 3", gameState.aPlayerHere("2", "3"), true)
+        assertEquals("player not found in position 2, 3", gameState.anyoneThere("2", "3"), true)
         assertEquals("wrong player found at 2, 3", gameState.playerHere("2", "3"), 0)
-        assertEquals("player found in wrong position 1, 1", gameState.aPlayerHere("1", "1"), false)
-        assertEquals("player found in wrong position 10, 10", gameState.aPlayerHere("10", "10"), false)
-        assertEquals("player not found in position 8, 9", gameState.aPlayerHere("8", "9"), true)
+        assertEquals("player found in wrong position 1, 1", gameState.anyoneThere("1", "1"), false)
+        assertEquals("player found in wrong position 10, 10", gameState.anyoneThere("10", "10"), false)
+        assertEquals("player not found in position 8, 9", gameState.anyoneThere("8", "9"), true)
         assertEquals("wrong player found at 10, 10", gameState.playerHere("8", "9"), 1)
     }
 
@@ -188,12 +188,11 @@ class GameStateServiceTests extends GroovyTestCase
         }
     }
 
-
     private void checkPlayerStatusesAndTurnNumber(Game game, String playerAStatus, String playerBStatus, Integer turnNumber)
     {
         def gameState = game.currentGameState()
-        assertEquals("player A status incorrect on turn ${turnNumber}", gameState.player('A').get('status'), playerAStatus)
-        assertEquals("player B status incorrect on turn ${turnNumber}", gameState.player('B').get('status'), playerBStatus)
+        assertEquals("player A status incorrect on turn ${turnNumber}", game.players.find{it.name=='A'}.status(), playerAStatus)
+        assertEquals("player B status incorrect on turn ${turnNumber}", game.players.find{it.name=='B'}.status(), playerBStatus)
         assertEquals("turn number incorrect", gameState.turnNumber, turnNumber)
     }
 
@@ -201,6 +200,9 @@ class GameStateServiceTests extends GroovyTestCase
     {
         def newGame = new Game(10, 10, "A", "B")
         newGame.save(flush: true)
+        newGame.players.each {
+            it.gameStateService = gameStateService
+        }
         newGame.gameStateService = gameStateService
         return newGame
     }
