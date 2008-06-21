@@ -2,23 +2,13 @@ package squid
 
 class GameStateService
 {
-
-    void addStatus(Player player, Game game)
-    {
-        player.metaClass.status = {
-            playerStatus(player, game)
-        }
-    }
-
     GameState gameState(Game game)
     {
         GameState gameState = new GameState(game)
         game.players.each {player->
-            addStatus(player, game)
-//            gameState.player(player).put(GameState.PLAYER_STATUS, playerStatus(player, game))
-            gameState.player(player).put(GameState.PLAYER_ROW, playerRow(player, game).toString())
-            gameState.player(player).put(GameState.PLAYER_COLUMN, playerColumn(player, game).toString())
-            gameState.player(player).put(GameState.SHOT_LANDED, shotLanded(player, game).toString())
+//            gameState.player(player).put(GameState.PLAYER_ROW, playerRow(player, game).toString())
+//            gameState.player(player).put(GameState.PLAYER_COLUMN, playerColumn(player, game).toString())
+//            gameState.player(player).put(GameState.SHOT_LANDED, shotLanded(player, game).toString())
             if (shotLanded(player, game))
             {
                 def fireTurn = playerStatus(player, game)=='ready'?lastTurnByPlayer(player):previousTurnByPlayer(player)
@@ -32,27 +22,26 @@ class GameStateService
             gameState.gameOver = true
             game.players.each {gameState.winner << it}
         }
-        if (aPlayerHasWon(gameState).size() > 0)
+        if (aPlayerHasWon(game, gameState).size() > 0)
         {
             gameState.gameOver = true
-            gameState.winner = aPlayerHasWon(gameState)
+            gameState.winner = aPlayerHasWon(game, gameState)
         }
         return gameState
     }
 
-    List<Player> aPlayerHasWon(GameState gameState)
+    List<Player> aPlayerHasWon(Game game, GameState gameState)
     {
         List<Player> winners = new ArrayList<Player>()
-        if (gameState.players.collect {player, value -> value.get(GameState.PLAYER_STATUS)}.every {'ready'}
-                && gameState.players.collect {player, value -> value.get(GameState.SHOT_LANDED)}.any {'true'})
+        if (game.players.collect {it.status()}.every {'ready'}
+                && game.players.collect {it.shotLanded()}.any {true})
         {
             gameState.players.each {player, value ->
                 String shotRow = value.get(GameState.SHOT_LANDED_ROW)
                 String shotColumn = value.get(GameState.SHOT_LANDED_COLUMN)
-                if (value.get(GameState.SHOT_LANDED) == 'true')
+                if (player.shotLanded())
                 {
-                    if (gameState.players.any {shotAtPlayer, shotAtValue ->
-                        shotAtValue.get(GameState.PLAYER_ROW) == shotRow && shotAtValue.get(GameState.PLAYER_COLUMN) == shotColumn
+                    if (game.players.any {it.row().toString() == shotRow && it.column().toString() == shotColumn
                     })
                     {
                         winners << player
@@ -66,9 +55,9 @@ class GameStateService
 
     boolean shotLanded(Player player, Game game)
     {
-        return ((player.turns?.max()?.turnType == Turn.FIRE && playerStatus(player, game) == 'ready')
+        return ((player.turns?.max()?.turnType == Turn.FIRE && player.status() == 'ready')
                 ||
-                (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && playerStatus(player, game) == 'waiting')
+                (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && player.status() == 'waiting')
     }
 
     private Turn lastTurnByPlayer(Player player)

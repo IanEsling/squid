@@ -70,6 +70,7 @@ class SquidControllerTests extends GroovyTestCase
         def squid = new SquidController()
         squid.newGame.call()
         setGameService()
+        setPlayerService()
         newMove('3', '2', 'PlayerA')
         checkPlayer(1, 1, 'PlayerA')
         checkPlayer(10, 10, 'PlayerB')
@@ -114,12 +115,12 @@ class SquidControllerTests extends GroovyTestCase
 
     private void checkPlayerRow(Integer row, String player)
     {
-        assertEquals("player ${player} not in row ${row}", row.toString(), getGame().player(player).get(GameState.PLAYER_ROW))
+        assertEquals("player ${player} not in row ${row}", row, Player.findByName(player).row())
     }
 
     private void checkPlayerColumn(Integer col, String player)
     {
-        assertEquals("player ${player} not in column ${col}", col.toString(), getGame().player(player).get(GameState.PLAYER_COLUMN))
+        assertEquals("player ${player} not in column ${col}", col, Player.findByName(player).column())
     }
 
     private GameState getGame()

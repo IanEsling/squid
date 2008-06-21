@@ -11,18 +11,25 @@ class GameStateServiceTests extends GroovyTestCase
         game = newGame()
     }
 
+    Player player(String playerName)
+    {
+        game.players.find{
+            it.name == playerName
+        }
+    }
+
     void testPlayerPositions()
     {
         game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
-        assertEquals("player A row moved before player B move received", game.currentGameState().player('A').get(GameState.PLAYER_ROW), '1')
-        assertEquals("player A column moved before player B move received", game.currentGameState().player('A').get(GameState.PLAYER_COLUMN), '1')
-        assertEquals("player B row moved after player A move received", game.currentGameState().player('B').get(GameState.PLAYER_ROW), '10')
-        assertEquals("player B column moved after player A move received", game.currentGameState().player('B').get(GameState.PLAYER_COLUMN), '10')
+        assertEquals("player A row moved before player B move received", player('A').row(), 1)
+        assertEquals("player A column moved before player B move received", player('A').column(), 1)
+        assertEquals("player B row moved after player A move received", player('B').row(), 10)
+        assertEquals("player B column moved after player A move received", player('B').column(), 10)
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
-        assertEquals("player A row wrong after move", game.currentGameState().player('A').get(GameState.PLAYER_ROW), '2')
-        assertEquals("player A column wrong after move", game.currentGameState().player('A').get(GameState.PLAYER_COLUMN), '3')
-        assertEquals("player B row wrong after move", game.currentGameState().player('B').get(GameState.PLAYER_ROW), '8')
-        assertEquals("player B column wrong after move", game.currentGameState().player('B').get(GameState.PLAYER_COLUMN), '9')
+        assertEquals("player A row wrong after move", player('A').row(), 2)
+        assertEquals("player A column wrong after move", player('A').column(), 3)
+        assertEquals("player B row wrong after move", player('B').row(), 8)
+        assertEquals("player B column wrong after move", player('B').column(), 9)
     }
 
     void testPlayerStatusAndTurnNumber()
@@ -68,10 +75,10 @@ class GameStateServiceTests extends GroovyTestCase
     {
         assertTrue("new game has too many turns", game.players.every{it.turns.size()==1})
         def gameState = game.currentGameState()
-        assertEquals("player A not in starting row", gameState.player('A').get(GameState.PLAYER_ROW), "1")
-        assertEquals("player B not in starting row", gameState.player('B').get(GameState.PLAYER_ROW), "10")
-        assertEquals("player A not in starting column", gameState.player('A').get(GameState.PLAYER_COLUMN), "1")
-        assertEquals("player B not in starting column", gameState.player('B').get(GameState.PLAYER_COLUMN), "10")
+        assertEquals("player A not in starting row", player('A').row(), "1")
+        assertEquals("player B not in starting row", player('B').row(), "10")
+        assertEquals("player A not in starting column", player('A').column(), "1")
+        assertEquals("player B not in starting column", player('B').column(), "10")
     }
 
     void testAddNewTurn()
