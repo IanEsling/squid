@@ -40,6 +40,16 @@ class Player implements Comparable
         gameStateService.shotLanded(this, game)
     }
 
+    Integer shotLandedRow()
+    {
+        gameStateService.shotLandedRow(this, game)
+    }
+
+    Integer shotLandedColumn()
+    {
+        gameStateService.shotLandedColumn(this, game)
+    }
+
     void newTurn(turn)
     {
         def turnNumber = turns?.max()?.turnNumber

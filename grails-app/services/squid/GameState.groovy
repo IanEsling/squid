@@ -13,17 +13,19 @@ class GameState {
     public final static String PLAYER_ROW = 'row'
     public final static String PLAYER_COLUMN = 'column'
 
-    SortedMap<Player, Map<String, String>> players
+    SortedSet<Player> players
 
+    Game game
     Integer turnNumber
     boolean gameOver = false
     List<Player> winner
     Integer gameId
 
     GameState(Game game) {
+        this.game = game
         winner = new ArrayList<Player>()
-        players = new TreeMap<Player, Map<String, String>>()
-        game.players.each {players.put(it, new HashMap<String, String>())}
+        players = new TreeSet<Player>()
+        game.players.each {players << it}
         gameId = game.id
     }
 
@@ -34,54 +36,36 @@ class GameState {
     }
 
     boolean anyoneThere(row, column) {
-        players.any {player, values ->
-            Integer.valueOf(values.get(PLAYER_ROW)) == Integer.valueOf(row) && Integer.valueOf(values.get(PLAYER_COLUMN)) == Integer.valueOf(column)
+        game.players.any {
+            it.row() == row && it.column() == column
         }
     }
 
     Integer playerHere(row, column) {
         Integer index = null
-        players.eachWithIndex {player, values, i ->
-            if (Integer.valueOf(values.get(PLAYER_ROW)) == Integer.valueOf(row) && Integer.valueOf(values.get(PLAYER_COLUMN)) == Integer.valueOf(column)) index = Integer.valueOf(i)
+        players.eachWithIndex {player, i ->
+            if (player.row() == row && player.column() == column) index = i
         }
         index
     }
 
     boolean aShotHere(row, column) {
-        players.any {player, values ->
-            values.get(SHOT_LANDED) == 'true' && Integer.valueOf(values.get(SHOT_LANDED_COLUMN)) == Integer.valueOf(column) && Integer.valueOf(values.get(SHOT_LANDED_ROW)) == Integer.valueOf(row)
+        players.any {player ->
+            player.shotLandedRow() == row && player.shotLandedColumn() == column
         }
     }
 
     Integer playerShotHere(row, column) {
 
         Integer index = null
-        players.eachWithIndex {player, values, i ->
-            if (values.get(SHOT_LANDED) == 'true' && Integer.valueOf(values.get(SHOT_LANDED_COLUMN)) == Integer.valueOf(column) && Integer.valueOf(values.get(SHOT_LANDED_ROW)) == Integer.valueOf(row)) index = i
+        players.eachWithIndex {player, i ->
+            if (player.shotLandedColumn() == column && player.shotLandedRow() == row) index = i
         }
         index
     }
 
     boolean playerCanMoveHere(row, column, playerName) {
-        def playerValues = new HashMap<String, String>()
-        players.find {player, values ->
-            if (player.name == playerName) playerValues = values
-        }
-        (Math.abs(Integer.valueOf(row) - Integer.valueOf(playerValues.get(PLAYER_ROW))) <= Game.ROWS_PLAYER_CAN_MOVE) && (Math.abs(Integer.valueOf(column) - Integer.valueOf(playerValues.get(PLAYER_COLUMN))) <= Game.ROWS_PLAYER_CAN_MOVE)
-    }
-
-    Map<String, String> player(String playerName) {
-        Map returnMap = new HashMap<String, String>()
-        players.each {player, values ->
-            if (player.name == playerName) returnMap = values
-        }
-        if (returnMap.size() > 0) return returnMap
-        else
-            throw new PlayerNotFoundException("GameState cannot locate player name: ${playerName}")
-    }
-
-    Map<String, String> player(Player player) {
-        if (players.containsKey(player)) return players.get(player)
-        throw new PlayerNotFoundException("GameState cannot locate player ${player.name}")
+        def player = players.find() {it.name == playerName}
+        (Math.abs(row - player.row()) <= Game.ROWS_PLAYER_CAN_MOVE) && (Math.abs(column - player.column()) <= Game.ROWS_PLAYER_CAN_MOVE)
     }
 }
