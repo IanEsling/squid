@@ -43,6 +43,7 @@ class Game implements Comparable
     
     GameState currentGameState()
     {
+        save(flush:true) //seems to be needed for the gui to stay stable
         gameStateService.gameState(this)
     }
 

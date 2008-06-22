@@ -17,11 +17,15 @@ class GameStateServiceTests extends GroovyTestCase {
 
     void testPlayerPositions() {
         game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
+        def gameState = game.currentGameState()
+        assertFalse("player A in 2, 3 before player B has moved", gameState.anyoneThere(2, 3))
         assertEquals("player A row moved before player B move received", player('A').row(), 1)
         assertEquals("player A column moved before player B move received", player('A').column(), 1)
         assertEquals("player B row moved after player A move received", player('B').row(), 10)
         assertEquals("player B column moved after player A move received", player('B').column(), 10)
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
+        gameState = game.currentGameState()
+        assertTrue("player A not in 2,3 after player B has moved", gameState.anyoneThere(2, 3))
         assertEquals("player A row wrong after move", player('A').row(), 2)
         assertEquals("player A column wrong after move", player('A').column(), 3)
         assertEquals("player B row wrong after move", player('B').row(), 8)
