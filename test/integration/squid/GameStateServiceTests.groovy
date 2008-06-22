@@ -138,12 +138,26 @@ class GameStateServiceTests extends GroovyTestCase {
         gameState = game.currentGameState()
         assertTrue("shot not landed after B has moved", gameState.aShotHere(2, 3))
         assertEquals("wrong player has fired", gameState.playerShotHere(2, 3), 0)
-        assertFalse("shot not supposed to have landed here", gameState.aShotHere(7, 8))
+        checkNoShotsLandedExceptHere(gameState, 2, 3)
+
         game.newTurn(new Turn(3, 4, Turn.MOVE), 'A').save(flush: true)
         game.newTurn(new Turn(3, 4, Turn.FIRE), 'B').save(flush: true)
         gameState = game.currentGameState()
         assertTrue("shot not landed after B has fired", gameState.aShotHere(3, 4))
+        checkNoShotsLandedExceptHere(gameState, 3, 4)
         assertEquals("wrong player shot here", gameState.playerShotHere(3, 4), 1)
+    }
+
+    private def checkNoShotsLandedExceptHere(gameState, expectedRow, expectedColumn) {
+        def rows = 1..10
+        def columns = 1..10
+        rows.each {row ->
+            columns.each {col ->
+                if (row != expectedRow && col != expectedColumn) {
+                    assertFalse("shot not supposed to have landed here, row $row column $col", gameState.aShotHere(row, col))
+                }
+            }
+        }
     }
 
     void testPlayerCanMoveHere() {
@@ -206,4 +220,5 @@ class GameStateServiceTests extends GroovyTestCase {
     private Integer columnShotLandedInForPlayer(String playerName) {
         return player(playerName).shotLandedColumn()
     }
+
 }
