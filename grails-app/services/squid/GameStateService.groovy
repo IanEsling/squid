@@ -1,7 +1,9 @@
 package squid
 
 class GameStateService {
+
     GameState gameState(Game game) {
+        game.save(flush: true) //seems to be needed for the gui to stay stable
         GameState gameState = new GameState(game)
         gameState.turnNumber = turnNumber(game)
         if (playersInSameCell(game)) {
@@ -95,18 +97,13 @@ class GameStateService {
     }
 
     private boolean playersInSameCell(Game game) {
-        boolean sameRow = true
-        boolean sameColumn = true
-        Integer lastRow, lastColumn
-        game.players.each {
-            def thisRow = playerRow(it, game)
-            def thisColumn = playerColumn(it, game)
-            if (lastRow != null && thisRow != lastRow) {sameRow = false}
-            if (lastColumn != null && thisColumn != lastColumn) {sameColumn = false}
-            lastRow = thisRow
-            lastColumn = thisColumn
+        boolean sameCell = false
+        game.players.each {thisPlayer ->
+            if (game.players.any{thatPlayer ->
+                thisPlayer.row() == thatPlayer.row() && thisPlayer.column() == thatPlayer.column() && thisPlayer.name != thatPlayer.name})
+                sameCell = true
         }
-        return sameRow && sameColumn
+        return sameCell
     }
 
     public Integer turnNumber(Game game) {

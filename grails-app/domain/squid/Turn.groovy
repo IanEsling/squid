@@ -1,4 +1,5 @@
 package squid
+
 class Turn implements Comparable
 {
     public static final String MOVE = 'Move'

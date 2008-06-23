@@ -15,6 +15,7 @@ class Player implements Comparable
     {
         this.name = name
         this.game = game
+        //starting positions will need work if more than 2 players
         Integer startingRow = game.players == null ? 1 : game.rows
         Integer startingColumn = game.players == null ? 1 : game.columns
         newTurn(new Turn(startingRow, startingColumn, Turn.MOVE))
@@ -69,7 +70,7 @@ class Player implements Comparable
     public int compareTo(Object o)
     {
         if (o instanceof Player)
-            return this.id - o.id
+            return (this.name == o.name ? 0 : (this.name > o.name ? 1: -1))
 
         return 0
     }

@@ -172,7 +172,8 @@ class GameStateServiceTests extends GroovyTestCase {
         def columns = 5 - Game.COLUMNS_PLAYER_CAN_MOVE..5 + Game.COLUMNS_PLAYER_CAN_MOVE
         rows.each {row ->
             columns.each {column ->
-                assertTrue("player A should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
+                if (row!=5 && column!=5)
+                    assertTrue("player A should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
             }
         }
         rows = 1..4 - Game.ROWS_PLAYER_CAN_MOVE
@@ -191,7 +192,8 @@ class GameStateServiceTests extends GroovyTestCase {
         columns = 9 - Game.COLUMNS_PLAYER_CAN_MOVE..9 + Game.COLUMNS_PLAYER_CAN_MOVE
         rows.each {row ->
             columns.each {column ->
-                assertTrue("player B should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'B'))
+                if (row!=6 && column!=9)
+                    assertTrue("player B should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'B'))
             }
         }
     }
