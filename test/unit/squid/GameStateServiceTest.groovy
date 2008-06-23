@@ -10,13 +10,23 @@ class GameStateServiceTest extends GroovyTestCase {
     {
         setGameMetaMethods()
         setPlayerMetaMethods()
+        setPlayerStateMetaMethods()
         game = new Game(10, 10, 'PlayerA', 'PlayerB')
         setGameStateService(game)
     }
 
-    void testPlayerState()
+    void testPlayerPosition()
     {
-        assertTrue(game.players.size()==2)
+        assertEquals "player A not in correct row", game.currentGameState().playerRow('PlayerA'), 1
+    }
+
+    void testPlayerStatus()
+    {
+        assertTrue("players not ready", game.currentGameState().playerStates.every {it.status == 'ready'})
+        game.newTurn(new Turn(3, 3, Turn.MOVE), 'PlayerA')
+        assertFalse("players shouldn't be all ready", game.currentGameState().playerStates.every {it.status == 'ready'})
+        assertEquals("player A status should be waiting", game.currentGameState().playerState('PlayerA').status, 'waiting')
+        assertEquals("player B status should be ready", game.currentGameState().playerState('PlayerB').status, 'ready')
     }
 
     private void setGameStateService(Game game)
@@ -26,9 +36,14 @@ class GameStateServiceTest extends GroovyTestCase {
         game.gameStateService = gss
     }
 
+    private void setPlayerStateMetaMethods()
+    {
+        PlayerState.metaClass.getGameStateService = {->return new GameStateService()}
+    }
+
     private void setPlayerMetaMethods()
     {
-        Player.metaClass.constructor = {String name, Game newGame -> return new Player(name:name)}
+        Player.metaClass.addToTurns = {turn -> turns.add(turn)}
     }
 
     private void setGameMetaMethods()

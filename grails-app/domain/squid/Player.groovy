@@ -7,7 +7,10 @@ class Player implements Comparable
 
     def gameStateService
 
+    Game game
     String name
+    Integer startingRow, startingColumn
+    List<Turn> turns = new ArrayList<Turn>()
 
     Player() {}
 
@@ -16,24 +19,14 @@ class Player implements Comparable
         this.name = name
         this.game = game
         //starting positions will need work if more than 2 players
-        Integer startingRow = game.players == null ? 1 : game.rows
-        Integer startingColumn = game.players == null ? 1 : game.columns
+        makeFirstMove(game)
+    }
+
+    private def makeFirstMove(Game game)
+    {
+        startingRow = game.players ? game.rows : 1
+        startingColumn = game.players ? game.columns : 1
         newTurn(new Turn(startingRow, startingColumn, Turn.MOVE))
-    }
-
-    String status()
-    {
-        gameStateService.playerStatus(this, game)
-    }
-
-    Integer row()
-    {
-        gameStateService.playerRow(this, game)
-    }
-
-    Integer column()
-    {
-        gameStateService.playerColumn(this, game)
     }
 
     boolean shotLanded()

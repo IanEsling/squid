@@ -3,7 +3,7 @@ package squid
 class GameState
 {
     //needs sorting for the gui css styles
-    SortedSet<Player> players
+    SortedSet<PlayerState> playerStates
 
     Game game
     Integer turnNumber
@@ -16,9 +16,19 @@ class GameState
     {
         this.game = game
         winner = new ArrayList<Player>()
-        players = new TreeSet<Player>()
-        game.players.each {players << it}
+        playerStates = new TreeSet<PlayerState>()
+        game.players.each {playerStates << new PlayerState(it)}
         gameId = game.getId()
+    }
+
+    def playerRow(String playerName)
+    {
+        playerStates.find {it.player.name == playerName}.row
+    }
+
+    def playerState(String playerName)
+    {
+        playerStates.find {it.player.name == playerName}
     }
 
     String declareWinner()

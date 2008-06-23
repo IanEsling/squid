@@ -56,7 +56,7 @@ class GameStateService
     {
         if (shotLanded(player, game))
         {
-            return playerStatus(player, game) == 'ready' ? lastTurnByPlayer(player).row : previousTurnByPlayer(player).row
+            return playerStatus(player) == 'ready' ? lastTurnByPlayer(player).row : previousTurnByPlayer(player).row
         }
     }
 
@@ -64,7 +64,7 @@ class GameStateService
     {
         if (shotLanded(player, game))
         {
-            return playerStatus(player, game) == 'ready' ? lastTurnByPlayer(player).column : previousTurnByPlayer(player).column
+            return playerStatus(player) == 'ready' ? lastTurnByPlayer(player).column : previousTurnByPlayer(player).column
         }
     }
 
@@ -105,15 +105,15 @@ class GameStateService
         return player.startingColumn
     }
 
-    public Integer playerRow(Player player, Game game)
+    public Integer playerRow(Player player)
     {
-        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
         return (turn == null) ? defaultRow(player) : turn.row
     }
 
-    public Integer playerColumn(Player player, Game game)
+    public Integer playerColumn(Player player)
     {
-        def turn = playerStatus(player, game).equals("waiting") ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 
@@ -135,7 +135,7 @@ class GameStateService
     {
         def turnNumber = 0
         game.players.each {
-            if (playerStatus(it, game) == 'ready')
+            if (playerStatus(it) == 'ready')
                 turnNumber = lastTurnNumberMadeByPlayer(it) + 1
         }
         return turnNumber
@@ -148,18 +148,20 @@ class GameStateService
         return turn == null ? 0 : turn
     }
 
-    private Integer lastTurnNumberMadeByOtherPlayer(Player player, Game game)
+    private Integer lastTurnNumberMadeByOtherPlayer(Player player)
     {
         Integer turnNumber = 0
-        game.players.each {
+        player.game.players.each {
             if (it.name != player.name && lastTurnNumberMadeByPlayer(it) > turnNumber)
                 turnNumber = lastTurnNumberMadeByPlayer(it)
         }
         return turnNumber
     }
 
-    private String playerStatus(Player player, Game game)
+    private String playerStatus(Player player)
     {
-        return lastTurnNumberMadeByPlayer(player) > lastTurnNumberMadeByOtherPlayer(player, game) ? "waiting" : "ready"
+        return lastTurnNumberMadeByPlayer(player) > lastTurnNumberMadeByOtherPlayer(player) ?
+            PlayerState.WAITING :
+            PlayerState.READY
     }
 }

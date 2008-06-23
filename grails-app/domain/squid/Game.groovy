@@ -4,9 +4,6 @@ class Game implements Comparable
 {
     def gameStateService
 
-//    public static Integer ROWS_PLAYER_CAN_MOVE = 2
-//    public static Integer COLUMNS_PLAYER_CAN_MOVE = 2
-
     static hasMany = [players: Player]
 
     Integer rowsPlayerCanMove = 2
