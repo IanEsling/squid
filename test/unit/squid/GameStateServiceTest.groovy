@@ -1,7 +1,8 @@
 package squid
 /**
  */
-class GameStateServiceTest extends GroovyTestCase {
+class GameStateServiceTest extends GroovyTestCase
+{
 
     Game game
     def gss
@@ -17,7 +18,20 @@ class GameStateServiceTest extends GroovyTestCase {
 
     void testPlayerPosition()
     {
-        assertEquals "player A not in correct row", game.currentGameState().playerRow('PlayerA'), 1
+        checkPlayerRowAndColumn(1, 1, 'PlayerA')
+        checkPlayerRowAndColumn(10, 10, 'PlayerB')
+        game.newTurn(new Turn(2, 3, Turn.MOVE), 'PlayerA')
+        checkPlayerRowAndColumn(1, 1, 'PlayerA')
+        checkPlayerRowAndColumn(10, 10, 'PlayerB')
+        game.newTurn(new Turn(8, 9, Turn.MOVE), 'PlayerB')
+        checkPlayerRowAndColumn(2, 3, 'PlayerA')
+        checkPlayerRowAndColumn(8, 9, 'PlayerB')
+    }
+
+    private def checkPlayerRowAndColumn(row, column, playerName)
+    {
+        assertEquals "player A not in correct row", game.currentGameState().playerRow(playerName), row
+        assertEquals "player A not in correct column", game.currentGameState().playerColumn(playerName), column
     }
 
     void testPlayerStatus()
@@ -38,7 +52,7 @@ class GameStateServiceTest extends GroovyTestCase {
 
     private void setPlayerStateMetaMethods()
     {
-        PlayerState.metaClass.getGameStateService = {->return new GameStateService()}
+        PlayerState.metaClass.getGameStateService = {-> return new GameStateService()}
     }
 
     private void setPlayerMetaMethods()
@@ -50,6 +64,6 @@ class GameStateServiceTest extends GroovyTestCase {
     {
         Game.metaClass.save = {}
         Game.metaClass.getId = {1}
-        Game.metaClass.addToPlayers = {player-> players.add(player)}
+        Game.metaClass.addToPlayers = {player -> players.add(player)}
     }
 }

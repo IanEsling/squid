@@ -26,6 +26,11 @@ class GameState
         playerStates.find {it.player.name == playerName}.row
     }
 
+    def playerColumn(String playerName)
+    {
+        playerStates.find {it.player.name == playerName}.column
+    }
+
     def playerState(String playerName)
     {
         playerStates.find {it.player.name == playerName}
