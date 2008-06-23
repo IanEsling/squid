@@ -30,7 +30,7 @@ class Turn implements Comparable
     {
         if (!o instanceof Turn) return 0
 
-        return turnNumber - ((Turn)o).turnNumber
+        return turnNumber - o.turnNumber
     }
 }
 

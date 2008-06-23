@@ -13,7 +13,7 @@ class Game implements Comparable
     Integer columnsPlayerCanMove = 2
     Integer rows = 10
     Integer columns = 10
-    List<Player> players
+    List<Player> players = new ArrayList<Player>()
 
     static constraints =
     {
