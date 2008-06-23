@@ -1,17 +1,7 @@
 package squid
 
-class GameStateTest extends GroovyTestCase
+class GameStateTest extends BaseSquidTestCase
 {
-    Game game
-    def gss
-
-    void setUp()
-    {
-        game = new Game(rows: 10, columns: 10)
-        setGameMetaMethods(game)
-        setGameStateService(game)
-    }
-
     void testPlayerOrdering()
     {
         game.players = new ArrayList<Player>()
@@ -46,27 +36,11 @@ class GameStateTest extends GroovyTestCase
         assertFalse("player A should not be able to move to 8, 8", game.currentGameState().playerCanMoveHere(8, 8, 'PlayerA'))
     }
 
-    private def checkPlayerOrder()
+    private void checkPlayerOrder()
     {
-        return game.currentGameState().players.eachWithIndex {player, i ->
+        game.currentGameState().players.eachWithIndex {player, i ->
             if (player.name == 'PlayerA') assertEquals("player A not first in list", i, 0)
             if (player.name == 'PlayerB') assertEquals("player B not last in list", i, 1)
         }
-    }
-
-    private def setGameStateService(Game game)
-    {
-        gss = new Expando()
-        gss.gameState = {testGame -> return new GameState(testGame) }
-        game.gameStateService = gss
-    }
-
-    private def setGameMetaMethods(Game game)
-    {
-        def emc = new ExpandoMetaClass(Game)
-        emc.save = {}
-        emc.getId = {1}
-        emc.initialize()
-        game.setMetaClass(emc)
     }
 }

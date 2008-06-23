@@ -23,17 +23,17 @@ class GameState
 
     def playerRow(String playerName)
     {
-        playerStates.find {it.player.name == playerName}.row
+        playerStates.find {it.playerName == playerName}.row
     }
 
     def playerColumn(String playerName)
     {
-        playerStates.find {it.player.name == playerName}.column
+        playerStates.find {it.playerName == playerName}.column
     }
 
-    def playerState(String playerName)
+    def playerStatus(String playerName)
     {
-        playerStates.find {it.player.name == playerName}
+        playerStates.find {it.playerName == playerName}.status
     }
 
     String declareWinner()
@@ -45,7 +45,7 @@ class GameState
 
     boolean anyoneThere(row, column)
     {
-        game.players.any {
+        playerStates.any {
             it.row() == row && it.column() == column
         }
     }
@@ -53,8 +53,8 @@ class GameState
     Integer playerHere(row, column)
     {
         Integer index = null
-        players.eachWithIndex {player, i ->
-            if (player.row() == row && player.column() == column) index = i
+        playerStates.eachWithIndex {playerState, i ->
+            if (playerState.row == row && playerState.column == column) index = i
         }
         index
     }
