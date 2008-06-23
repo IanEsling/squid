@@ -2,8 +2,8 @@ package squid
 
 class GameStateServiceTests extends GroovyTestCase {
 
-    def game
-    def gameStateService
+    Game game
+    GameStateService gameStateService
 
     protected void setUp() {
         game = newGame()
@@ -168,28 +168,28 @@ class GameStateServiceTests extends GroovyTestCase {
         game.newTurn(new Turn(5, 5, Turn.MOVE), 'A').save(flush: true)
         game.newTurn(new Turn(6, 9, Turn.MOVE), 'B').save(flush: true)
         def gameState = game.currentGameState()
-        def rows = 5 - Game.ROWS_PLAYER_CAN_MOVE..5 + Game.ROWS_PLAYER_CAN_MOVE
-        def columns = 5 - Game.COLUMNS_PLAYER_CAN_MOVE..5 + Game.COLUMNS_PLAYER_CAN_MOVE
+        def rows = 5 - game.rowsPlayerCanMove..5 + game.rowsPlayerCanMove
+        def columns = 5 - game.columnsPlayerCanMove..5 + game.columnsPlayerCanMove
         rows.each {row ->
             columns.each {column ->
                 if (row!=5 && column!=5)
                     assertTrue("player A should be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
             }
         }
-        rows = 1..4 - Game.ROWS_PLAYER_CAN_MOVE
+        rows = 1..4 - game.rowsPlayerCanMove
         rows.each {row ->
             columns.each {column ->
                 assertFalse("player A should not be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
             }
         }
-        columns = 1..4 - Game.COLUMNS_PLAYER_CAN_MOVE
+        columns = 1..4 - game.columnsPlayerCanMove
         rows.each {row ->
             columns.each {column ->
                 assertFalse("player A should not be able to move here: ${row}, ${column}", gameState.playerCanMoveHere(row, column, 'A'))
             }
         }
-        rows = 6 - Game.ROWS_PLAYER_CAN_MOVE..6 + Game.ROWS_PLAYER_CAN_MOVE
-        columns = 9 - Game.COLUMNS_PLAYER_CAN_MOVE..9 + Game.COLUMNS_PLAYER_CAN_MOVE
+        rows = 6 - game.rowsPlayerCanMove..6 + game.rowsPlayerCanMove
+        columns = 9 - game.columnsPlayerCanMove..9 + game.columnsPlayerCanMove
         rows.each {row ->
             columns.each {column ->
                 if (row!=6 && column!=9)

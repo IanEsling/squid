@@ -32,15 +32,18 @@ class GameStateTest extends GroovyTestCase
         Player playerA = new Player(name:'PlayerA')
         Player playerB = new Player(name:'PlayerB')
         def mcPlayerA = new ExpandoMetaClass(Player)
-        mcPlayerA.row = {->1}
-        mcPlayerA.column = {->1}
+        mcPlayerA.row = {->5}
+        mcPlayerA.column = {->5}
         mcPlayerA.initialize()
         playerA.setMetaClass(mcPlayerA)
         game.players.add(playerA)
         game.players.add(playerB)
-        game.setPlayerMoveColumns(3)
-        game.setPlayerMoveRows(3)
-        assertTrue("player A should be able to move here", game.currentGameState().playerCanMoveHere(3, 3, 'PlayerA'))
+        game.setColumnsPlayerCanMove(2)
+        game.setRowsPlayerCanMove(3)
+        assertTrue("player A should be able to move to 3, 2", game.currentGameState().playerCanMoveHere(2, 3, 'PlayerA'))
+        assertTrue("player A should be able to move to 8, 7", game.currentGameState().playerCanMoveHere(8, 7, 'PlayerA'))
+        assertFalse("player A should not be able to move to 2, 2", game.currentGameState().playerCanMoveHere(2, 2, 'PlayerA'))
+        assertFalse("player A should not be able to move to 8, 8", game.currentGameState().playerCanMoveHere(8, 8, 'PlayerA'))
     }
 
     private def checkPlayerOrder()

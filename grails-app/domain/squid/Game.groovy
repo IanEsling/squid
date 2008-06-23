@@ -4,11 +4,13 @@ class Game implements Comparable
 {
     def gameStateService
 
-    public static Integer ROWS_PLAYER_CAN_MOVE = 2
-    public static Integer COLUMNS_PLAYER_CAN_MOVE = 2
+//    public static Integer ROWS_PLAYER_CAN_MOVE = 2
+//    public static Integer COLUMNS_PLAYER_CAN_MOVE = 2
 
     static hasMany = [players: Player]
 
+    Integer rowsPlayerCanMove = 2
+    Integer columnsPlayerCanMove = 2
     Integer rows = 10
     Integer columns = 10
     List<Player> players
@@ -44,16 +46,6 @@ class Game implements Comparable
     GameState currentGameState()
     {        
         gameStateService.gameState(this)
-    }
-
-    void setPlayerMoveRows(Integer rows)
-    {
-        ROWS_PLAYER_CAN_MOVE = rows
-    }
-
-    void setPlayerMoveColumns(Integer columns)
-    {
-        COLUMNS_PLAYER_CAN_MOVE = columns
     }
 
     public int compareTo(Object o)

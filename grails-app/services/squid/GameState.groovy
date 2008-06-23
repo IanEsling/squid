@@ -64,8 +64,8 @@ class GameState
     boolean playerCanMoveHere(row, column, playerName)
     {
         def player = players.find() {it.name == playerName}
-        (Math.abs(row - player.row()) <= Game.ROWS_PLAYER_CAN_MOVE) &&
-        (Math.abs(column - player.column()) <= Game.ROWS_PLAYER_CAN_MOVE) &&
+        (Math.abs(row - player.row()) <= game.rowsPlayerCanMove) &&
+        (Math.abs(column - player.column()) <= game.columnsPlayerCanMove) &&
         !(row == player.row() && column == player.column())        
     }
 }
