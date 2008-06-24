@@ -1,4 +1,11 @@
-package squid
+package squid.test
+
+import squid.Game
+import squid.GameState
+import squid.PlayerState
+import squid.GameStateService
+import squid.Player
+
 /**
  */
 class BaseSquidTestCase extends GroovyTestCase
@@ -30,6 +37,7 @@ class BaseSquidTestCase extends GroovyTestCase
     private void setPlayerMetaMethods()
     {
         Player.metaClass.addToTurns = {turn -> turns.add(turn)}
+        Player.metaClass.getGame = {-> game}
     }
 
     private void setGameMetaMethods()

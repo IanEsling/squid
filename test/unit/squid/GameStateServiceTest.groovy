@@ -1,4 +1,7 @@
 package squid
+
+import squid.test.BaseSquidTestCase
+
 /**
  */
 class GameStateServiceTest extends BaseSquidTestCase

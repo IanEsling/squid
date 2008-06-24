@@ -23,6 +23,6 @@ class PlayerState implements Comparable
     
     public int compareTo(Object o)
     {
-        return (o.player.compareTo(player))
+        return (player.compareTo(o.player))
     }
 }
