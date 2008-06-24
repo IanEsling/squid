@@ -1,10 +1,6 @@
 package squid.test
 
-import squid.Game
-import squid.GameState
-import squid.PlayerState
-import squid.GameStateService
-import squid.Player
+import squid.*
 
 /**
  */
@@ -22,22 +18,90 @@ class BaseSquidTestCase extends GroovyTestCase
         setGameStateService(game)
     }
 
-    private void setGameStateService(Game game)
+    protected void tearDown()
+    {
+        PlayerState.metaClass.invokeMethod = {String name, args ->
+            def validMethod = PlayerState.metaClass.getMetaMethod(name, args)
+            if (validMethod != null)
+            {
+                validMethod.invoke(delegate, args)
+            }
+            else
+            {
+                return PlayerState.metaClass.invokeMissingMethod(delegate, name, args)
+            }
+        }
+
+        Player.metaClass.invokeMethod = {String name, args ->
+            def validMethod = Player.metaClass.getMetaMethod(name, args)
+            if (validMethod != null)
+            {
+                validMethod.invoke(delegate, args)
+            }
+            else
+            {
+                return Player.metaClass.invokeMissingMethod(delegate, name, args)
+            }
+        }
+    }
+
+    void setGameStateService(Game game)
     {
         gss = new Expando()
         gss.gameState = {testGame -> return new GameState(testGame) }
         game.gameStateService = gss
     }
 
-    private void setPlayerStateMetaMethods()
+    def setPlayerStateMetaMethods()
     {
-        PlayerState.metaClass.getGameStateService = {-> return new GameStateService()}
+        PlayerState.metaClass.invokeMethod = {String name, args ->
+            if (name == 'getGameStateService')
+            {
+                return new GameStateService()
+            }
+            else
+            {
+
+                def validMethod = PlayerState.metaClass.getMetaMethod(name, args)
+                if (validMethod != null)
+                {
+                    validMethod.invoke(delegate, args)
+                }
+                else
+                {
+                    return PlayerState.metaClass.invokeMissingMethod(delegate, name, args)
+                }
+            }
+        }
     }
 
-    private void setPlayerMetaMethods()
+    def setPlayerMetaMethods()
     {
-        Player.metaClass.addToTurns = {turn -> turns.add(turn)}
-        Player.metaClass.getGame = {-> game}
+        Player.metaClass.invokeMethod = {String name, args ->
+
+            if (name == 'addToTurns')
+            {
+                delegate.turns.add(args[0])
+            }
+            if (name == 'getGame')
+            {
+                return game
+            }
+
+            if (name != 'getGame' && name != 'addToTurns')
+            {
+                def validMethod = Player.metaClass.getMetaMethod(name, args)
+                if (validMethod != null)
+                {
+                    validMethod.invoke(delegate, args)
+                }
+                else
+                {
+                    return Player.metaClass.invokeMissingMethod(delegate, name, args)
+                }
+            }
+
+        }
     }
 
     private void setGameMetaMethods()
@@ -46,4 +110,5 @@ class BaseSquidTestCase extends GroovyTestCase
         Game.metaClass.getId = {1}
         Game.metaClass.addToPlayers = {player -> players.add(player)}
     }
+
 }

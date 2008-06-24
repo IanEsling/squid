@@ -1,5 +1,7 @@
 package squid
 
+import squid.test.PlayerStateTestUtil
+
 class GameState
 {
     //needs sorting for the gui css styles

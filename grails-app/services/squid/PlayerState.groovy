@@ -1,4 +1,5 @@
 package squid
+
 /**
  */
 class PlayerState implements Comparable
@@ -10,7 +11,10 @@ class PlayerState implements Comparable
     String playerName
     String status
     Integer row, column
+
     def gameStateService
+
+    PlayerState(){}
 
     PlayerState(Player player)
     {
@@ -20,9 +24,9 @@ class PlayerState implements Comparable
         row = getGameStateService().playerRow(player)
         column = getGameStateService().playerColumn(player)
     }
-    
+
     public int compareTo(Object o)
     {
-        return (player.compareTo(o.player))
+        return player.name == o.player.name ? 0 : player.name > o.player.name ? 1 : -1
     }
 }

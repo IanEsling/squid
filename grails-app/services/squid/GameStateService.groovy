@@ -143,7 +143,7 @@ class GameStateService
 
     private Integer lastTurnNumberMadeByPlayer(Player player)
     {
-        def turn = player.turns?.max()?.turnNumber
+        Integer turn = player?.turns?.max()?.turnNumber
 
         return turn == null ? 0 : turn
     }
@@ -160,7 +160,10 @@ class GameStateService
 
     private String playerStatus(Player player)
     {
-        return lastTurnNumberMadeByPlayer(player) > lastTurnNumberMadeByOtherPlayer(player) ?
+        Integer myLastTurnNumber = lastTurnNumberMadeByPlayer(player)
+        Integer theirLastTurnNumber = lastTurnNumberMadeByOtherPlayer(player)
+
+        return myLastTurnNumber > theirLastTurnNumber ?
             PlayerState.WAITING :
             PlayerState.READY
     }

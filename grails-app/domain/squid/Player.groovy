@@ -55,16 +55,17 @@ class Player implements Comparable
     {
         if (obj instanceof Player)
         {
-            return ((Player) obj).name == this.name
+            return ((Player) obj).name == name
         }
-        return obj.equals(this.name)
+        return obj.equals(name)
     }
 
     public int compareTo(Object o)
     {
         if (o instanceof Player)
-            return (this.name == o.name ? 0 : (this.name > o.name ? 1: -1))
-
+        {
+            return name == o.name ? 0 : (name > o.name ? 1 : -1)
+        }
         return 0
     }
 }

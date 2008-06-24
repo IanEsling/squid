@@ -4,7 +4,7 @@ import squid.test.BaseSquidTestCase
 
 /**
  */
-class GameStateServiceTest extends BaseSquidTestCase
+class GameStateServiceUnitTest extends BaseSquidTestCase
 {
     void testPlayerPosition()
     {
