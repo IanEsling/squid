@@ -1,8 +1,8 @@
-<g:if test="${game}">
+<g:if test="${gameState.game}">
     <table class="gameboard">
-        <g:each in="${(1..game.rows)}" var="r">
+        <g:each in="${(1..gameState.game.rows)}" var="r">
             <tr>
-                <g:each in="${(1..game.columns)}" var="c">
+                <g:each in="${(1..gameState.game.columns)}" var="c">
                     <g:set var="cellClass" value="normalGameboardCell"/>
                     <g:if test="${gameState.anyoneThere(r,c)}">
                         <g:set var="cellClass" value="player${gameState.playerHere(r,c)}Position"/>

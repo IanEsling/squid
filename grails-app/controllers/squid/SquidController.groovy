@@ -10,14 +10,13 @@ class SquidController
     def squid = { currentGame.call() }
 
     def latestGame = {
-        Game.findAll().max()
+        Game.list().max()
     }
 
     def currentGame = {player ->
-        if (Game.findAll().size() == 0) return null
+        if (Game.list().size() == 0) return null
 
-        def game = latestGame.call()
-        [gameState: game.currentGameState(), game: game, player: player, playerName: player]
+        [gameState: latestGame.call().currentGameState(), player: player]
     }
 
     def move = {

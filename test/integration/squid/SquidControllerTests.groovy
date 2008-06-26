@@ -97,14 +97,14 @@ class SquidControllerTests extends GroovyTestCase
 
     private void setPlayerService()
     {
-        Player.findAll().each {
+        Player.list().each {
             it.gameStateService = gameStateService
         }
     }
 
     private void setGameService()
     {
-        Game.findAll().each {
+        Game.list().each {
             it.gameStateService = gameStateService
         }
     }
