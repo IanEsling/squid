@@ -1,6 +1,5 @@
 package squid
 
-import squid.test.PlayerStateTestUtil
 
 class GameState
 {
@@ -14,28 +13,32 @@ class GameState
     List<Player> winner
     Integer gameId
 
-    GameState(Game game)
+    GameState(Game game, GameStateService gameStateService)
     {
         this.game = game
         winner = new ArrayList<Player>()
         playerStates = new TreeSet<PlayerState>()
-        game.players.each {playerStates << new PlayerState(it)}
+        game.players.each {playerStates << new PlayerState(it, gameStateService)}
         gameId = game.getId()
     }
 
-    def playerRow(String playerName)
+    def findPlayer = {playerName->
+        playerStates.find {it.playerName == playerName}
+    }
+    
+    Integer playerRow(String playerName)
     {
-        playerStates.find {it.playerName == playerName}.row
+        findPlayer(playerName).row
     }
 
-    def playerColumn(String playerName)
+    Integer playerColumn(String playerName)
     {
-        playerStates.find {it.playerName == playerName}.column
+        findPlayer(playerName).column
     }
 
-    def playerStatus(String playerName)
+    String playerStatus(String playerName)
     {
-        playerStates.find {it.playerName == playerName}.status
+        findPlayer(playerName).status
     }
 
     String declareWinner()
@@ -48,7 +51,7 @@ class GameState
     boolean anyoneThere(row, column)
     {
         playerStates.any {
-            it.row() == row && it.column() == column
+            it.row == row && it.column == column
         }
     }
 
@@ -63,8 +66,8 @@ class GameState
 
     boolean aShotHere(row, column)
     {
-        players.any {player ->
-            player.shotLandedRow() == row && player.shotLandedColumn() == column
+        playerStates.any {playerState ->
+            playerState.shotLandedRow == row && playerState.shotLandedColumn == column
         }
     }
 
@@ -72,8 +75,8 @@ class GameState
     {
 
         Integer index = null
-        players.eachWithIndex {player, i ->
-            if (player.shotLandedColumn() == column && player.shotLandedRow() == row) index = i
+        playerStates.eachWithIndex {playerState, i ->
+            if (playerState.shotLandedColumn == column && playerState.shotLandedRow == row) index = i
         }
         index
     }

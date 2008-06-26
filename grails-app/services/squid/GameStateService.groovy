@@ -2,13 +2,12 @@ package squid
 
 class GameStateService
 {
-
     GameState gameState(Game game)
     {
         game.save(flush: true) //seems to be needed for the gui to stay stable
-        GameState gameState = new GameState(game)
+        GameState gameState = new GameState(game, this)
         gameState.turnNumber = turnNumber(game)
-        if (playersInSameCell(game))
+        if (playersInSameCell(gameState))
         {
             gameState.gameOver = true
             game.players.each {gameState.winner << it}
@@ -24,19 +23,19 @@ class GameStateService
     List<Player> aPlayerHasWon(Game game, GameState gameState)
     {
         List<Player> winners = new ArrayList<Player>()
-        if (game.players.collect {it.status()}.every {'ready'}
-                && game.players.collect {it.shotLanded()}.any {true})
+        if (gameState.playerStates.collect {it.status}.every {PlayerState.READY}
+                && gameState.playerStates.collect {it.shotLanded}.any {true})
         {
-            gameState.players.each {player ->
-                if (player.shotLanded())
+            gameState.playerStates.each {playerState ->
+                if (playerState.shotLanded)
                 {
-                    def shotRow = player.shotLandedRow()
-                    def shotColumn = player.shotLandedColumn()
-                    if (game.players.any {
-                        it.row() == shotRow && it.column() == shotColumn
+                    def shotRow = playerState.shotLandedRow
+                    def shotColumn = playerState.shotLandedColumn
+                    if (gameState.playerStates.any {
+                        it.row == shotRow && it.column == shotColumn
                     })
                     {
-                        winners << player
+                        winners << playerState.player
                     }
                 }
             }
@@ -45,26 +44,26 @@ class GameStateService
         return winners
     }
 
-    boolean shotLanded(Player player, Game game)
+    boolean shotLanded(Player player, String status)
     {
-        return ((player.turns?.max()?.turnType == Turn.FIRE && player.status() == 'ready')
+        return ((player.turns?.max()?.turnType == Turn.FIRE && status == PlayerState.READY)
                 ||
-                (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && player.status() == 'waiting')
+                (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && status == PlayerState.WAITING)
     }
 
-    Integer shotLandedRow(Player player, Game game)
+    Integer shotLandedRow(Player player, String status)
     {
-        if (shotLanded(player, game))
+        if (shotLanded(player, status))
         {
-            return playerStatus(player) == 'ready' ? lastTurnByPlayer(player).row : previousTurnByPlayer(player).row
+            return status == PlayerState.READY ? lastTurnByPlayer(player).row : previousTurnByPlayer(player).row
         }
     }
 
-    Integer shotLandedColumn(Player player, Game game)
+    Integer shotLandedColumn(Player player, String status)
     {
-        if (shotLanded(player, game))
+        if (shotLanded(player, status))
         {
-            return playerStatus(player) == 'ready' ? lastTurnByPlayer(player).column : previousTurnByPlayer(player).column
+            return status == PlayerState.READY ? lastTurnByPlayer(player).column : previousTurnByPlayer(player).column
         }
     }
 
@@ -117,14 +116,14 @@ class GameStateService
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 
-    private boolean playersInSameCell(Game game)
+    private boolean playersInSameCell(GameState gameState)
     {
         boolean sameCell = false
-        game.players.each {thisPlayer ->
-            if (game.players.any {thatPlayer ->
-                thisPlayer.row() == thatPlayer.row() &&
-                        thisPlayer.column() == thatPlayer.column() &&
-                        thisPlayer.name != thatPlayer.name
+        gameState.playerStates.each {thisPlayer ->
+            if (gameState.playerStates.any {thatPlayer ->
+                thisPlayer.row == thatPlayer.row &&
+                        thisPlayer.column == thatPlayer.column &&
+                        thisPlayer.playerName != thatPlayer.playerName
             })
                 sameCell = true
         }
@@ -158,7 +157,7 @@ class GameStateService
         return turnNumber
     }
 
-    private String playerStatus(Player player)
+    String playerStatus(Player player)
     {
         Integer myLastTurnNumber = lastTurnNumberMadeByPlayer(player)
         Integer theirLastTurnNumber = lastTurnNumberMadeByOtherPlayer(player)

@@ -15,21 +15,31 @@ class GameStateServiceTests extends GroovyTestCase {
         }
     }
 
+    Integer playerRow(String playerName)
+    {
+        return game.currentGameState().playerRow(playerName)
+    }
+
+    Integer playerColumn(String playerName)
+    {
+        return game.currentGameState().playerColumn(playerName)
+    }
+
     void testPlayerPositions() {
         game.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
         def gameState = game.currentGameState()
         assertFalse("player A in 2, 3 before player B has moved", gameState.anyoneThere(2, 3))
-        assertEquals("player A row moved before player B move received", player('A').row(), 1)
-        assertEquals("player A column moved before player B move received", player('A').column(), 1)
-        assertEquals("player B row moved after player A move received", player('B').row(), 10)
-        assertEquals("player B column moved after player A move received", player('B').column(), 10)
+        assertEquals("player A row moved before player B move received", playerRow('A'), 1)
+        assertEquals("player A column moved before player B move received", playerColumn('A'), 1)
+        assertEquals("player B row moved after player A move received", playerRow('B'), 10)
+        assertEquals("player B column moved after player A move received", playerColumn('B'), 10)
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
         gameState = game.currentGameState()
         assertTrue("player A not in 2,3 after player B has moved", gameState.anyoneThere(2, 3))
-        assertEquals("player A row wrong after move", player('A').row(), 2)
-        assertEquals("player A column wrong after move", player('A').column(), 3)
-        assertEquals("player B row wrong after move", player('B').row(), 8)
-        assertEquals("player B column wrong after move", player('B').column(), 9)
+        assertEquals("player A row wrong after move", playerRow('A'), 2)
+        assertEquals("player A column wrong after move", playerColumn('A'), 3)
+        assertEquals("player B row wrong after move", playerRow('B'), 8)
+        assertEquals("player B column wrong after move", playerColumn('B'), 9)
     }
 
     void testPlayerStatusAndTurnNumber() {
@@ -71,10 +81,10 @@ class GameStateServiceTests extends GroovyTestCase {
 
     void testPlayerStartPositions() {
         assertTrue("new game has too many turns", game.players.every {it.turns.size() == 1})
-        assertEquals("player A not in starting row", player('A').row(), 1)
-        assertEquals("player B not in starting row", player('B').row(), 10)
-        assertEquals("player A not in starting column", player('A').column(), 1)
-        assertEquals("player B not in starting column", player('B').column(), 10)
+        assertEquals("player A not in starting row", playerRow('A'), 1)
+        assertEquals("player B not in starting row", playerRow('B'), 10)
+        assertEquals("player A not in starting column", playerColumn('A'), 1)
+        assertEquals("player B not in starting column", playerColumn('B'), 10)
     }
 
     void testAddNewTurn() {
@@ -200,8 +210,8 @@ class GameStateServiceTests extends GroovyTestCase {
 
     private void checkPlayerStatusesAndTurnNumber(Game game, String playerAStatus, String playerBStatus, Integer turnNumber) {
         def gameState = game.currentGameState()
-        assertEquals("player A status incorrect on turn ${turnNumber}", game.players.find {it.name == 'A'}.status(), playerAStatus)
-        assertEquals("player B status incorrect on turn ${turnNumber}", game.players.find {it.name == 'B'}.status(), playerBStatus)
+        assertEquals("player A status incorrect on turn ${turnNumber}", gameState.playerStatus('A'), playerAStatus)
+        assertEquals("player B status incorrect on turn ${turnNumber}", gameState.playerStatus('B'), playerBStatus)
         assertEquals("turn number incorrect", gameState.turnNumber, turnNumber)
     }
 
@@ -216,15 +226,15 @@ class GameStateServiceTests extends GroovyTestCase {
     }
 
     private boolean hasShotLandedForPlayer(String playerName) {
-        return player(playerName).shotLanded()
+        return game.currentGameState().findPlayer(playerName).shotLanded
     }
 
     private Integer rowShotLandedInForPlayer(String playerName) {
-        return player(playerName).shotLandedRow()
+        return game.currentGameState().findPlayer(playerName).shotLandedRow
     }
 
     private Integer columnShotLandedInForPlayer(String playerName) {
-        return player(playerName).shotLandedColumn()
+        return game.currentGameState().findPlayer(playerName).shotLandedColumn
     }
 
 }

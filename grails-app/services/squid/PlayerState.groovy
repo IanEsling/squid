@@ -10,19 +10,21 @@ class PlayerState implements Comparable
     Player player
     String playerName
     String status
-    Integer row, column
-
-    def gameStateService
+    Integer row, column, shotLandedRow, shotLandedColumn
+    boolean shotLanded
 
     PlayerState(){}
 
-    PlayerState(Player player)
+    PlayerState(Player player, GameStateService gameStateService)
     {
         this.player = player
         this.playerName = player.name
-        status = getGameStateService().playerStatus(player)
-        row = getGameStateService().playerRow(player)
-        column = getGameStateService().playerColumn(player)
+        status = gameStateService.playerStatus(player)
+        row = gameStateService.playerRow(player)
+        column = gameStateService.playerColumn(player)
+        shotLanded = gameStateService.shotLanded(player, status)
+        shotLandedRow = gameStateService.shotLandedRow(player, status)
+        shotLandedColumn = gameStateService.shotLandedColumn(player, status)
     }
 
     public int compareTo(Object o)

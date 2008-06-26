@@ -48,7 +48,7 @@ class BaseSquidTestCase extends GroovyTestCase
     void setGameStateService(Game game)
     {
         gss = new Expando()
-        gss.gameState = {testGame -> return new GameState(testGame) }
+        gss.gameState = {testGame -> return new GameState(testGame, new GameStateService()) }
         game.gameStateService = gss
     }
 

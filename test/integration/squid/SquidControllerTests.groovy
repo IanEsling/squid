@@ -90,7 +90,9 @@ class SquidControllerTests extends GroovyTestCase
 
     private void checkPlayerStatus(String playerName, String status)
     {
-        assertEquals("player status not correct for ${playerName}", Player.findByName(playerName).status(), status)
+        def playerState = getGame().playerStates.find {it.playerName==playerName}
+        assertEquals("player status not correct for ${playerName}", playerState.status, status)
+
     }
 
     private void setPlayerService()
@@ -113,14 +115,14 @@ class SquidControllerTests extends GroovyTestCase
         checkPlayerColumn(col, player)
     }
 
-    private void checkPlayerRow(Integer row, String player)
+    private void checkPlayerRow(Integer row, String playerName)
     {
-        assertEquals("player ${player} not in row ${row}", row, Player.findByName(player).row())
+        assertEquals("player ${playerName} not in row ${row}", row, getGame().playerRow(playerName))
     }
 
-    private void checkPlayerColumn(Integer col, String player)
+    private void checkPlayerColumn(Integer col, String playerName)
     {
-        assertEquals("player ${player} not in column ${col}", col, Player.findByName(player).column())
+        assertEquals("player ${playerName} not in column ${col}", col, getGame().playerColumn(playerName))
     }
 
     private GameState getGame()

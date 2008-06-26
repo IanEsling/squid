@@ -29,21 +29,6 @@ class Player implements Comparable
         newTurn(new Turn(startingRow, startingColumn, Turn.MOVE))
     }
 
-    boolean shotLanded()
-    {
-        gameStateService.shotLanded(this, game)
-    }
-
-    Integer shotLandedRow()
-    {
-        gameStateService.shotLandedRow(this, game)
-    }
-
-    Integer shotLandedColumn()
-    {
-        gameStateService.shotLandedColumn(this, game)
-    }
-
     void newTurn(turn)
     {
         def turnNumber = turns?.max()?.turnNumber

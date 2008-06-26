@@ -6,6 +6,12 @@ import squid.test.BaseSquidTestCase
  */
 class GameStateServiceUnitTest extends BaseSquidTestCase
 {
+    void testCurrentGameState()
+    {
+        game.gameStateService = new GameStateService()
+        assertNotNull(game.currentGameState())
+    }
+
     void testPlayerPosition()
     {
         checkPlayerRowAndColumn(1, 1, 'PlayerA')
