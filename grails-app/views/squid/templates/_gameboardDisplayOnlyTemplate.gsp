@@ -1,14 +1,14 @@
-<g:if test="${gameState.game}">
+<g:if test="${gameState.setTestGame}">
     <table class="gameboard">
-        <g:each in="${(1..gameState.game.rows)}" var="r">
+        <g:each in="${(1..gameState.setTestGame.rows)}" var="r">
             <tr>
-                <g:each in="${(1..gameState.game.columns)}" var="c">
+                <g:each in="${(1..gameState.setTestGame.columns)}" var="c">
                     <g:set var="cellClass" value="normalGameboardCell"/>
                     <g:if test="${gameState.anyoneThere(r,c)}">
-                        <g:set var="cellClass" value="player${gameState.playerHere(r,c)}Position"/>
+                        <g:set var="cellClass" value="player${gameState.isThereAPlayerHere(r,c)}Position"/>
                     </g:if>
                     <g:elseif test="${gameState.aShotHere(r,c)}">
-                        <g:set var="cellClass" value="player${gameState.playerShotHere(r,c)}Shot"/>
+                        <g:set var="cellClass" value="player${gameState.whichPlayerShotHere(r,c)}Shot"/>
                     </g:elseif>
                     <td class="${cellClass}">
                     ${r}-${c}

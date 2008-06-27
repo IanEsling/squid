@@ -13,25 +13,12 @@ class BaseSquidTestCase extends GroovyTestCase
     {
         setGameMetaMethods()
         setPlayerMetaMethods()
-        setPlayerStateMetaMethods()
         game = new Game(10, 10, 'PlayerA', 'PlayerB')
         setGameStateService(game)
     }
 
     protected void tearDown()
     {
-        PlayerState.metaClass.invokeMethod = {String name, args ->
-            def validMethod = PlayerState.metaClass.getMetaMethod(name, args)
-            if (validMethod != null)
-            {
-                validMethod.invoke(delegate, args)
-            }
-            else
-            {
-                return PlayerState.metaClass.invokeMissingMethod(delegate, name, args)
-            }
-        }
-
         Player.metaClass.invokeMethod = {String name, args ->
             def validMethod = Player.metaClass.getMetaMethod(name, args)
             if (validMethod != null)
@@ -55,9 +42,10 @@ class BaseSquidTestCase extends GroovyTestCase
     def setPlayerStateMetaMethods()
     {
         PlayerState.metaClass.invokeMethod = {String name, args ->
-            if (name == 'getGameStateService')
+            println name.substring(0, 5)
+            if (name.substring(0, 5)=='player')
             {
-                return new GameStateService()
+                println "invoking player method:..."+name
             }
             else
             {

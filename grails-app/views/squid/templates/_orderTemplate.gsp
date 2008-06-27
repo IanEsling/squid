@@ -3,7 +3,7 @@
     <input type="radio" name="turnType" value="Move" checked="checked" />Move To<br>
     <input type="radio" name="turnType" value="Fire" />Fire At<br>
 
-    <input type="hidden" id="gameId" name="gameId" value="${gameState?.game?.id}"/>
+    <input type="hidden" id="gameId" name="gameId" value="${gameState?.setTestGame?.id}"/>
     <input type="hidden" id="player" name="player"/>
     <g:actionSubmit method="post" value="Submit Order"/>
 </g:form>

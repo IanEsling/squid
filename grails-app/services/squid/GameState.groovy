@@ -13,6 +13,26 @@ class GameState
     List<Player> winner
     Integer gameId
 
+    def invoke = {String name, args ->
+        if (name.substring(0, 6) == 'player')
+        {
+            def property = name.substring(6, 7).toLowerCase() + name.substring(7)
+            return delegate.playerStates.find {it.playerName == args[0].toString()}."${property}"
+        }
+        else
+        {
+            def validMethod = GameState.metaClass.getMetaMethod(name, args)
+            if (validMethod != null)
+            {
+                return validMethod.invoke(delegate, args)
+            }
+            else
+            {
+                return GameState.metaClass.invokeMissingMethod(delegate, name, args)
+            }
+        }
+    }
+
     GameState(Game game, GameStateService gameStateService)
     {
         this.game = game
@@ -20,25 +40,7 @@ class GameState
         playerStates = new TreeSet<PlayerState>()
         game.players.each {playerStates << new PlayerState(it, gameStateService)}
         gameId = game.getId()
-    }
-
-    def findPlayer = {playerName ->
-        playerStates.find {it.playerName == playerName}
-    }
-    
-    Integer playerRow(String playerName)
-    {
-        findPlayer(playerName).row
-    }
-
-    Integer playerColumn(String playerName)
-    {
-        findPlayer(playerName).column
-    }
-
-    String playerStatus(String playerName)
-    {
-        findPlayer(playerName).status
+        GameState.metaClass.invokeMethod = invoke
     }
 
     String declareWinner()
@@ -48,14 +50,16 @@ class GameState
             return "The winner is ${winner.get(0).name}"
     }
 
-    boolean anyoneThere(row, column)
+    boolean anyoneThere(Integer row, Integer column)
     {
-        playerStates.any {
+        return playerStates.any {
+            System.out.println "checking playerStates position for ${it.dump()} in row $row and column $column"
+            System.out.println "playerState has row $it.row and column $it.column"
             it.row == row && it.column == column
         }
     }
 
-    Integer playerHere(row, column)
+    Integer isThereAPlayerHere(row, column)
     {
         Integer index = null
         playerStates.eachWithIndex {playerState, i ->
@@ -71,7 +75,7 @@ class GameState
         }
     }
 
-    Integer playerShotHere(row, column)
+    Integer whichPlayerShotHere(row, column)
     {
 
         Integer index = null
@@ -81,10 +85,10 @@ class GameState
         index
     }
 
-    boolean playerCanMoveHere(row, column, playerName)
+    boolean canPlayerMoveHere(row, column, playerName)
     {
         (Math.abs(row - playerRow(playerName)) <= game.rowsPlayerCanMove) &&
-        (Math.abs(column - playerColumn(playerName)) <= game.columnsPlayerCanMove) &&
-        !(row == playerRow(playerName) && column == playerColumn(playerName))
+                (Math.abs(column - playerColumn(playerName)) <= game.columnsPlayerCanMove) &&
+                !(row == playerRow(playerName) && column == playerColumn(playerName))
     }
 }

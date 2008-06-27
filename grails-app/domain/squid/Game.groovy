@@ -20,7 +20,7 @@ class Game implements Comparable
 
     Game() {}
 
-    Game(Integer rows, Integer columns, String ... player)
+    Game(Integer rows, Integer columns, String... player)
     {
         this.rows = rows
         this.columns = columns
