@@ -12,30 +12,28 @@ class GameStateService
             gameState.gameOver = true
             game.players.each {gameState.winner << it}
         }
-        if (aPlayerHasWon(game, gameState).size() > 0)
+        if (aPlayerHasWon(gameState).size() > 0)
         {
             gameState.gameOver = true
-            gameState.winner = aPlayerHasWon(game, gameState)
+            gameState.winner = aPlayerHasWon(gameState)
         }
         return gameState
     }
 
-    List<Player> aPlayerHasWon(Game game, GameState gameState)
+    List<Player> aPlayerHasWon(GameState gameState)
     {
         List<Player> winners = new ArrayList<Player>()
         if (gameState.playerStates.collect {it.status}.every {PlayerState.READY}
                 && gameState.playerStates.collect {it.shotLanded}.any {true})
         {
-            gameState.playerStates.each {playerState ->
-                if (playerState.shotLanded)
+            gameState.playerStates.each {shootingPlayerState ->
+                if (shootingPlayerState.shotLanded)
                 {
-                    def shotRow = playerState.shotLandedRow
-                    def shotColumn = playerState.shotLandedColumn
                     if (gameState.playerStates.any {
-                        it.row == shotRow && it.column == shotColumn
+                        it.position == shootingPlayerState.position
                     })
                     {
-                        winners << playerState.player
+                        winners << shootingPlayerState.player
                     }
                 }
             }
@@ -106,13 +104,17 @@ class GameStateService
 
     public Integer playerRow(Player player)
     {
+        println "getting row for player ${player.dump()}"
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        println "got turn ${turn.dump()}"
         return (turn == null) ? defaultRow(player) : turn.row
     }
 
     public Integer playerColumn(Player player)
     {
+        println "getting column for player ${player.dump()}"
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
+        println "got turn ${turn.dump()}"
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 
@@ -121,8 +123,7 @@ class GameStateService
         boolean sameCell = false
         gameState.playerStates.each {thisPlayer ->
             if (gameState.playerStates.any {thatPlayer ->
-                thisPlayer.row == thatPlayer.row &&
-                        thisPlayer.column == thatPlayer.column &&
+                thisPlayer.position == thatPlayer.position &&
                         thisPlayer.playerName != thatPlayer.playerName
             })
                 sameCell = true

@@ -1,5 +1,6 @@
 package squid
 
+import static squid.Position.position
 
 class GameState
 {
@@ -57,7 +58,7 @@ class GameState
     boolean anyoneThere(Integer row, Integer column)
     {
         return playerStates.any {
-            it.row == row && it.column == column
+            it.position == position(row, column)
         }
     }
 
@@ -65,7 +66,7 @@ class GameState
     {
         Integer index = null
         playerStates.eachWithIndex {playerState, i ->
-            if (playerState.row == row && playerState.column == column) index = i
+            if (playerState.position == position(row, column)) index = i
         }
         index
     }
@@ -73,7 +74,7 @@ class GameState
     boolean aShotHere(row, column)
     {
         playerStates.any {playerState ->
-            playerState.shotLandedRow == row && playerState.shotLandedColumn == column
+            playerState.shotLandedPosition == position(row, column)
         }
     }
 
@@ -82,15 +83,13 @@ class GameState
 
         Integer index = null
         playerStates.eachWithIndex {playerState, i ->
-            if (playerState.shotLandedColumn == column && playerState.shotLandedRow == row) index = i
+            if (playerState.shotLandedPosition == position(row, column)) index = i
         }
         index
     }
 
-    boolean canPlayerMoveHere(row, column, playerName)
+    boolean canPlayerMoveHere(Integer row, Integer column, String playerName)
     {
-        (Math.abs(row - playerRow(playerName)) <= game.rowsPlayerCanMove) &&
-                (Math.abs(column - playerColumn(playerName)) <= game.columnsPlayerCanMove) &&
-                !(row == playerRow(playerName) && column == playerColumn(playerName))
+        playerPosition(playerName).canMoveHere(row, column, game)
     }
 }

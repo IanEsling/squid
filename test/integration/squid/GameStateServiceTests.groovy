@@ -17,12 +17,12 @@ class GameStateServiceTests extends GroovyTestCase {
 
     Integer playerRow(String playerName)
     {
-        return testGame.currentGameState().playerRow(playerName)
+        return testGame.currentGameState().playerPosition(playerName).row
     }
 
     Integer playerColumn(String playerName)
     {
-        return testGame.currentGameState().playerColumn(playerName)
+        return testGame.currentGameState().playerPosition(playerName).column
     }
 
     void testPlayerPositions() {
@@ -230,11 +230,11 @@ class GameStateServiceTests extends GroovyTestCase {
     }
 
     private Integer rowShotLandedInForPlayer(String playerName) {
-        return testGame.currentGameState().playerShotLandedRow(playerName)
+        return testGame.currentGameState().playerShotLandedPosition(playerName).row
     }
 
     private Integer columnShotLandedInForPlayer(String playerName) {
-        return testGame.currentGameState().playerShotLandedColumn(playerName)
+        return testGame.currentGameState().playerShotLandedPosition(playerName).column
     }
 
 }

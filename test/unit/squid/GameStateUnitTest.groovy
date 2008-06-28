@@ -6,15 +6,8 @@ class GameStateUnitTest extends BaseSquidTestCase
 {
     void testDynamicGetPlayerProperties()
     {
-        assertEquals(game.currentGameState().playerRow('PlayerA'), 1)
-        assertEquals(game.currentGameState().playerColumn('PlayerA'), 1)
         assertEquals(game.currentGameState().playerStatus('PlayerA'), PlayerState.READY)
         assertEquals(game.currentGameState().playerShotLanded('PlayerA'), false)
-    }
-
-    void testIsAnyoneThere()
-    {
-        
     }
 
     void testPlayerOrdering()

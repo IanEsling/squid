@@ -35,8 +35,8 @@ class GameStateServiceUnitTest extends BaseSquidTestCase
 
     private def checkPlayerRowAndColumn(row, column, playerName)
     {
-        assertEquals "$playerName not in correct row", game.currentGameState().playerRow(playerName), row
-        assertEquals "$playerName not in correct column", game.currentGameState().playerColumn(playerName), column
+        assertEquals "$playerName not in correct row", game.currentGameState().playerPosition(playerName).row, row
+        assertEquals "$playerName not in correct column", game.currentGameState().playerPosition(playerName).column, column
         assertTrue "$playerName should be found in row $row and column $column", game.currentGameState().anyoneThere(row, column)
     }
 }

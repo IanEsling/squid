@@ -117,12 +117,12 @@ class SquidControllerTests extends GroovyTestCase
 
     private void checkPlayerRow(Integer row, String playerName)
     {
-        assertEquals("player ${playerName} not in row ${row}", row, getGame().playerRow(playerName))
+        assertEquals("player ${playerName} not in row ${row}", row, getGame().playerPosition(playerName).row)
     }
 
     private void checkPlayerColumn(Integer col, String playerName)
     {
-        assertEquals("player ${playerName} not in column ${col}", col, getGame().playerColumn(playerName))
+        assertEquals("player ${playerName} not in column ${col}", col, getGame().playerPosition(playerName).column)
     }
 
     private GameState getGame()
