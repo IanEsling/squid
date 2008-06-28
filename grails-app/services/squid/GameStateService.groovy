@@ -30,7 +30,7 @@ class GameStateService
                 if (shootingPlayerState.shotLanded)
                 {
                     if (gameState.playerStates.any {
-                        it.position == shootingPlayerState.position
+                        it.position == shootingPlayerState.shotLandedPosition
                     })
                     {
                         winners << shootingPlayerState.player
@@ -47,6 +47,11 @@ class GameStateService
         return ((player.turns?.max()?.turnType == Turn.FIRE && status == PlayerState.READY)
                 ||
                 (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && status == PlayerState.WAITING)
+    }
+
+    Position shotLandedPosition(Player player, String status)
+    {
+        return new Position(shotLandedRow(player, status), shotLandedColumn(player, status))
     }
 
     Integer shotLandedRow(Player player, String status)
@@ -102,19 +107,20 @@ class GameStateService
         return player.startingColumn
     }
 
+    Position playerPosition(Player player)
+    {
+        return new Position(playerRow(player), playerColumn(player))
+    }
+    
     public Integer playerRow(Player player)
     {
-        println "getting row for player ${player.dump()}"
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
-        println "got turn ${turn.dump()}"
         return (turn == null) ? defaultRow(player) : turn.row
     }
 
     public Integer playerColumn(Player player)
     {
-        println "getting column for player ${player.dump()}"
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
-        println "got turn ${turn.dump()}"
         return (turn == null) ? defaultColumn(player) : turn.column
     }
 

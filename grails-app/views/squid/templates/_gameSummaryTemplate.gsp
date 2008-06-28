@@ -1,7 +1,7 @@
 <span class="summary">
-    <g:if test="${gameState.game}">
+    <g:if test="${gameState?.game}">
         <g:if test="${!gameState.gameOver}">
-            <div class="summaryGameNumber">current game is number ${gameState.gameId}, turn number ${gameState.turnNumber}</div>
+            <div class="summaryGameNumber">current game is number ${gameState.game.id}, turn number ${gameState.turnNumber}</div>
             <div class="summaryBoardSize">board size: ${gameState.game.rows} x ${gameState.game.columns}</div>
             <g:each status="i" in="${gameState.playerStates}" var="p">
             <div class="summaryPlayer${i}">player : ${p.playerName} - <g:if test="${p.status.equals('waiting')}">Orders Received</g:if>

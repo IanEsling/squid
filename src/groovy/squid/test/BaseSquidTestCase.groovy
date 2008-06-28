@@ -28,31 +28,8 @@ class BaseSquidTestCase extends GroovyTestCase
 
     def setPlayerMetaMethods()
     {
-        Player.metaClass.invokeMethod = {String name, args ->
-
-            if (name == 'addToTurns')
-            {
-                delegate.turns.add(args[0])
-            }
-            if (name == 'getGame')
-            {
-                return game
-            }
-
-            if (name != 'getGame' && name != 'addToTurns')
-            {
-                def validMethod = Player.metaClass.getMetaMethod(name, args)
-                if (validMethod != null)
-                {
-                    validMethod.invoke(delegate, args)
-                }
-                else
-                {
-                    return Player.metaClass.invokeMissingMethod(delegate, name, args)
-                }
-            }
-
-        }
+        Player.metaClass.addToTurns = {turn-> turns.add(turn)}
+        Player.metaClass.getGame = { return game }
     }
 
     private void setGameMetaMethods()

@@ -20,10 +20,9 @@ class PlayerState implements Comparable
         this.player = player
         this.playerName = player.name
         status = gameStateService.playerStatus(player)
-        position = new Position(gameStateService.playerRow(player), gameStateService.playerColumn(player))
+        position = gameStateService.playerPosition(player)
         shotLanded = gameStateService.shotLanded(player, status)
-        shotLandedPosition = new Position(gameStateService.shotLandedRow(player, status),
-                gameStateService.shotLandedColumn(player, status))
+        shotLandedPosition = gameStateService.shotLandedPosition(player, status)
     }
 
     public int compareTo(Object o)
