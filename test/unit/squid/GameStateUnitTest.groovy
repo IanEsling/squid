@@ -12,6 +12,11 @@ class GameStateUnitTest extends BaseSquidTestCase
         assertEquals(game.currentGameState().playerShotLanded('PlayerA'), false)
     }
 
+    void testIsAnyoneThere()
+    {
+        
+    }
+
     void testPlayerOrdering()
     {
         assertNotNull("game state not returned", game.currentGameState())
@@ -22,7 +27,7 @@ class GameStateUnitTest extends BaseSquidTestCase
         checkPlayerOrder()
     }
 
-    void testPlayerPosition()
+    void testValidMovesForPlayers()
     {
         game.newTurn(new Turn(5, 5, Turn.MOVE), 'PlayerA')
         game.newTurn(new Turn(8, 9, Turn.MOVE), 'PlayerB')

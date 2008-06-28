@@ -28,9 +28,7 @@ class GameStateServiceTests extends GroovyTestCase {
     void testPlayerPositions() {
         testGame.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
         def gameState = testGame.currentGameState()
-        println "testing anyoneThere with gameState $gameState"
         assertFalse("player A in 2, 3 before player B has moved", gameState.anyoneThere(2, 3))
-        println "testing playerRow..."
         assertEquals("player A row moved before player B move received", playerRow('A'), 1)
         assertEquals("player A column moved before player B move received", playerColumn('A'), 1)
         assertEquals("player B row moved after player A move received", playerRow('B'), 10)
@@ -132,18 +130,18 @@ class GameStateServiceTests extends GroovyTestCase {
         testGame.newTurn(new Turn(2, 3, Turn.MOVE), 'A').save(flush: true)
         def gameState = testGame.currentGameState()
         assertEquals("player not found in position 1, 1", gameState.anyoneThere(1, 1), true)
-        assertEquals("wrong player found at 1, 1", gameState.isThereAPlayerHere(1, 1), 0)
+        assertEquals("wrong player found at 1, 1", gameState.whichPlayerHere(1, 1), 0)
         assertEquals("player found in wrong position 2, 3", gameState.anyoneThere(2, 3), false)
         assertEquals("player not found in position, 10, 10", gameState.anyoneThere(10, 10), true)
-        assertEquals("wrong player found at 10, 10", gameState.isThereAPlayerHere(10, 10), 1)
+        assertEquals("wrong player found at 10, 10", gameState.whichPlayerHere(10, 10), 1)
         testGame.newTurn(new Turn(8, 9, Turn.MOVE), 'B').save(flush: true)
         gameState = testGame.currentGameState()
         assertEquals("player not found in position 2, 3", gameState.anyoneThere(2, 3), true)
-        assertEquals("wrong player found at 2, 3", gameState.isThereAPlayerHere(2, 3), 0)
+        assertEquals("wrong player found at 2, 3", gameState.whichPlayerHere(2, 3), 0)
         assertEquals("player found in wrong position 1, 1", gameState.anyoneThere(1, 1), false)
         assertEquals("player found in wrong position 10, 10", gameState.anyoneThere(10, 10), false)
         assertEquals("player not found in position 8, 9", gameState.anyoneThere(8, 9), true)
-        assertEquals("wrong player found at 10, 10", gameState.isThereAPlayerHere(8, 9), 1)
+        assertEquals("wrong player found at 10, 10", gameState.whichPlayerHere(8, 9), 1)
     }
 
     void testShootingHere() {

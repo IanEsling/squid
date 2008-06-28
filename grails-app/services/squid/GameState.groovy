@@ -13,7 +13,21 @@ class GameState
     List<Player> winner
     Integer gameId
 
+    GameState(Game game, GameStateService gameStateService)
+    {
+        this.game = game
+        winner = new ArrayList<Player>()
+        playerStates = new TreeSet<PlayerState>()
+        game.players.each {playerStates << new PlayerState(it, gameStateService)}
+        //intercept GameState methods.  Only really need to do this once on the GameState metaclass
+        //rather than for each instance, but can't seem to find where/how to do that.  Would
+        //have thought BootStrap.groovy was the obvious place but that doesn't seem to work.
+        metaClass.invokeMethod = invoke
+    }
+
     def invoke = {String name, args ->
+        //treat all playerSomeProperty(playerName) method calls as requests
+        //for someProperty on the player's PlayerState object
         if (name.substring(0, 6) == 'player')
         {
             def property = name.substring(6, 7).toLowerCase() + name.substring(7)
@@ -33,16 +47,6 @@ class GameState
         }
     }
 
-    GameState(Game game, GameStateService gameStateService)
-    {
-        this.game = game
-        winner = new ArrayList<Player>()
-        playerStates = new TreeSet<PlayerState>()
-        game.players.each {playerStates << new PlayerState(it, gameStateService)}
-        gameId = game.getId()
-        GameState.metaClass.invokeMethod = invoke
-    }
-
     String declareWinner()
     {
         if (winner.size() > 1) return 'The game is a draw'
@@ -53,13 +57,11 @@ class GameState
     boolean anyoneThere(Integer row, Integer column)
     {
         return playerStates.any {
-            System.out.println "checking playerStates position for ${it.dump()} in row $row and column $column"
-            System.out.println "playerState has row $it.row and column $it.column"
             it.row == row && it.column == column
         }
     }
 
-    Integer isThereAPlayerHere(row, column)
+    Integer whichPlayerHere(row, column)
     {
         Integer index = null
         playerStates.eachWithIndex {playerState, i ->
