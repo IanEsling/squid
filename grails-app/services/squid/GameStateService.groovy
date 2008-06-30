@@ -44,7 +44,7 @@ class GameStateService
 
     boolean shotLanded(Player player, String status)
     {
-        return ((player.turns?.max()?.turnType == Turn.FIRE && status == PlayerState.READY)
+        return ((lastTurnByPlayer(player)?.turnType == Turn.FIRE && status == PlayerState.READY)
                 ||
                 (previousTurnByPlayer(player)?.turnType) == Turn.FIRE && status == PlayerState.WAITING)
     }
