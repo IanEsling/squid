@@ -11,14 +11,27 @@
                         <g:set var="cellClass" value="player${gameState.whichPlayerShotHere(r,c)}Shot"/>
                     </g:elseif>
 
-                    <g:if test="${gameState.canPlayerMoveHere(r, c, player)}">
-                        <td class="${cellClass}"
+                    <g:if test="${turnType=='Fire'}">
+                        <g:if test="${gameState.canPlayerFireHere(r, c, player)}">
+                            <td class="${cellClass}"
                             onclick="moveTo('${r}', '${c}')"
                             onmouseout="this.className = '${cellClass}'"
-                            onmouseover="this.className = 'cellHover';this.style.cursor = 'pointer'">
+                            onmouseover="this.className = 'fireHover';this.style.cursor = 'pointer'">
+                        </g:if>
+                        <g:else>
+                            <td class="${cellClass}">
+                        </g:else>
                     </g:if>
                     <g:else>
-                        <td class="${cellClass}">
+                        <g:if test="${gameState.canPlayerMoveHere(r, c, player)}">
+                            <td class="${cellClass}"
+                            onclick="moveTo('${r}', '${c}')"
+                            onmouseout="this.className = '${cellClass}'"
+                            onmouseover="this.className = 'moveHover';this.style.cursor = 'pointer'">
+                        </g:if>
+                        <g:else>
+                            <td class="${cellClass}">
+                        </g:else>
                     </g:else>
                     ${r}-${c}
                     </td>
@@ -33,7 +46,6 @@
     {
         document.getElementById("row").value = row;
         document.getElementById("column").value = column;
-        if (row=="" || column=="") return;
         document.getElementById("player").value = "${player}";
     }
 </script>

@@ -8,6 +8,8 @@ class Game implements Comparable
 
     Integer rowsPlayerCanMove = 2
     Integer columnsPlayerCanMove = 2
+    Integer rowsPlayerCanShoot = 4
+    Integer columnsPlayerCanShoot = 4
     Integer rows = 10
     Integer columns = 10
     List<Player> players = new ArrayList<Player>()

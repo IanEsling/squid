@@ -10,7 +10,7 @@
     <h2><g:render template="/squid/templates/gameSummaryTemplate"/></h2>
 
     <div class="boardContainer">
-        <g:render template="/squid/templates/gameboardMovementTemplate"/>
+        <g:render template="/squid/templates/gameboardOrdersTemplate"/>
     </div>
 
     <div class="playersContainer">

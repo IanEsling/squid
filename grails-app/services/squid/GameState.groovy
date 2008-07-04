@@ -88,6 +88,11 @@ class GameState
         index
     }
 
+    boolean canPlayerFireHere(Integer row, Integer column, String playerName)
+    {
+        playerPosition(playerName).canFireHere(row, column, game)
+    }
+
     boolean canPlayerMoveHere(Integer row, Integer column, String playerName)
     {
         playerPosition(playerName).canMoveHere(row, column, game)

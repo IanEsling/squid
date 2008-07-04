@@ -16,6 +16,12 @@ class Position {
         return new Position(newRow, newColumn)
     }
 
+    boolean canFireHere(Integer rowToShootAt, Integer columnToShootAt, Game game)
+    {
+        (Math.abs(row - rowToShootAt) <= game.rowsPlayerCanShoot) &&
+                (Math.abs(column - columnToShootAt) <= game.columnsPlayerCanShoot)
+    }
+
     boolean canMoveHere(Integer rowToMoveTo, Integer columnToMoveTo, Game game)
     {
         (Math.abs(row - rowToMoveTo) <= game.rowsPlayerCanMove) &&

@@ -16,7 +16,7 @@ class SquidController
     def currentGame = {player ->
         if (Game.list().size() == 0) return null
 
-        [gameState: latestGame.call().currentGameState(), player: player]
+        [gameState: latestGame.call().currentGameState(), player: params.player, turnType: paramMissing('turnType')?'Move':params.turnType ]
     }
 
     def move = {
@@ -40,12 +40,15 @@ class SquidController
     }
 
     def order = {
-        def game = Game.get(params.gameId)
-        game.newTurn(new Turn(Integer.valueOf(params.row), Integer.valueOf(params.column), params.turnType), params.player)
+        if (!paramMissing('row') && !paramMissing('column'))
+        {
+            def game = Game.get(params.gameId)
+            game.newTurn(new Turn(Integer.valueOf(params.row), Integer.valueOf(params.column), params.turnType), params.player)
+        }
     }
 
     boolean paramMissing(property)
     {
-        params?.get(property)==""||params?.get(property)==null
+        params?.get(property) == "" || params?.get(property) == null
     }
 }
