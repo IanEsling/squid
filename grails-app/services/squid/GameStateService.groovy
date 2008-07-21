@@ -111,7 +111,7 @@ class GameStateService
     {
         return new Position(playerRow(player), playerColumn(player))
     }
-    
+
     public Integer playerRow(Player player)
     {
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
@@ -123,6 +123,34 @@ class GameStateService
         def turn = playerStatus(player).equals(PlayerState.WAITING) ? previousMoveByPlayer(player) : lastMoveByPlayer(player)
         return (turn == null) ? defaultColumn(player) : turn.column
     }
+
+    def playerHealth(Game game)
+    {
+        def health = new Expando()
+        health.shot = {playerName ->
+            delegate."${playerName}" -= 1
+        }
+        game.players.each {
+            health."${it.name}" = 1
+        }
+        for (thisTurnNumber in 1..turnNumber(game) - 1)
+        {
+            Map<String, Turn> turnsForThisTurnNumber = new HashMap<String, Turn>()
+            game.players.each {player ->
+                turnsForThisTurnNumber.put(player.name, player.turns.find {it.turnNumber == thisTurnNumber})
+            }
+            turnsForThisTurnNumber.values().findAll {it.turnType == Turn.FIRE}.each {shot ->
+                turnsForThisTurnNumber.each {name, turn ->
+                    if (turn.row == shot.row && turn.column == shot.column && turn.turnType == 'Move')
+                    {
+                        health.shot(name)
+                    }
+                }
+            }
+        }
+        return health.getProperties()
+    }
+
 
     private boolean playersInSameCell(GameState gameState)
     {

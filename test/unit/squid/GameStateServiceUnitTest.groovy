@@ -12,6 +12,17 @@ class GameStateServiceUnitTest extends BaseSquidTestCase
         assertNotNull(game.currentGameState())
     }
 
+    void testCalculatePlayerShooting()
+    {
+        GameStateService gss = new GameStateService()
+        game.newTurn(new Turn(2, 3, Turn.MOVE), 'PlayerA')
+        game.newTurn(new Turn(8, 9, Turn.MOVE), 'PlayerB')
+        game.newTurn(new Turn(5, 5, Turn.MOVE), 'PlayerA')
+        game.newTurn(new Turn(5, 5, Turn.FIRE), 'PlayerB')
+        println gss.playerHealth(game)
+        assertEquals("player health wrong after shooting", gss.playerHealth(game).get('PlayerA'), 0)
+    }
+
     void testPlayerPosition()
     {
         checkPlayerRowAndColumn(1, 1, 'PlayerA')
